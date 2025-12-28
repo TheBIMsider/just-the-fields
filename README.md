@@ -9,7 +9,7 @@ Drop in JSON files, explore them safely, and use templates to control what you s
 
 ### Live demo
 
-👉 https://thebimsider.github.io/just-the-fields/  
+👉 https://thebimsider.github.io/just-the-fields/
 
 Runs entirely in your browser. No uploads. No installs.
 
@@ -21,7 +21,7 @@ Runs entirely in your browser. No uploads. No installs.
 - A way to explore large or messy JSON without writing code
 - A template-driven layout tool for records like Issues, RFIs, or API responses
 - Offline-friendly and easy to host
-  
+
 <img width="1920" height="884" alt="JTF" src="https://github.com/user-attachments/assets/51ca6cb9-10d0-4cbf-a2b9-b8552ef77883" />
 
 ---
@@ -96,15 +96,17 @@ They are:
 
 Templates control layout only.  
 They cannot change app behavior or data.
+Want the how-to? Start here: [Templates in JTF](docs/templates.md)
 
 ---
 
 ## Getting started with templates
 
-- Click **Download** in the Templates panel to get a starter file  
-- Or open the [starter templates page](https://thebimsider.github.io/just-the-fields/templates/index.html) (save the file locally if it opens in your browser)
+- Click **Download** in the Templates panel to get a starter file
+- Or open the [starter templates page](https://thebimsider.github.io/just-the-fields/templates/index.html) (if it opens in your browser, use Save As)
 - Edit paths and labels
 - Upload the template back into JTF
+- Read the full guide: [Templates in JTF](docs/templates.md)
 
 ---
 
@@ -136,6 +138,7 @@ If someone opens this code cold in the future, they should be able to follow it.
 Contributions are welcome, but keep the scope tight.
 
 Please avoid proposals that add:
+
 - Template scripting or conditional logic
 - Data editing or write-back
 - Accounts, storage, or backends
@@ -153,9 +156,5 @@ This project is licensed under the BSD-3-Clause License.
 
 ---
 
-*Built with ❤️ & 🤖 AI assistance from ChatGPT by The BIMsider for the AECO community*  
-
-*Just the Fields: Your JSON Detective - See what matters.*
-
-
-
+_Built with ❤️ & 🤖 AI assistance from ChatGPT by The BIMsider for the AECO community_  
+_Just the Fields: Your JSON Detective - See what matters._
