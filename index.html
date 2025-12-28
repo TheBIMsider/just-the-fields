@@ -77,7 +77,7 @@
               <label
                 class="template-picker"
                 for="templateSelect"
-                title="Choose an active template"
+                title="Pick a template. Auto tries the best match per record (Records mode only)."
               >
                 <span class="sr-only">Template</span>
                 <select id="templateSelect" disabled>
@@ -85,7 +85,13 @@
                 </select>
               </label>
 
-              <button id="clearBtn" class="btn" type="button" disabled>
+              <button
+                id="clearBtn"
+                class="btn"
+                type="button"
+                disabled
+                title="Clear the active template selection (does not remove files)"
+              >
                 Clear
               </button>
             </div>
@@ -130,7 +136,11 @@
           </div>
 
           <div class="toolbar-right">
-            <label class="mode-picker" for="modeSelect">
+            <label
+              class="mode-picker"
+              for="modeSelect"
+              title="Auto: JTF picks the best view. Dataset: browse large arrays (templates do not apply). Records: view one record at a time (templates apply)."
+            >
               <span class="mode-label">Mode</span>
               <select id="modeSelect" disabled>
                 <option value="auto">Auto</option>
@@ -139,7 +149,11 @@
               </select>
             </label>
 
-            <label class="record-picker" for="recordSelect">
+            <label
+              class="record-picker"
+              for="recordSelect"
+              title="Choose which record you are viewing. Applies in Records mode only."
+            >
               <span class="record-label">Record</span>
               <select id="recordSelect" disabled>
                 <option value="0">1</option>
@@ -157,31 +171,44 @@
                   placeholder="Filter rows..."
                   autocomplete="off"
                   disabled
+                  title="Filter dataset rows. This is the main way to explore large datasets beyond the first page."
                 />
               </label>
 
               <div class="dataset-jump">
-                <label for="datasetJump" class="dataset-jump-label">Row</label>
+                <label
+                  for="datasetJump"
+                  class="dataset-jump-label"
+                  title="Jump directly to a specific row number in the dataset."
+                >
+                  Row
+                </label>
+
                 <input
                   id="datasetJump"
                   type="number"
                   min="1"
                   step="1"
                   disabled
+                  title="Enter a row number to jump directly to that entry."
                 />
+
                 <button
                   id="datasetGoBtn"
                   class="mini-btn"
                   type="button"
                   disabled
+                  title="Jump to the entered row number."
                 >
                   Go
                 </button>
+
                 <button
                   id="datasetResetBtn"
                   class="mini-btn"
                   type="button"
                   disabled
+                  title="Clear the jump and return to the first rows."
                 >
                   Reset
                 </button>
@@ -192,6 +219,7 @@
               class="search-wrap search-group record-search"
               id="recordSearchGroup"
               for="searchInput"
+              title="Search within the current record. In Dataset mode, use the filter above."
             >
               <span class="search-tag">Record</span>
 
@@ -207,7 +235,7 @@
             <label
               class="toggle"
               id="includeCollapsedLabel"
-              title="Include fields inside collapsed sections in search"
+              title="Also search inside collapsed sections. Useful for deep records, but may add noise."
             >
               <input id="includeCollapsedToggle" type="checkbox" />
               <span>Include collapsed</span>
@@ -233,6 +261,10 @@
         <div id="viewer" class="viewer">
           <div class="empty-state">
             Drop a JSON file on the left to start snooping. 🕵️
+            <div class="empty-state-sub">
+              Tip: Try Records mode for API-style JSON. Dataset mode is for big
+              arrays.
+            </div>
           </div>
         </div>
       </section>

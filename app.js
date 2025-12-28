@@ -243,12 +243,12 @@ function writeThemePreference(theme) {
   }
 }
 
-const RECORD_SEARCH_PLACEHOLDER = 'Search fields/values…';
+const RECORD_SEARCH_PLACEHOLDER = 'Records: search fields and values…';
 const DATASET_SEARCH_PLACEHOLDER =
-  'Dataset Mode: use the Dataset filter search above';
+  'Dataset: use the filter box above (templates do not apply)';
 
 /* ------------------------------------------------------------
-   Event wiring + init
+    Event wiring + init
 ------------------------------------------------------------ */
 
 function init() {
@@ -1277,8 +1277,12 @@ function renderDatasetView(arr, lfId) {
 
   const note =
     matches.length > HARD_MAX
-      ? `<div class="array-note">Tip: refine the filter, or jump to a specific row number.</div>`
+      ? `<div class="array-note">
+         Showing the first ${HARD_MAX} rows for performance.
+         Use the filter or jump to a specific row to explore the rest.
+       </div>`
       : '';
+
   const cards = show.map(({ row, idx }) => {
     return renderArrayItem(arr, row, idx);
   });
@@ -3296,7 +3300,9 @@ function renderTemplateSelect() {
 
     // Only show Auto if there is at least one uploaded template
     ...(hasAny
-      ? [`<option value="${TEMPLATE_AUTO_ID}">Auto (best match)</option>`]
+      ? [
+          `<option value="${TEMPLATE_AUTO_ID}">Auto (best match per record)</option>`,
+        ]
       : []),
 
     ...state.templates.map((t) => {
