@@ -55,75 +55,65 @@ From the project folder:
 ```bash
 python -m http.server 8080
 ```
-How JTF views your JSON
 
-JTF automatically adapts to common JSON shapes.
+## How JTF views your JSON
 
-Dataset mode
+JTF automatically adapts to common JSON shapes so you do not have to restructure your data first.
+
+### Dataset mode
 
 Best for large, flat arrays (table-like data).
 
-Automatically detected for large arrays
+- Automatically detected for large arrays
+- Filter rows
+- Jump to a specific row
+- Templates do not apply in this mode
 
-Filter rows
-
-Jump to a specific row
-
-Templates do not apply in this mode
-
-Records mode
+### Records mode
 
 Best for API responses and structured objects.
 
-Detects records from common wrapper shapes
-
-Lets you select individual records
-
-Templates control layout and record labels
+- Detects records from common wrapper shapes
+- Lets you select individual records
+- Templates control layout and record labels
 
 You can override the mode at any time.
 
-Templates
+---
 
-Templates let you define what fields appear and in what order.
+## Templates
+
+Templates let you define **what fields appear and in what order**.
 
 They are:
 
-Plain JSON files
+- Plain JSON files
+- Declarative (no logic, no scripting)
+- Safe if fields are missing
+- Easy to edit in any text editor
 
-Declarative (no logic, no scripting)
-
-Safe if fields are missing
-
-Easy to edit in any text editor
-
-Templates control layout only.
+Templates control layout only.  
 They cannot change app behavior or data.
 
-Getting started with templates
+---
 
-Click Download in the Templates panel to get a starter file
+## Getting started with templates
 
-Or open templates/index.html for examples
+- Click **Download** in the Templates panel to get a starter file  
+- Or open `templates/index.html` for examples
+- Edit paths and labels
+- Upload the template back into JTF
 
-Edit paths and labels
+---
 
-Upload the template back into JTF
-
-Template basics
+## Template basics
 
 A template contains:
 
-templateName
-
-Optional match rules (to control when it applies)
-
-Optional recordLabel rules (for the record dropdown)
-
-A layout made of sections and fields
+- `templateName`
+- Optional `match` rules (to control when it applies)
+- Optional `recordLabel` rules (for the record dropdown)
+- A `layout` made of sections and fields
 
 If a field path does not exist, it is simply skipped.
-
-
-
 
