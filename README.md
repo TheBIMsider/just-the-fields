@@ -1,6 +1,7 @@
 # Just the Fields (JTF)
 
-<img width="1536" height="1024" alt="JTF_Logo_White" src="https://github.com/user-attachments/assets/3e706a77-1204-4138-9686-6da816a2f4b3" />
+<img width="1150" height="450" alt="JTF_Logo_White_Banner" src="https://github.com/user-attachments/assets/c40bb4a8-f2c4-4339-8ebe-6c041748ae02" />
+
 
 A lightweight JSON viewer that helps you focus on just the fields that matter.
 
@@ -54,6 +55,7 @@ From the project folder:
 ```bash
 python -m http.server 8080
 ```
+
 
 
 
