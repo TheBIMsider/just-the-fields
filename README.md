@@ -23,6 +23,8 @@ Runs entirely in your browser. No uploads. No installs.
 - A way to explore large or messy JSON without writing code
 - A template-driven layout tool for records like Issues, RFIs, or API responses
 - Offline-friendly and easy to host
+  
+<img width="1920" height="884" alt="JTF" src="https://github.com/user-attachments/assets/51ca6cb9-10d0-4cbf-a2b9-b8552ef77883" />
 
 ---
 
@@ -142,6 +144,7 @@ Please avoid proposals that add:
 Small, focused improvements are best.
 
 See `CONTRIBUTING.md` for details.
+
 
 
 
