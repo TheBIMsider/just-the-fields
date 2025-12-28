@@ -3,258 +3,105 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Just the Fields</title>
-    <meta
-      name="description"
-      content="Just the Fields: Your JSON Detective — See what matters."
-    />
-    <link rel="stylesheet" href="styles.css" />
+    <title>Just the Fields – Starter Templates</title>
 
-    <!-- Prism themes (we toggle which one is active) -->
-    <link id="prismLight" rel="stylesheet" href="vendor/prism/prism.css" />
-    <link
-      id="prismDark"
-      rel="stylesheet"
-      href="vendor/prism/prism-tomorrow.css"
-      disabled
-    />
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+
+      body {
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
+          Arial, sans-serif;
+        margin: 24px;
+        line-height: 1.5;
+      }
+
+      .wrap {
+        max-width: 900px;
+      }
+
+      h1 {
+        margin-top: 0;
+      }
+
+      ul {
+        padding-left: 18px;
+      }
+
+      li {
+        margin-bottom: 8px;
+      }
+
+      .note {
+        opacity: 0.85;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .footer {
+        margin-top: 32px;
+        font-size: 14px;
+        opacity: 0.8;
+      }
+    </style>
   </head>
 
   <body>
-    <noscript>
-      <div class="empty-state" style="margin: 14px">
-        This tool needs JavaScript to run. Please enable JavaScript (or
-        whitelist this page) and reload.
-      </div>
-    </noscript>
+    <div class="wrap">
+      <h1>Just the Fields – Starter Templates</h1>
 
-    <header class="app-header">
-      <div class="brand">
-        <h1>Just the Fields</h1>
-        <p class="tagline">Your JSON Detective — See what matters.</p>
-      </div>
-    </header>
+      <p class="note">
+        These are example template files for Just the Fields (JTF). Download
+        one, edit it in any text editor, then upload it into the app using the
+        <strong>Upload</strong> button in the Templates panel.
+      </p>
 
-    <main class="app">
-      <section class="left-panel" aria-label="Files">
-        <div class="panel-header files-header">
-          <div class="files-header-row files-header-top">
-            <h2>Templates</h2>
+      <h2>Available templates</h2>
 
-            <div class="files-actions">
-              <button
-                id="downloadTemplateBtn"
-                class="btn"
-                type="button"
-                title="Download a starter template JSON you can edit and upload later"
-              >
-                Download
-              </button>
-
-              <input
-                id="templateInput"
-                class="file-input"
-                type="file"
-                accept=".json,.jsonc,application/json"
-                hidden
-                multiple
-              />
-
-              <button
-                id="uploadTemplateBtn"
-                class="btn"
-                type="button"
-                title="Upload one or more template files (.json or .jsonc)"
-              >
-                Upload
-              </button>
-            </div>
-          </div>
-
-          <!-- Row 2: Template selection -->
-          <div class="files-header-row files-header-bottom">
-            <div class="template-row">
-              <label
-                class="template-picker"
-                for="templateSelect"
-                title="Choose an active template"
-              >
-                <span class="sr-only">Template</span>
-                <select id="templateSelect" disabled>
-                  <option value="">None</option>
-                </select>
-              </label>
-
-              <button id="clearBtn" class="btn" type="button" disabled>
-                Clear
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div
-          id="dropZone"
-          class="drop-zone"
-          role="button"
-          tabindex="0"
-          aria-label="Drag and drop JSON files here or click to select"
-          aria-describedby="dropZoneHelp"
-        >
-          <input
-            id="fileInput"
-            class="file-input"
-            type="file"
-            accept=".json,application/json"
-            multiple
-          />
-          <div class="drop-zone-inner">
-            <div class="files-subtitle">Files</div>
-            <div class="drop-title">Drag and drop JSON files</div>
-            <div class="drop-subtitle">or click to select</div>
-            <div class="drop-hint" id="dropZoneHelp">
-              Viewer-only. Nothing leaves your browser.
-            </div>
-          </div>
-        </div>
-
-        <div id="fileList" class="file-list" aria-live="polite">
-          <!-- Populated by app.js -->
-        </div>
-      </section>
-
-      <section class="right-panel" aria-label="Viewer">
-        <div class="viewer-toolbar">
-          <div class="toolbar-left">
-            <h2 id="viewerTitle" class="viewer-title">No file selected</h2>
-            <div id="viewerMeta" class="viewer-meta"></div>
-          </div>
-
-          <div class="toolbar-right">
-            <label class="mode-picker" for="modeSelect">
-              <span class="mode-label">Mode</span>
-              <select id="modeSelect" disabled>
-                <option value="auto">Auto</option>
-                <option value="dataset">Dataset</option>
-                <option value="records">Records</option>
-              </select>
-            </label>
-
-            <label class="record-picker" for="recordSelect">
-              <span class="record-label">Record</span>
-              <select id="recordSelect" disabled>
-                <option value="0">1</option>
-              </select>
-            </label>
-
-            <div id="datasetBar" class="dataset-bar" hidden>
-              <div class="dataset-title">Dataset</div>
-
-              <label class="dataset-filter">
-                <span class="sr-only">Filter rows</span>
-                <input
-                  id="datasetFilter"
-                  type="search"
-                  placeholder="Filter rows..."
-                  autocomplete="off"
-                  disabled
-                />
-              </label>
-
-              <div class="dataset-jump">
-                <label for="datasetJump" class="dataset-jump-label">Row</label>
-                <input
-                  id="datasetJump"
-                  type="number"
-                  min="1"
-                  step="1"
-                  disabled
-                />
-                <button
-                  id="datasetGoBtn"
-                  class="mini-btn"
-                  type="button"
-                  disabled
-                >
-                  Go
-                </button>
-                <button
-                  id="datasetResetBtn"
-                  class="mini-btn"
-                  type="button"
-                  disabled
-                >
-                  Reset
-                </button>
-              </div>
-            </div>
-
-            <label
-              class="search-wrap search-group record-search"
-              id="recordSearchGroup"
-              for="searchInput"
-            >
-              <span class="search-tag">Record</span>
-
-              <input
-                id="searchInput"
-                type="search"
-                placeholder="Search fields, paths, values..."
-                autocomplete="off"
-                disabled
-              />
-            </label>
-
-            <label
-              class="toggle"
-              id="includeCollapsedLabel"
-              title="Include fields inside collapsed sections in search"
-            >
-              <input id="includeCollapsedToggle" type="checkbox" />
-              <span>Include collapsed</span>
-            </label>
-
-            <label class="toggle" title="Show JSON paths in Generic view">
-              <input id="pathToggle" type="checkbox" disabled />
-              <span>Paths</span>
-            </label>
-
-            <label class="toggle">
-              <input id="rawToggle" type="checkbox" disabled />
-              <span>Raw JSON</span>
-            </label>
-
-            <label class="toggle" title="Switch light/dark theme">
-              <input id="themeToggle" type="checkbox" />
-              <span>Dark</span>
-            </label>
-          </div>
-        </div>
-
-        <div id="viewer" class="viewer">
-          <div class="empty-state">
-            Drop a JSON file on the left to start snooping. 🕵️
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="app-footer">
-      <small>
-        Offline-friendly. Viewer-only. Works on GitHub Pages.
-        <span class="footer-links">
+      <ul>
+        <li>
           <a
-            href="https://github.com/TheBIMsider/just-the-fields"
-            target="_blank"
-            rel="noopener"
-            >GitHub</a
+            href="https://github.com/thebimsider/just-the-fields/main/templates/jtf-template-starter.json"
+            download
           >
-          <span aria-hidden="true">•</span>
-          <a href="templates/index.html">Starter templates</a>
-        </span>
-      </small>
-    </footer>
+            Starter template (edit this first)
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://github.com/thebimsider/just-the-fields/main/templates/example-issues.json"
+            download
+          >
+            Example – Issues-style records
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://github.com/thebimsider/just-the-fields/main/templates/example-rfis.json"
+            download
+          >
+            Example – RFI-style records
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://github.com/thebimsider/just-the-fields/main/templates/example-generic.json"
+            download
+          >
+            Example – Generic records
+          </a>
+        </li>
+      </ul>
 
-    <script src="vendor/prism/prism.min.js" defer></script>
-    <script src="app.js" defer></script>
+      <div class="footer">
+        <p>
+          Back to the app:
+          <a href="../index.html">Just the Fields</a>
+        </p>
+      </div>
+    </div>
   </body>
 </html>
