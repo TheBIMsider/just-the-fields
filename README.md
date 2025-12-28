@@ -102,7 +102,7 @@ They cannot change app behavior or data.
 ## Getting started with templates
 
 - Click **Download** in the Templates panel to get a starter file  
-- Or open the [starter templates page](templates/index.html) (save the file locally if it opens in your browser)
+- Or open the [starter templates page](https://thebimsider.github.io/just-the-fields/templates/index.html) (save the file locally if it opens in your browser)
 - Edit paths and labels
 - Upload the template back into JTF
 
@@ -156,5 +156,6 @@ This project is licensed under the BSD-3-Clause License.
 *Built with ❤️ & 🤖 AI assistance from ChatGPT by The BIMsider for the AECO community*  
 
 *Just the Fields: Your JSON Detective - See what matters.*
+
 
 
