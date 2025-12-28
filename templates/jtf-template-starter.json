@@ -1,0 +1,65 @@
+{
+  "templateVersion": 1,
+  "templateName": "Starter Template (Edit Me)",
+  "description": "Copy this file, edit paths/labels, then upload it back to JTF in a later step.",
+  "match": {
+    "typeField": null,
+    "typeValue": null,
+    "requiredKeys": []
+  },
+  "recordLabel": {
+    "fields": [],
+    "fallback": "Record {n}"
+  },
+  "layout": [
+    {
+      "section": "Header",
+      "fields": [
+        {
+          "path": "Title",
+          "label": "Title",
+          "format": "text"
+        },
+        {
+          "path": "Status.Name",
+          "label": "Status",
+          "format": "badge"
+        },
+        {
+          "path": "Number",
+          "label": "Number",
+          "format": "text"
+        }
+      ]
+    },
+    {
+      "section": "Details",
+      "fields": [
+        {
+          "path": "Description",
+          "label": "Description",
+          "format": "multiline"
+        },
+        {
+          "path": "Priority.Name",
+          "label": "Priority",
+          "format": "badge"
+        },
+        {
+          "path": "DueDate",
+          "label": "Due date",
+          "format": "date"
+        },
+        {
+          "path": "ViewerUrl",
+          "label": "Viewer URL",
+          "format": "link"
+        }
+      ]
+    },
+    {
+      "section": "Everything else",
+      "fields": []
+    }
+  ]
+}
