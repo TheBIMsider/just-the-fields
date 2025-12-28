@@ -117,3 +117,31 @@ A template contains:
 
 If a field path does not exist, it is simply skipped.
 
+## Design goals
+
+- Keep it boring and readable
+- No dependencies
+- No build step
+- No framework lock-in
+- Easy to modify months or years later
+
+If someone opens this code cold in the future, they should be able to follow it.
+
+---
+
+## Contributing
+
+Contributions are welcome, but keep the scope tight.
+
+Please avoid proposals that add:
+- Template scripting or conditional logic
+- Data editing or write-back
+- Accounts, storage, or backends
+- Heavy dependencies or frameworks
+
+Small, focused improvements are best.
+
+See `CONTRIBUTING.md` for details.
+
+
+
