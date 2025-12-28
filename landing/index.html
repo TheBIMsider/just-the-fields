@@ -1,9 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Just the Fields (JTF) — a lightweight, browser-based JSON viewer that helps you focus on the fields that matter." />
+    <meta
+      name="description"
+      content="Just the Fields (JTF) — a lightweight, browser-based JSON viewer that helps you focus on the fields that matter."
+    />
     <title>Just the Fields (JTF) | Your JSON Detective</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -22,10 +25,8 @@
     <header class="site-header">
       <div class="wrap header-inner">
         <a class="brand" href="#top" aria-label="Just the Fields">
-          <span class="brand-mark" aria-hidden="true">JTF</span>
           <span class="brand-text">
             <span class="brand-name">Just the Fields</span>
-            <span class="brand-tag">Your JSON Detective</span>
           </span>
         </a>
 
@@ -33,12 +34,12 @@
           <a href="#features">Features</a>
           <a href="#workflow">Workflow</a>
           <a href="#templates">Templates</a>
-                    <a href="#template-guide">Template guide</a>
-<a href="#privacy">Privacy</a>
+          <a href="#template-guide">Template guide</a>
+          <a href="#privacy">Privacy</a>
           <a href="#docs">Docs</a>
         </nav>
 
-        <div class="header-actions">
+        <div class="header-actions" aria-label="Header actions">
           <a class="btn ghost" href="../" aria-label="Launch JTF">Launch</a>
           <a
             class="btn"
@@ -48,6 +49,17 @@
             aria-label="Open JTF on GitHub"
             >GitHub</a
           >
+
+          <button
+            class="theme-btn"
+            id="themeBtn"
+            type="button"
+            aria-label="Toggle theme"
+            title="Toggle light/dark"
+          >
+            <span class="theme-btn-icon" aria-hidden="true">☾</span>
+            <span class="theme-btn-text">Theme</span>
+          </button>
         </div>
       </div>
     </header>
@@ -56,15 +68,38 @@
       <section id="top" class="hero">
         <div class="wrap hero-inner">
           <div class="hero-copy">
+            <div class="hero-logo" aria-hidden="true">
+              <!-- Dark theme logo -->
+              <img
+                class="hero-logo-img hero-logo-img--dark"
+                src="assets/JTF_Logo_Dark_Banner.png"
+                alt=""
+              />
+
+              <!-- Light theme logo -->
+              <img
+                class="hero-logo-img hero-logo-img--light"
+                src="assets/JTF_Logo_White_Banner.png"
+                alt=""
+              />
+            </div>
+
             <p class="eyebrow">Browser-based. Offline-friendly. Zero setup.</p>
-            <h1>See what matters in your JSON.</h1>
+            <h2>See what matters in your JSON.</h2>
+
             <p class="lead">
-              Just the Fields (JTF) is a lightweight JSON viewer that helps you focus on the fields that matter. Drop in a file, browse safely, and use templates to control what you see.
+              Just the Fields (JTF) is a lightweight JSON viewer that helps you
+              focus on the fields that matter. Drop in a file, browse safely,
+              and use templates to control what you see.
             </p>
 
             <div class="cta-row">
               <a class="btn primary" href="../">Launch JTF</a>
-              <a class="btn" href="https://thebimsider.github.io/just-the-fields/templates/index.html">Starter templates</a>
+              <a
+                class="btn"
+                href="https://thebimsider.github.io/just-the-fields/templates/index.html"
+                >Starter templates</a
+              >
               <a class="btn ghost" href="#docs">Read the docs</a>
             </div>
 
@@ -80,14 +115,28 @@
             <div class="card">
               <div class="card-head">
                 <h2 class="card-title">Built for real-world JSON</h2>
-                <p class="card-sub">API responses, Issue lists, RFIs, and big messy exports.</p>
+                <p class="card-sub">
+                  API responses, Issue lists, RFIs, and big messy exports.
+                </p>
               </div>
               <div class="card-body">
                 <ul class="checklist">
-                  <li><strong>Records mode</strong> for structured payloads with templates.</li>
-                  <li><strong>Dataset mode</strong> for large arrays with filter and jump-to-row.</li>
-                  <li><strong>Safe rendering</strong> with collapsible objects and arrays.</li>
-                  <li><strong>Search</strong> across labels and values (optionally inside collapsed sections).</li>
+                  <li>
+                    <strong>Records mode</strong> for structured payloads with
+                    templates.
+                  </li>
+                  <li>
+                    <strong>Dataset mode</strong> for large arrays with filter
+                    and jump-to-row.
+                  </li>
+                  <li>
+                    <strong>Safe rendering</strong> with collapsible objects and
+                    arrays.
+                  </li>
+                  <li>
+                    <strong>Search</strong> across labels and values (optionally
+                    inside collapsed sections).
+                  </li>
                 </ul>
               </div>
             </div>
@@ -106,42 +155,48 @@
             <article class="tile">
               <h3>Records and dataset views</h3>
               <p>
-                JTF adapts to common JSON shapes and lets you switch modes anytime.
+                JTF adapts to common JSON shapes and lets you switch modes
+                anytime.
               </p>
             </article>
 
             <article class="tile">
               <h3>Template-driven layout</h3>
               <p>
-                Control what shows up and in what order using plain JSON template files.
+                Control what shows up and in what order using plain JSON
+                template files.
               </p>
             </article>
 
             <article class="tile">
               <h3>Safe exploration</h3>
               <p>
-                Expand objects and arrays only when you want to. Big stuff stays collapsed.
+                Expand objects and arrays only when you want to. Big stuff stays
+                collapsed.
               </p>
             </article>
 
             <article class="tile">
               <h3>Search where it counts</h3>
               <p>
-                Search fields and values in Records mode, and optionally include collapsed sections.
+                Search fields and values in Records mode, and optionally include
+                collapsed sections.
               </p>
             </article>
 
             <article class="tile">
               <h3>Dark mode</h3>
               <p>
-                Easy on the eyes when you're hunting down that one weird value at 2am.
+                Easy on the eyes when you're hunting down that one weird value
+                at 2am.
               </p>
             </article>
 
             <article class="tile">
               <h3>Works offline</h3>
               <p>
-                Static files only. Host it anywhere. Run it locally. Use it on a plane.
+                Static files only. Host it anywhere. Run it locally. Use it on a
+                plane.
               </p>
             </article>
           </div>
@@ -164,28 +219,44 @@
             <div class="step">
               <div class="step-num">2</div>
               <h3>Pick a view</h3>
-              <p>Records mode for structured payloads, Dataset mode for large arrays.</p>
+              <p>
+                Records mode for structured payloads, Dataset mode for large
+                arrays.
+              </p>
             </div>
             <div class="step">
               <div class="step-num">3</div>
               <h3>Apply a template</h3>
-              <p>Download a starter template, edit paths and labels, then upload it back.</p>
+              <p>
+                Download a starter template, edit paths and labels, then upload
+                it back.
+              </p>
             </div>
             <div class="step">
               <div class="step-num">4</div>
               <h3>Search and inspect</h3>
-              <p>Find values fast, expand only what you need, and stay in control.</p>
+              <p>
+                Find values fast, expand only what you need, and stay in
+                control.
+              </p>
             </div>
           </div>
 
           <div class="cta-box">
             <div>
               <h3>Ready to try it?</h3>
-              <p>Launch the app and drop in a JSON file. That’s it. That’s the whole setup.</p>
+              <p>
+                Launch the app and drop in a JSON file. That’s it. That’s the
+                whole setup.
+              </p>
             </div>
             <div class="cta-box-actions">
               <a class="btn primary" href="../">Launch JTF</a>
-              <a class="btn" href="https://github.com/TheBIMsider/just-the-fields">View source</a>
+              <a
+                class="btn"
+                href="https://github.com/TheBIMsider/just-the-fields"
+                >View source</a
+              >
             </div>
           </div>
         </div>
@@ -196,7 +267,8 @@
           <header class="section-head">
             <h2>Templates</h2>
             <p>
-              Templates are plain JSON files. They define layout only: what fields appear and in what order.
+              Templates are plain JSON files. They define layout only: what
+              fields appear and in what order.
             </p>
           </header>
 
@@ -204,16 +276,30 @@
             <div class="card">
               <div class="card-head">
                 <h3 class="card-title">Starter template</h3>
-                <p class="card-sub">Download, edit in any text editor, upload back into JTF.</p>
+                <p class="card-sub">
+                  Download, edit in any text editor, upload back into JTF.
+                </p>
               </div>
               <div class="card-body">
                 <ul class="bullets">
-                  <li>Define sections and fields using dot paths (like <code>Status.Name</code>).</li>
-                  <li>Missing fields are skipped, so templates are forgiving.</li>
-                  <li>Optional match rules help templates apply only to the right records.</li>
+                  <li>
+                    Define sections and fields using dot paths (like
+                    <code>Status.Name</code>).
+                  </li>
+                  <li>
+                    Missing fields are skipped, so templates are forgiving.
+                  </li>
+                  <li>
+                    Optional match rules help templates apply only to the right
+                    records.
+                  </li>
                 </ul>
                 <div class="cta-row">
-                  <a class="btn" href="https://thebimsider.github.io/just-the-fields/templates/index.html">Open starter templates</a>
+                  <a
+                    class="btn"
+                    href="https://thebimsider.github.io/just-the-fields/templates/index.html"
+                    >Open starter templates</a
+                  >
                   <a class="btn ghost" href="#template-guide">Template guide</a>
                 </div>
               </div>
@@ -222,13 +308,24 @@
             <div class="card">
               <div class="card-head">
                 <h3 class="card-title">Auto (best match)</h3>
-                <p class="card-sub">If you upload multiple templates, JTF can pick the best one per record.</p>
+                <p class="card-sub">
+                  If you upload multiple templates, JTF can pick the best one
+                  per record.
+                </p>
               </div>
               <div class="card-body">
                 <ul class="bullets">
-                  <li>Templates must match record keys (optional) and hit real paths.</li>
-                  <li>Best match is based on field hits, then match specificity.</li>
-                  <li>If nothing fits, JTF falls back safely to the full record view.</li>
+                  <li>
+                    Templates must match record keys (optional) and hit real
+                    paths.
+                  </li>
+                  <li>
+                    Best match is based on field hits, then match specificity.
+                  </li>
+                  <li>
+                    If nothing fits, JTF falls back safely to the full record
+                    view.
+                  </li>
                 </ul>
               </div>
             </div>
@@ -241,7 +338,9 @@
           <header class="section-head">
             <h2>Template guide</h2>
             <p>
-              A practical, expandable guide to help you get templates working quickly. If you want the full reference, it still lives in the repo.
+              A practical, expandable guide to help you get templates working
+              quickly. If you want the full reference, it still lives in the
+              repo.
             </p>
           </header>
 
@@ -249,7 +348,9 @@
             <details class="acc" open>
               <summary>
                 <span class="acc-title">The mental model: two modes</span>
-                <span class="acc-hint">Templates apply in Records mode only</span>
+                <span class="acc-hint"
+                  >Templates apply in Records mode only</span
+                >
               </summary>
               <div class="acc-body">
                 <div class="two-col">
@@ -269,19 +370,24 @@
                   <div class="card">
                     <div class="card-head">
                       <h3 class="card-title">Records mode</h3>
-                      <p class="card-sub">Structured objects and API responses.</p>
+                      <p class="card-sub">
+                        Structured objects and API responses.
+                      </p>
                     </div>
                     <div class="card-body">
                       <ul class="bullets">
                         <li>Templates control layout and field order.</li>
-                        <li>Templates can also build the Record dropdown labels.</li>
+                        <li>
+                          Templates can also build the Record dropdown labels.
+                        </li>
                       </ul>
                     </div>
                   </div>
                 </div>
 
                 <p class="note">
-                  If your template “does nothing”, the first thing to check is your mode.
+                  If your template “does nothing”, the first thing to check is
+                  your mode.
                 </p>
               </div>
             </details>
@@ -293,13 +399,17 @@
               </summary>
               <div class="acc-body">
                 <ol class="steps">
-                  <li>In JTF, click <strong>Download</strong> in the Templates panel to get a starter template.</li>
+                  <li>
+                    In JTF, click <strong>Download</strong> in the Templates
+                    panel to get a starter template.
+                  </li>
                   <li>Edit it (paths and labels) in any text editor.</li>
                   <li>Upload the template back into JTF.</li>
                   <li>Select it in the Template dropdown.</li>
                 </ol>
                 <p class="note">
-                  If your browser opens the JSON instead of downloading it, use <strong>Save As</strong> and store it locally.
+                  If your browser opens the JSON instead of downloading it, use
+                  <strong>Save As</strong> and store it locally.
                 </p>
               </div>
             </details>
@@ -312,11 +422,18 @@
               <div class="acc-body">
                 <ul class="bullets">
                   <li><code>templateName</code></li>
-                  <li><code>match</code> (optional): controls when it applies</li>
-                  <li><code>recordLabel</code> (optional): controls Record dropdown labels</li>
+                  <li>
+                    <code>match</code> (optional): controls when it applies
+                  </li>
+                  <li>
+                    <code>recordLabel</code> (optional): controls Record
+                    dropdown labels
+                  </li>
                   <li><code>layout</code>: ordered sections and fields</li>
                 </ul>
-                <p class="note">If a path does not exist, it is skipped. Nothing crashes.</p>
+                <p class="note">
+                  If a path does not exist, it is skipped. Nothing crashes.
+                </p>
               </div>
             </details>
 
@@ -334,7 +451,8 @@
                   <code>ViewerUrl</code>
                 </div>
                 <p class="note">
-                  Practical tip: copy real property names from the Raw JSON view and build one field at a time.
+                  Practical tip: copy real property names from the Raw JSON view
+                  and build one field at a time.
                 </p>
               </div>
             </details>
@@ -346,27 +464,52 @@
               </summary>
               <div class="acc-body">
                 <div class="grid-3">
-                  <div class="mini-card"><strong>text</strong><span>Default</span></div>
-                  <div class="mini-card"><strong>badge</strong><span>Status pills</span></div>
-                  <div class="mini-card"><strong>date</strong><span>Readable date/time</span></div>
-                  <div class="mini-card"><strong>link</strong><span>Clickable URLs</span></div>
-                  <div class="mini-card"><strong>multiline</strong><span>Preserve line breaks</span></div>
-                  <div class="mini-card"><strong>json</strong><span>Nested object/array</span></div>
+                  <div class="mini-card">
+                    <strong>text</strong><span>Default</span>
+                  </div>
+                  <div class="mini-card">
+                    <strong>badge</strong><span>Status pills</span>
+                  </div>
+                  <div class="mini-card">
+                    <strong>date</strong><span>Readable date/time</span>
+                  </div>
+                  <div class="mini-card">
+                    <strong>link</strong><span>Clickable URLs</span>
+                  </div>
+                  <div class="mini-card">
+                    <strong>multiline</strong><span>Preserve line breaks</span>
+                  </div>
+                  <div class="mini-card">
+                    <strong>json</strong><span>Nested object/array</span>
+                  </div>
                 </div>
-                <p class="note">If the value is the wrong type for a format, the field is skipped.</p>
+                <p class="note">
+                  If the value is the wrong type for a format, the field is
+                  skipped.
+                </p>
               </div>
             </details>
 
             <details class="acc">
               <summary>
                 <span class="acc-title">Match rules</span>
-                <span class="acc-hint">Apply the right template to the right record</span>
+                <span class="acc-hint"
+                  >Apply the right template to the right record</span
+                >
               </summary>
               <div class="acc-body">
                 <ul class="bullets">
-                  <li>Match rules decide whether a template applies to a given record.</li>
-                  <li>Match is not filtering, not a query language, and not a transform.</li>
-                  <li>Keep match rules simple so templates stay predictable.</li>
+                  <li>
+                    Match rules decide whether a template applies to a given
+                    record.
+                  </li>
+                  <li>
+                    Match is not filtering, not a query language, and not a
+                    transform.
+                  </li>
+                  <li>
+                    Keep match rules simple so templates stay predictable.
+                  </li>
                 </ul>
               </div>
             </details>
@@ -378,18 +521,24 @@
               </summary>
               <div class="acc-body">
                 <p>
-                  A template can build Record dropdown labels from multiple fields in order. If fields are missing, JTF falls back safely.
+                  A template can build Record dropdown labels from multiple
+                  fields in order. If fields are missing, JTF falls back safely.
                 </p>
                 <p class="note">
-                  This is how “Record 12” becomes something like “#RFI-1042 Window detail (Open)”.
+                  This is how “Record 12” becomes something like “#RFI-1042
+                  Window detail (Open)”.
                 </p>
               </div>
             </details>
 
             <details class="acc">
               <summary>
-                <span class="acc-title">When a template matches but shows nothing</span>
-                <span class="acc-hint">The common “why is it blank?” checklist</span>
+                <span class="acc-title"
+                  >When a template matches but shows nothing</span
+                >
+                <span class="acc-hint"
+                  >The common “why is it blank?” checklist</span
+                >
               </summary>
               <div class="acc-body">
                 <p>Fix is usually one of:</p>
@@ -399,7 +548,8 @@
                   <li>Template is for a different record shape</li>
                 </ul>
                 <p class="note">
-                  JTF shows a friendly hint card and still lets you view the full record.
+                  JTF shows a friendly hint card and still lets you view the
+                  full record.
                 </p>
               </div>
             </details>
@@ -416,14 +566,22 @@
                   <li>No conditional logic</li>
                   <li>No data mutation</li>
                 </ul>
-                <p class="note"><strong>JTF reads data. It does not change data.</strong></p>
+                <p class="note">
+                  <strong>JTF reads data. It does not change data.</strong>
+                </p>
               </div>
             </details>
           </div>
 
           <div class="cta-slim">
             <a class="btn" href="../templates/">Starter templates</a>
-            <a class="btn ghost" href="https://github.com/TheBIMsider/just-the-fields/blob/main/docs/templates.md" target="_blank" rel="noreferrer">View the Markdown source</a>
+            <a
+              class="btn ghost"
+              href="https://github.com/TheBIMsider/just-the-fields/blob/main/docs/templates.md"
+              target="_blank"
+              rel="noreferrer"
+              >View the Markdown source</a
+            >
           </div>
         </div>
       </section>
@@ -439,17 +597,24 @@
             <div class="tile big">
               <h3>100% client-side processing</h3>
               <p>
-                JTF runs entirely in your browser. No uploads, no backend, no accounts, no tracking.
-                If your JSON is sensitive, good. Keep it that way.
+                JTF runs entirely in your browser. No uploads, no backend, no
+                accounts, no tracking. If your JSON is sensitive, good. Keep it
+                that way.
               </p>
             </div>
             <div class="tile">
               <h3>Host it anywhere</h3>
-              <p>It’s static files. GitHub Pages, internal servers, or a local folder with a tiny web server.</p>
+              <p>
+                It’s static files. GitHub Pages, internal servers, or a local
+                folder with a tiny web server.
+              </p>
             </div>
             <div class="tile">
               <h3>Offline-friendly</h3>
-              <p>Once loaded, it works without internet. Ideal for job sites, flights, and cursed Wi‑Fi.</p>
+              <p>
+                Once loaded, it works without internet. Ideal for job sites,
+                flights, and cursed Wi‑Fi.
+              </p>
             </div>
           </div>
         </div>
@@ -497,8 +662,9 @@
 
           <div class="fineprint">
             <p>
-              JTF is open source and intentionally lightweight. If you want a feature, open an issue with a clear use case.
-              If you want it tomorrow, bribe time itself.
+              JTF is open source and intentionally lightweight. If you want a
+              feature, open an issue with a clear use case. If you want it
+              tomorrow, bribe time itself.
             </p>
           </div>
         </div>
@@ -509,19 +675,23 @@
       <div class="wrap footer-inner">
         <div>
           <div class="footer-brand">Just the Fields</div>
-          <div class="footer-note">Built by The BIMsider for the AECO community.</div>
+          <div class="footer-note">
+            Built by The BIMsider for the AECO community.
+          </div>
         </div>
         <div class="footer-links">
           <a href="../">Launch</a>
-          <a href="https://github.com/TheBIMsider/just-the-fields" target="_blank" rel="noreferrer">GitHub</a>
-<button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle theme" title="Toggle light/dark">
-  <span class="theme-btn-icon" aria-hidden="true">☾</span>
-  <span class="theme-btn-text">Theme</span>
-</button>
+          <a
+            href="https://github.com/TheBIMsider/just-the-fields"
+            target="_blank"
+            rel="noreferrer"
+            >GitHub</a
+          >
+
           <a href="#top">Back to top</a>
         </div>
       </div>
     </footer>
-    <script src="app.js"></script>
-</body>
+    <script src="app.js" defer></script>
+  </body>
 </html>
