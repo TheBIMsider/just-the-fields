@@ -136,6 +136,10 @@ code {
   color: var(--text);
 }
 
+.brand-name {
+  font-weight: 900; /* or 800 / 900 if you want it punchier */
+}
+
 .brand-tag {
   color: var(--muted);
 }
