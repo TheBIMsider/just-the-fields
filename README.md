@@ -2,7 +2,6 @@
 
 <img width="1150" height="450" alt="JTF_Logo_White_Banner" src="https://github.com/user-attachments/assets/c40bb4a8-f2c4-4339-8ebe-6c041748ae02" />
 
-
 A lightweight JSON viewer that helps you focus on just the fields that matter.
 
 JTF runs entirely in your browser and works great on GitHub Pages.  
@@ -13,7 +12,6 @@ Drop in JSON files, explore them safely, and use templates to control what you s
 👉 https://thebimsider.github.io/just-the-fields/  
 
 Runs entirely in your browser. No uploads. No installs.
-
 
 ---
 
@@ -62,7 +60,6 @@ python -m http.server 8080
 
 ## How JTF views your JSON
 
-
 JTF automatically adapts to common JSON shapes so you do not have to restructure your data first.
 
 ### Dataset mode
@@ -105,7 +102,7 @@ They cannot change app behavior or data.
 ## Getting started with templates
 
 - Click **Download** in the Templates panel to get a starter file  
-- Or open `templates/index.html` for examples
+- Or open `templates/index.html` for examples (save the file locally if it opens in your browser)
 - Edit paths and labels
 - Upload the template back into JTF
 
