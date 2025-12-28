@@ -8,6 +8,7 @@ Drop in JSON files, explore them safely, and use templates to control what you s
 ### Live demo
 
 👉 https://thebimsider.github.io/just-the-fields/  
+
 Runs entirely in your browser. No uploads. No installs.
 
 
@@ -51,4 +52,5 @@ From the project folder:
 ```bash
 python -m http.server 8080
 ```
+
 
