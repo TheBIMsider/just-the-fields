@@ -800,6 +800,16 @@ html[data-theme='light'] .cta-box p {
   color: var(--muted);
 }
 
+/* Light mode: Docs/Links tiles should not go dark on hover */
+html[data-theme='light'] .link-desc {
+  color: var(--muted);
+}
+
+html[data-theme='light'] .link-tile:hover {
+  background: rgba(15, 20, 26, 0.04);
+  border-color: var(--border2);
+}
+
 /* Light mode: remove all drop shadows */
 html[data-theme='light'] * {
   box-shadow: none !important;
