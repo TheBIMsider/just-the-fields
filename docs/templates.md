@@ -1,5 +1,8 @@
 # Templates
 
+> This document is written in Markdown.  
+> If it looks unstyled here, view it on GitHub for a formatted version.
+
 Templates let you define what fields appear and in what order. They are plain JSON files you can edit in any text editor. Templates control layout only. They cannot change app behavior or data.:contentReference[oaicite:9]{index=9}
 
 ## 1) The mental model (two modes)
