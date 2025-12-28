@@ -58,7 +58,10 @@ From the project folder:
 python -m http.server 8080
 ```
 
+---
+
 ## How JTF views your JSON
+
 
 JTF automatically adapts to common JSON shapes so you do not have to restructure your data first.
 
@@ -68,7 +71,7 @@ Best for large, flat arrays (table-like data).
 
 - Automatically detected for large arrays
 - Filter rows
-- Jump to a specific row
+- Jump to specific rows
 - Templates do not apply in this mode
 
 ### Records mode
