@@ -33,7 +33,8 @@
           <a href="#features">Features</a>
           <a href="#workflow">Workflow</a>
           <a href="#templates">Templates</a>
-          <a href="#privacy">Privacy</a>
+                    <a href="#template-guide">Template guide</a>
+<a href="#privacy">Privacy</a>
           <a href="#docs">Docs</a>
         </nav>
 
@@ -213,7 +214,7 @@
                 </ul>
                 <div class="cta-row">
                   <a class="btn" href="https://thebimsider.github.io/just-the-fields/templates/index.html">Open starter templates</a>
-                  <a class="btn ghost" href="#docs">Template guide</a>
+                  <a class="btn ghost" href="#template-guide">Template guide</a>
                 </div>
               </div>
             </div>
@@ -231,6 +232,198 @@
                 </ul>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="template-guide" class="section">
+        <div class="wrap">
+          <header class="section-head">
+            <h2>Template guide</h2>
+            <p>
+              A practical, expandable guide to help you get templates working quickly. If you want the full reference, it still lives in the repo.
+            </p>
+          </header>
+
+          <div class="accordion" role="region" aria-label="Template guide">
+            <details class="acc" open>
+              <summary>
+                <span class="acc-title">The mental model: two modes</span>
+                <span class="acc-hint">Templates apply in Records mode only</span>
+              </summary>
+              <div class="acc-body">
+                <div class="two-col">
+                  <div class="card">
+                    <div class="card-head">
+                      <h3 class="card-title">Dataset mode</h3>
+                      <p class="card-sub">Big flat arrays (table-like).</p>
+                    </div>
+                    <div class="card-body">
+                      <ul class="bullets">
+                        <li>Templates do not apply.</li>
+                        <li>Use the Dataset filter and Jump-to-row.</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="card">
+                    <div class="card-head">
+                      <h3 class="card-title">Records mode</h3>
+                      <p class="card-sub">Structured objects and API responses.</p>
+                    </div>
+                    <div class="card-body">
+                      <ul class="bullets">
+                        <li>Templates control layout and field order.</li>
+                        <li>Templates can also build the Record dropdown labels.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <p class="note">
+                  If your template “does nothing”, the first thing to check is your mode.
+                </p>
+              </div>
+            </details>
+
+            <details class="acc">
+              <summary>
+                <span class="acc-title">Basic workflow</span>
+                <span class="acc-hint">Download → edit → upload → select</span>
+              </summary>
+              <div class="acc-body">
+                <ol class="steps">
+                  <li>In JTF, click <strong>Download</strong> in the Templates panel to get a starter template.</li>
+                  <li>Edit it (paths and labels) in any text editor.</li>
+                  <li>Upload the template back into JTF.</li>
+                  <li>Select it in the Template dropdown.</li>
+                </ol>
+                <p class="note">
+                  If your browser opens the JSON instead of downloading it, use <strong>Save As</strong> and store it locally.
+                </p>
+              </div>
+            </details>
+
+            <details class="acc">
+              <summary>
+                <span class="acc-title">Template anatomy</span>
+                <span class="acc-hint">What’s inside the file</span>
+              </summary>
+              <div class="acc-body">
+                <ul class="bullets">
+                  <li><code>templateName</code></li>
+                  <li><code>match</code> (optional): controls when it applies</li>
+                  <li><code>recordLabel</code> (optional): controls Record dropdown labels</li>
+                  <li><code>layout</code>: ordered sections and fields</li>
+                </ul>
+                <p class="note">If a path does not exist, it is skipped. Nothing crashes.</p>
+              </div>
+            </details>
+
+            <details class="acc">
+              <summary>
+                <span class="acc-title">Paths</span>
+                <span class="acc-hint">How JTF finds values</span>
+              </summary>
+              <div class="acc-body">
+                <p>Paths are dot-separated, and can include array indexes:</p>
+                <div class="code-slab" role="note" aria-label="Path examples">
+                  <code>Status.Name</code>
+                  <code>AssignedTo.Email</code>
+                  <code>Items[0].Title</code>
+                  <code>ViewerUrl</code>
+                </div>
+                <p class="note">
+                  Practical tip: copy real property names from the Raw JSON view and build one field at a time.
+                </p>
+              </div>
+            </details>
+
+            <details class="acc">
+              <summary>
+                <span class="acc-title">Formats</span>
+                <span class="acc-hint">How values display</span>
+              </summary>
+              <div class="acc-body">
+                <div class="grid-3">
+                  <div class="mini-card"><strong>text</strong><span>Default</span></div>
+                  <div class="mini-card"><strong>badge</strong><span>Status pills</span></div>
+                  <div class="mini-card"><strong>date</strong><span>Readable date/time</span></div>
+                  <div class="mini-card"><strong>link</strong><span>Clickable URLs</span></div>
+                  <div class="mini-card"><strong>multiline</strong><span>Preserve line breaks</span></div>
+                  <div class="mini-card"><strong>json</strong><span>Nested object/array</span></div>
+                </div>
+                <p class="note">If the value is the wrong type for a format, the field is skipped.</p>
+              </div>
+            </details>
+
+            <details class="acc">
+              <summary>
+                <span class="acc-title">Match rules</span>
+                <span class="acc-hint">Apply the right template to the right record</span>
+              </summary>
+              <div class="acc-body">
+                <ul class="bullets">
+                  <li>Match rules decide whether a template applies to a given record.</li>
+                  <li>Match is not filtering, not a query language, and not a transform.</li>
+                  <li>Keep match rules simple so templates stay predictable.</li>
+                </ul>
+              </div>
+            </details>
+
+            <details class="acc">
+              <summary>
+                <span class="acc-title">Record labels</span>
+                <span class="acc-hint">Make “Record 12” human</span>
+              </summary>
+              <div class="acc-body">
+                <p>
+                  A template can build Record dropdown labels from multiple fields in order. If fields are missing, JTF falls back safely.
+                </p>
+                <p class="note">
+                  This is how “Record 12” becomes something like “#RFI-1042 Window detail (Open)”.
+                </p>
+              </div>
+            </details>
+
+            <details class="acc">
+              <summary>
+                <span class="acc-title">When a template matches but shows nothing</span>
+                <span class="acc-hint">The common “why is it blank?” checklist</span>
+              </summary>
+              <div class="acc-body">
+                <p>Fix is usually one of:</p>
+                <ul class="bullets">
+                  <li>Wrong mode (Dataset vs Records)</li>
+                  <li>Wrong path (typo or different casing)</li>
+                  <li>Template is for a different record shape</li>
+                </ul>
+                <p class="note">
+                  JTF shows a friendly hint card and still lets you view the full record.
+                </p>
+              </div>
+            </details>
+
+            <details class="acc">
+              <summary>
+                <span class="acc-title">Guardrails</span>
+                <span class="acc-hint">What templates cannot do</span>
+              </summary>
+              <div class="acc-body">
+                <ul class="bullets">
+                  <li>Declarative only (layout)</li>
+                  <li>No scripting</li>
+                  <li>No conditional logic</li>
+                  <li>No data mutation</li>
+                </ul>
+                <p class="note"><strong>JTF reads data. It does not change data.</strong></p>
+              </div>
+            </details>
+          </div>
+
+          <div class="cta-slim">
+            <a class="btn" href="../templates/">Starter templates</a>
+            <a class="btn ghost" href="https://github.com/TheBIMsider/just-the-fields/blob/main/docs/templates.md" target="_blank" rel="noreferrer">View the Markdown source</a>
           </div>
         </div>
       </section>
@@ -286,7 +479,7 @@
             </a>
             <a
               class="link-tile"
-              href="https://thebimsider.github.io/just-the-fields/docs/templates.html"
+              href="#template-guide"
               aria-label="Templates docs"
             >
               <span class="link-title">Templates guide</span>
