@@ -1,0 +1,999 @@
+/* Just the Fields
+  Clean defaults, readable UI, no framework required.
+*/
+
+:root {
+  /* Light theme (default) */
+  --bg: #f6f8fb;
+  --panel: #ffffff;
+  --panel-2: #f1f4f9;
+  --text: #0b1220;
+  --muted: #4a5b73;
+  --border: rgba(11, 18, 32, 0.14);
+  --accent: #0077ff;
+  --accent-2: #0a7a2f;
+  --danger: #c53030;
+
+  --radius: 12px;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+  --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
+    Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
+  --page-bg: radial-gradient(1200px 700px at 20% 0%, #e9f0ff 0%, var(--bg) 55%);
+  --control-bg: rgba(255, 255, 255, 0.92);
+  --control-border: rgba(11, 18, 32, 0.18);
+}
+
+/* Dark theme overrides */
+html[data-theme='dark'] {
+  --bg: #0b0f14;
+  --panel: #111826;
+  --panel-2: #0f1520;
+  --text: #e6edf3;
+  --muted: #9fb0c3;
+  --border: rgba(255, 255, 255, 0.12);
+  --accent: #5cc8ff;
+  --accent-2: #7ee787;
+  --danger: #ff6b6b;
+
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --page-bg: radial-gradient(1200px 700px at 20% 0%, #17223a 0%, var(--bg) 55%);
+  --control-bg: rgba(0, 0, 0, 0.22);
+  --control-border: rgba(255, 255, 255, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  background: var(--page-bg);
+  color: var(--text);
+}
+
+.app-header {
+  padding: 18px 20px 10px;
+}
+
+.brand h1 {
+  font-size: 20px;
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
+.tagline {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.app {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 14px;
+  padding: 14px 14px 8px;
+  align-items: start;
+}
+
+.left-panel,
+.right-panel {
+  background: linear-gradient(180deg, var(--panel), var(--panel-2));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap; /* key: lets the controls drop to a second row */
+  padding: 14px 14px 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Templates header layout (this element also has .panel-header, so override it cleanly) */
+.panel-header.files-header {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch; /* key: children become full width */
+  justify-content: flex-start;
+  flex-wrap: nowrap; /* key: stop .panel-header wrapping behavior here */
+  gap: 8px;
+}
+
+/* Each row */
+.files-header-row {
+  display: flex;
+  width: 100%; /* key: rows fill the header width */
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* Top row: title + main buttons */
+.files-header-top h2 {
+  margin: 0;
+}
+
+/* Force panel titles to anchor left */
+.files-header h2 {
+  margin: 0;
+  text-align: left;
+}
+
+.files-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  /* Keep all buttons on one line */
+  flex-wrap: nowrap;
+  white-space: nowrap;
+
+  /* If the panel gets narrow, scroll instead of wrapping */
+  overflow-x: auto;
+  max-width: 100%;
+
+  /* A little padding so the scroll doesn't clip focus rings */
+  padding: 2px;
+}
+
+/* Optional: hide ugly scrollbar in WebKit browsers, still scrollable */
+.files-actions::-webkit-scrollbar {
+  height: 8px;
+}
+.files-actions::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.12);
+  border-radius: 999px;
+}
+html[data-theme='dark'] .files-actions::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+/* Templates second row: align dropdown + Clear to the right */
+.files-header-bottom {
+  justify-content: flex-end;
+}
+
+.files-header-bottom .template-picker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* Keep controls compact */
+.files-actions .btn {
+  padding: 7px 10px;
+  font-size: 12px;
+}
+
+.files-header-bottom select {
+  max-width: 260px;
+}
+
+@media (max-width: 520px) {
+  .files-header-bottom {
+    flex-wrap: wrap;
+  }
+}
+
+/* Panel header action buttons (Templates, Files, etc.)
+   Single source of truth to avoid duplicate definitions */
+.panel-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap; /* prevents control squishing on narrow widths */
+}
+
+.panel-header h2 {
+  font-size: 14px;
+  margin: 0;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------
+   Buttons
+   Shared base styles live here so .btn and .mini-btn stay consistent.
+------------------------------------------------------------ */
+
+:is(.btn, .mini-btn) {
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  cursor: pointer;
+
+  /* Make button text visually center in Chrome and stay consistent elsewhere */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  /* Kill browser-specific button styling quirks */
+  -webkit-appearance: none;
+  appearance: none;
+
+  /* Prevent weird baseline effects */
+  line-height: 1.2;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+/* Standard button */
+.btn {
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+/* Keep header controls compact so "Files" does not get bullied */
+.panel-actions .btn {
+  padding: 7px 10px;
+  font-size: 12px;
+  border-radius: 10px;
+}
+
+.panel-actions .template-picker select {
+  padding: 7px 10px;
+  font-size: 12px;
+  max-width: 200px; /* prevents the dropdown from hogging the row */
+}
+
+/* On narrower screens, let the template label disappear */
+@media (max-width: 520px) {
+  .panel-actions .template-label {
+    display: none;
+  }
+}
+
+/* Toolbar button spacing consistency */
+.viewer-toolbar .btn {
+  padding: 7px 10px; /* match select height a bit better */
+}
+
+/* Some browsers add inner padding that can make text look off-center */
+.btn::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.drop-zone {
+  margin: 14px;
+  border: 1.5px dashed rgba(255, 255, 255, 0.22);
+  border-radius: var(--radius);
+  padding: 16px;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.drop-zone:focus {
+  outline: 2px solid rgba(92, 200, 255, 0.55);
+  outline-offset: 2px;
+}
+
+.drop-zone.dragover {
+  border-color: rgba(92, 200, 255, 0.85);
+  background: rgba(92, 200, 255, 0.08);
+}
+
+/* Small "Files" title inside the drop zone */
+.files-subtitle {
+  width: 100%;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.file-input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.drop-zone-inner {
+  text-align: center;
+}
+
+.drop-title {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.drop-subtitle {
+  color: var(--muted);
+  margin-top: 4px;
+  font-size: 13px;
+}
+
+.drop-hint {
+  margin-top: 10px;
+  color: rgba(159, 176, 195, 0.85);
+  font-size: 12px;
+}
+
+.file-list {
+  padding: 0 6px 10px;
+}
+
+.file-item {
+  margin: 8px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 10px 9px;
+  background: rgba(255, 255, 255, 0.03);
+  cursor: pointer;
+}
+
+.file-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.file-item.active {
+  border-color: rgba(92, 200, 255, 0.8);
+  box-shadow: 0 0 0 2px rgba(92, 200, 255, 0.14) inset;
+}
+
+.file-name {
+  font-size: 13px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-meta {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.file-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--muted);
+}
+
+.file-error {
+  margin-top: 8px;
+  color: var(--danger);
+  font-size: 12px;
+}
+
+.dataset-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.dataset-title {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+  padding: 0 4px;
+}
+
+.dataset-filter input {
+  width: 220px;
+  max-width: 30vw;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: var(--panel);
+  color: var(--text);
+}
+
+.dataset-filter input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.dataset-jump {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dataset-jump-label {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.dataset-jump input {
+  width: 90px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: var(--panel);
+  color: var(--text);
+}
+
+.dataset-jump input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.viewer-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.viewer-title {
+  margin: 0;
+  font-size: 14px;
+}
+
+.viewer-meta {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.record-picker,
+.mode-picker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--muted);
+  user-select: none;
+}
+
+.record-label,
+.mode-label {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.record-picker select,
+.mode-picker select {
+  border-radius: 10px;
+  border: 1px solid var(--control-border);
+  background: var(--control-bg);
+  color: var(--text);
+  padding: 7px 10px;
+  font-size: 13px;
+}
+
+.template-picker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--muted);
+  user-select: none;
+}
+
+.template-label {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.template-picker select {
+  border-radius: 10px;
+  border: 1px solid var(--control-border);
+  background: var(--control-bg);
+  color: var(--text);
+
+  padding: 7px 10px;
+  padding-right: 36px; /* space after arrow before the Clear button */
+  font-size: 13px;
+}
+
+.template-picker select:disabled {
+  opacity: 0.55;
+}
+
+/* Template dropdown + Clear button row */
+.template-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px; /* space between dropdown and Clear */
+}
+
+/* Labeled search group (Record search) */
+.search-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 12px;
+  border: 1px solid var(--control-border);
+  background: var(--control-bg);
+}
+
+.search-tag {
+  font-size: 12px;
+  color: var(--muted);
+  user-select: none;
+}
+
+.search-group input {
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 13px;
+  width: 320px;
+}
+
+.search-group input::placeholder {
+  color: var(--muted);
+}
+
+/* Disabled styling and hover cue */
+.search-group.is-disabled {
+  opacity: 0.7;
+  border-style: dashed;
+}
+
+.search-group.is-disabled input {
+  cursor: not-allowed;
+}
+
+/* Include-collapsed: obvious disabled state + hover ban icon */
+.toggle.is-disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  position: relative;
+}
+
+.toggle.is-disabled input {
+  cursor: not-allowed;
+}
+
+/* Dark mode: force dropdown menu to match app */
+html[data-theme='dark'] .record-picker select,
+html[data-theme='dark'] .mode-picker select {
+  background: #0b0f14;
+  color: var(--text);
+}
+
+/* Dropdown list items */
+html[data-theme='dark'] .record-picker select option,
+html[data-theme='dark'] .mode-picker select option {
+  background: #0b0f14;
+  color: var(--text);
+}
+
+.record-picker select:disabled,
+.mode-picker select:disabled {
+  opacity: 0.55;
+}
+
+.search-wrap input {
+  width: min(360px, 42vw);
+  border-radius: 10px;
+  border: 1px solid var(--control-border);
+  background: var(--control-bg);
+  color: var(--text);
+  padding: 8px 10px;
+  font-size: 13px;
+}
+
+.search-wrap input:disabled {
+  opacity: 0.55;
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--muted);
+  user-select: none;
+}
+
+/* Custom checkbox to match the UI (light and dark) */
+.toggle input[type='checkbox'] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.04);
+  display: inline-grid;
+  place-content: center;
+  cursor: pointer;
+}
+
+html[data-theme='dark'] .toggle input[type='checkbox'] {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.toggle input[type='checkbox']::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  transform: scale(0);
+  transition: transform 120ms ease-in-out;
+  background: var(--accent);
+}
+
+.toggle input[type='checkbox']:checked::after {
+  transform: scale(1);
+}
+
+.toggle input[type='checkbox']:focus-visible {
+  outline: 2px solid rgba(0, 119, 255, 0.35);
+  outline-offset: 2px;
+}
+
+html[data-theme='dark'] .toggle input[type='checkbox']:focus-visible {
+  outline: 2px solid rgba(92, 200, 255, 0.45);
+}
+
+.viewer {
+  padding: 14px;
+  min-height: 420px;
+}
+
+.empty-state {
+  padding: 14px;
+  border: 1px dashed rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.03);
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+/* Search: section header highlight when a collapsed section contains hits */
+.card.search-hit .card-header {
+  background: rgba(92, 200, 255, 0.07);
+  box-shadow: 0 0 0 1px rgba(92, 200, 255, 0.18) inset;
+}
+
+.search-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(92, 200, 255, 0.09);
+  color: var(--text);
+  font-size: 12px;
+  font-family: var(--sans);
+}
+
+/* Text highlighting for matched fragments */
+mark.jtf-mark {
+  background: rgba(126, 231, 135, 0.18);
+  color: var(--text);
+  padding: 0 2px;
+  border-radius: 4px;
+}
+
+.path-hint {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  opacity: 0.9;
+  margin-bottom: 6px;
+}
+
+.card-header {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.card-header-button {
+  all: unset;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.card-header-button:focus {
+  outline: 2px solid rgba(92, 200, 255, 0.55);
+  outline-offset: 2px;
+}
+
+.card-header .card-title {
+  margin: 0;
+}
+
+.card-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Compact “pill” button (inherits base from :is(.btn, .mini-btn)) */
+.mini-btn {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.mini-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.kv {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.kv:last-child {
+  border-bottom: none;
+}
+
+.kv .k {
+  color: var(--muted);
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.kv .v {
+  font-family: var(--mono);
+  font-size: 12px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Search feedback
+    - is-dim: non-matching rows fade but stay visible
+    - is-hit: matching rows get a subtle highlight
+    Works for both Issue (.kv) and other rows (.field).
+*/
+.kv.is-dim,
+.field.is-dim {
+  opacity: 0.35;
+  filter: saturate(0.7);
+}
+
+.kv.is-hit,
+.field.is-hit {
+  border-radius: 10px;
+  background: rgba(92, 200, 255, 0.09);
+  box-shadow: 0 0 0 1px rgba(92, 200, 255, 0.22) inset;
+}
+
+.kv.is-hit .k,
+.field.is-hit .field-label {
+  color: var(--text);
+}
+
+@media (max-width: 980px) {
+  .kv {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card-title {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.chevron {
+  font-family: var(--mono);
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.card-body {
+  padding: 10px 12px 12px;
+}
+
+.field {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.field:last-child {
+  border-bottom: none;
+}
+
+.field-label {
+  color: var(--muted);
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.field-value {
+  font-family: var(--mono);
+  font-size: 12px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.badge {
+  display: inline-flex;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(92, 200, 255, 0.08);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 12px;
+}
+
+.raw-json {
+  font-family: var(--mono);
+  font-size: 12px;
+  white-space: pre;
+  overflow: auto;
+  border-radius: var(--radius);
+}
+
+/* Non-Prism usage (if any) */
+.raw-json:not([class*='language-']) {
+  padding: 12px;
+  border: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.04);
+}
+
+/* Prism usage */
+.raw-json[class*='language-'] {
+  margin: 0;
+  border: 1px solid var(--border);
+}
+
+.array-meta {
+  color: var(--muted);
+  font-size: 12px;
+  margin: 8px 0 10px;
+}
+
+.array-list {
+  display: grid;
+  gap: 10px;
+}
+
+.array-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 8px 10px;
+}
+
+.array-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 8px 0 10px;
+}
+
+.array-actions {
+  display: inline-flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.array-note {
+  color: var(--muted);
+  font-size: 12px;
+  margin: 0 0 10px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.app-footer {
+  padding: 10px 16px 18px;
+  color: rgba(159, 176, 195, 0.8);
+}
+
+.app-footer .footer-links {
+  margin-left: 10px;
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.app-footer a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.app-footer a:hover {
+  opacity: 0.9;
+}
+
+@media (max-width: 980px) {
+  .app {
+    grid-template-columns: 1fr;
+  }
+
+  .field {
+    grid-template-columns: 1fr;
+  }
+
+  .search-wrap input {
+    width: min(520px, 70vw);
+  }
+}
