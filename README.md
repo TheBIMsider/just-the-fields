@@ -144,7 +144,3 @@ Please avoid proposals that add:
 Small, focused improvements are best.
 
 See `CONTRIBUTING.md` for details.
-
-
-
-
