@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Just the Fields (JTF) — a lightweight, browser-based JSON viewer that helps you focus on the fields that matter." />
+    <title>Just the Fields (JTF) | Your JSON Detective</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="brand" href="#top" aria-label="Just the Fields">
+          <span class="brand-mark" aria-hidden="true">JTF</span>
+          <span class="brand-text">
+            <span class="brand-name">Just the Fields</span>
+            <span class="brand-tag">Your JSON Detective</span>
+          </span>
+        </a>
+
+        <nav class="nav" aria-label="Primary">
+          <a href="#features">Features</a>
+          <a href="#workflow">Workflow</a>
+          <a href="#templates">Templates</a>
+          <a href="#privacy">Privacy</a>
+          <a href="#docs">Docs</a>
+        </nav>
+
+        <div class="header-actions">
+          <a class="btn ghost" href="../" aria-label="Launch JTF">Launch</a>
+          <a
+            class="btn"
+            href="https://github.com/TheBIMsider/just-the-fields"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Open JTF on GitHub"
+            >GitHub</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section id="top" class="hero">
+        <div class="wrap hero-inner">
+          <div class="hero-copy">
+            <p class="eyebrow">Browser-based. Offline-friendly. Zero setup.</p>
+            <h1>See what matters in your JSON.</h1>
+            <p class="lead">
+              Just the Fields (JTF) is a lightweight JSON viewer that helps you focus on the fields that matter. Drop in a file, browse safely, and use templates to control what you see.
+            </p>
+
+            <div class="cta-row">
+              <a class="btn primary" href="../">Launch JTF</a>
+              <a class="btn" href="https://thebimsider.github.io/just-the-fields/templates/index.html">Starter templates</a>
+              <a class="btn ghost" href="#docs">Read the docs</a>
+            </div>
+
+            <div class="hero-badges" aria-label="Highlights">
+              <span class="pill">Runs 100% in your browser</span>
+              <span class="pill">No installs</span>
+              <span class="pill">No uploads</span>
+              <span class="pill">GitHub Pages friendly</span>
+            </div>
+          </div>
+
+          <div class="hero-card" aria-label="What JTF is good at">
+            <div class="card">
+              <div class="card-head">
+                <h2 class="card-title">Built for real-world JSON</h2>
+                <p class="card-sub">API responses, Issue lists, RFIs, and big messy exports.</p>
+              </div>
+              <div class="card-body">
+                <ul class="checklist">
+                  <li><strong>Records mode</strong> for structured payloads with templates.</li>
+                  <li><strong>Dataset mode</strong> for large arrays with filter and jump-to-row.</li>
+                  <li><strong>Safe rendering</strong> with collapsible objects and arrays.</li>
+                  <li><strong>Search</strong> across labels and values (optionally inside collapsed sections).</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="section">
+        <div class="wrap">
+          <header class="section-head">
+            <h2>Features</h2>
+            <p>Simple, focused, and fast. No feature bloat. No drama.</p>
+          </header>
+
+          <div class="grid">
+            <article class="tile">
+              <h3>Records and dataset views</h3>
+              <p>
+                JTF adapts to common JSON shapes and lets you switch modes anytime.
+              </p>
+            </article>
+
+            <article class="tile">
+              <h3>Template-driven layout</h3>
+              <p>
+                Control what shows up and in what order using plain JSON template files.
+              </p>
+            </article>
+
+            <article class="tile">
+              <h3>Safe exploration</h3>
+              <p>
+                Expand objects and arrays only when you want to. Big stuff stays collapsed.
+              </p>
+            </article>
+
+            <article class="tile">
+              <h3>Search where it counts</h3>
+              <p>
+                Search fields and values in Records mode, and optionally include collapsed sections.
+              </p>
+            </article>
+
+            <article class="tile">
+              <h3>Dark mode</h3>
+              <p>
+                Easy on the eyes when you're hunting down that one weird value at 2am.
+              </p>
+            </article>
+
+            <article class="tile">
+              <h3>Works offline</h3>
+              <p>
+                Static files only. Host it anywhere. Run it locally. Use it on a plane.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="workflow" class="section alt">
+        <div class="wrap">
+          <header class="section-head">
+            <h2>Workflow</h2>
+            <p>Four steps. No onboarding video required.</p>
+          </header>
+
+          <div class="steps">
+            <div class="step">
+              <div class="step-num">1</div>
+              <h3>Drop in JSON</h3>
+              <p>Drag and drop a JSON file, or pick one from your device.</p>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <h3>Pick a view</h3>
+              <p>Records mode for structured payloads, Dataset mode for large arrays.</p>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <h3>Apply a template</h3>
+              <p>Download a starter template, edit paths and labels, then upload it back.</p>
+            </div>
+            <div class="step">
+              <div class="step-num">4</div>
+              <h3>Search and inspect</h3>
+              <p>Find values fast, expand only what you need, and stay in control.</p>
+            </div>
+          </div>
+
+          <div class="cta-box">
+            <div>
+              <h3>Ready to try it?</h3>
+              <p>Launch the app and drop in a JSON file. That’s it. That’s the whole setup.</p>
+            </div>
+            <div class="cta-box-actions">
+              <a class="btn primary" href="../">Launch JTF</a>
+              <a class="btn" href="https://github.com/TheBIMsider/just-the-fields">View source</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="templates" class="section">
+        <div class="wrap">
+          <header class="section-head">
+            <h2>Templates</h2>
+            <p>
+              Templates are plain JSON files. They define layout only: what fields appear and in what order.
+            </p>
+          </header>
+
+          <div class="two-col">
+            <div class="card">
+              <div class="card-head">
+                <h3 class="card-title">Starter template</h3>
+                <p class="card-sub">Download, edit in any text editor, upload back into JTF.</p>
+              </div>
+              <div class="card-body">
+                <ul class="bullets">
+                  <li>Define sections and fields using dot paths (like <code>Status.Name</code>).</li>
+                  <li>Missing fields are skipped, so templates are forgiving.</li>
+                  <li>Optional match rules help templates apply only to the right records.</li>
+                </ul>
+                <div class="cta-row">
+                  <a class="btn" href="https://thebimsider.github.io/just-the-fields/templates/index.html">Open starter templates</a>
+                  <a class="btn ghost" href="#docs">Template guide</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-head">
+                <h3 class="card-title">Auto (best match)</h3>
+                <p class="card-sub">If you upload multiple templates, JTF can pick the best one per record.</p>
+              </div>
+              <div class="card-body">
+                <ul class="bullets">
+                  <li>Templates must match record keys (optional) and hit real paths.</li>
+                  <li>Best match is based on field hits, then match specificity.</li>
+                  <li>If nothing fits, JTF falls back safely to the full record view.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="privacy" class="section alt">
+        <div class="wrap">
+          <header class="section-head">
+            <h2>Privacy first</h2>
+            <p>Your data stays on your device. Always.</p>
+          </header>
+
+          <div class="privacy">
+            <div class="tile big">
+              <h3>100% client-side processing</h3>
+              <p>
+                JTF runs entirely in your browser. No uploads, no backend, no accounts, no tracking.
+                If your JSON is sensitive, good. Keep it that way.
+              </p>
+            </div>
+            <div class="tile">
+              <h3>Host it anywhere</h3>
+              <p>It’s static files. GitHub Pages, internal servers, or a local folder with a tiny web server.</p>
+            </div>
+            <div class="tile">
+              <h3>Offline-friendly</h3>
+              <p>Once loaded, it works without internet. Ideal for job sites, flights, and cursed Wi‑Fi.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="docs" class="section">
+        <div class="wrap">
+          <header class="section-head">
+            <h2>Docs and links</h2>
+            <p>Everything you need, without sending you down a rabbit hole.</p>
+          </header>
+
+          <div class="links">
+            <a class="link-tile" href="../" aria-label="Launch JTF">
+              <span class="link-title">Launch JTF</span>
+              <span class="link-desc">Open the live app.</span>
+            </a>
+            <a
+              class="link-tile"
+              href="https://github.com/TheBIMsider/just-the-fields"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="JTF GitHub"
+            >
+              <span class="link-title">GitHub repo</span>
+              <span class="link-desc">Source, issues, and releases.</span>
+            </a>
+            <a
+              class="link-tile"
+              href="https://thebimsider.github.io/just-the-fields/docs/templates.html"
+              aria-label="Templates docs"
+            >
+              <span class="link-title">Templates guide</span>
+              <span class="link-desc">How to create and use templates.</span>
+            </a>
+            <a
+              class="link-tile"
+              href="https://thebimsider.github.io/just-the-fields/templates/index.html"
+              aria-label="Starter templates"
+            >
+              <span class="link-title">Starter templates</span>
+              <span class="link-desc">Examples you can download and edit.</span>
+            </a>
+          </div>
+
+          <div class="fineprint">
+            <p>
+              JTF is open source and intentionally lightweight. If you want a feature, open an issue with a clear use case.
+              If you want it tomorrow, bribe time itself.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap footer-inner">
+        <div>
+          <div class="footer-brand">Just the Fields</div>
+          <div class="footer-note">Built by The BIMsider for the AECO community.</div>
+        </div>
+        <div class="footer-links">
+          <a href="../">Launch</a>
+          <a href="https://github.com/TheBIMsider/just-the-fields" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="#top">Back to top</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
