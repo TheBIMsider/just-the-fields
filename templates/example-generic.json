@@ -1,0 +1,45 @@
+{
+  "templateVersion": 1,
+  "templateName": "Example – Generic",
+  "description": "Broad example template for general record-style JSON.",
+
+  "match": {},
+
+  "recordLabel": {
+    "fields": [
+      { "path": "Title", "maxLen": 80 },
+      { "path": "Name", "maxLen": 80 },
+      {
+        "path": "Id",
+        "prefix": " [",
+        "suffix": "]",
+        "lastChars": 8,
+        "maxLen": 12
+      }
+    ],
+    "fallback": "Record {n}"
+  },
+
+  "layout": [
+    {
+      "section": "Identity",
+      "fields": [
+        { "path": "Title", "label": "Title", "format": "text" },
+        { "path": "Name", "label": "Name", "format": "text" },
+        { "path": "Id", "label": "ID", "format": "text" },
+        { "path": "Status", "label": "Status", "format": "badge" }
+      ]
+    },
+    {
+      "section": "Body",
+      "fields": [
+        {
+          "path": "Description",
+          "label": "Description",
+          "format": "multiline"
+        },
+        { "path": "Url", "label": "URL", "format": "link" }
+      ]
+    }
+  ]
+}

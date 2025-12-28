@@ -1,0 +1,65 @@
+{
+  "templateVersion": 1,
+  "templateName": "Example – Issues",
+  "description": "Example template for issue-style records (issues, tasks, punch items).",
+
+  "match": {
+    "requiredKeys": ["Title", "Status"]
+  },
+
+  "recordLabel": {
+    "fields": [
+      { "path": "Number", "prefix": "#", "maxLen": 20 },
+      { "path": "Title", "prefix": " ", "maxLen": 80 },
+      {
+        "path": "Status.Name",
+        "prefix": " (",
+        "suffix": ")",
+        "maxLen": 20
+      }
+    ],
+    "fallback": "Issue {n}"
+  },
+
+  "layout": [
+    {
+      "section": "Summary",
+      "fields": [
+        { "path": "Title", "label": "Title", "format": "text" },
+        { "path": "Status.Name", "label": "Status", "format": "badge" },
+        { "path": "Priority.Name", "label": "Priority", "format": "badge" },
+        { "path": "Number", "label": "Number", "format": "text" }
+      ]
+    },
+    {
+      "section": "Details",
+      "fields": [
+        {
+          "path": "Description",
+          "label": "Description",
+          "format": "multiline"
+        },
+        {
+          "path": "Assignee.Email",
+          "label": "Assignee",
+          "format": "text"
+        }
+      ]
+    },
+    {
+      "section": "Dates",
+      "fields": [
+        {
+          "path": "CreationDate",
+          "label": "Created",
+          "format": "date"
+        },
+        {
+          "path": "DueDate",
+          "label": "Due",
+          "format": "date"
+        }
+      ]
+    }
+  ]
+}

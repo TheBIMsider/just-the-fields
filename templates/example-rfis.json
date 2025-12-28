@@ -1,0 +1,67 @@
+{
+  "templateVersion": 1,
+  "templateName": "Example – RFIs",
+  "description": "Example template for RFI-style question and answer records.",
+
+  "match": {
+    "requiredKeys": ["Question"]
+  },
+
+  "recordLabel": {
+    "fields": [
+      { "path": "Number", "prefix": "#", "maxLen": 20 },
+      { "path": "Question", "prefix": " ", "maxLen": 80 },
+      {
+        "path": "Status.Name",
+        "prefix": " (",
+        "suffix": ")",
+        "maxLen": 20
+      }
+    ],
+    "fallback": "RFI {n}"
+  },
+
+  "layout": [
+    {
+      "section": "RFI",
+      "fields": [
+        {
+          "path": "Question",
+          "label": "Question",
+          "format": "multiline"
+        },
+        {
+          "path": "Answer",
+          "label": "Answer",
+          "format": "multiline"
+        },
+        {
+          "path": "Status.Name",
+          "label": "Status",
+          "format": "badge"
+        }
+      ]
+    },
+    {
+      "section": "Meta",
+      "fields": [
+        { "path": "Number", "label": "Number", "format": "text" },
+        {
+          "path": "CreatedBy.Email",
+          "label": "Created by",
+          "format": "text"
+        },
+        {
+          "path": "CreationDate",
+          "label": "Created",
+          "format": "date"
+        },
+        {
+          "path": "DueDate",
+          "label": "Due",
+          "format": "date"
+        }
+      ]
+    }
+  ]
+}
