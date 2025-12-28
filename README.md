@@ -5,6 +5,10 @@ A lightweight JSON viewer that helps you focus on just the fields that matter.
 JTF runs entirely in your browser and works great on GitHub Pages.  
 Drop in JSON files, explore them safely, and use templates to control what you see.
 
+### Live demo
+
+👉 https://thebimsider.github.io/just-the-fields/
+
 ---
 
 ## What JTF is
