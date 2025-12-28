@@ -147,3 +147,14 @@ Please avoid proposals that add:
 Small, focused improvements are best.
 
 See `CONTRIBUTING.md` for details.
+
+---
+
+## License
+
+This project is licensed under the BSD-3-Clause License.
+
+---
+
+*Built with ❤️ & 🤖 AI assistance from ChatGPT by The BIMsider for the AECO community*  
+*Your JSON Detective - See what matters.*
