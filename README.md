@@ -94,7 +94,8 @@ They are:
 - Safe if fields are missing
 - Easy to edit in any text editor
 
-Templates control layout only.  
+Templates control layout only.
+When multiple templates are available, JTF can automatically pick the best match per record in Records mode.
 They cannot change app behavior or data.
 Want the how-to? Start here: [Templates in JTF](docs/templates.md)
 
@@ -104,7 +105,7 @@ Want the how-to? Start here: [Templates in JTF](docs/templates.md)
 
 - Click **Download** in the Templates panel to get a starter file
 - Or open the [starter templates page](https://thebimsider.github.io/just-the-fields/templates/index.html) (if it opens in your browser, use Save As)
-- Edit paths and labels
+- Edit paths and labels (templates can be `.json` or `.jsonc`)
 - Upload the template back into JTF
 - Read the full guide: [Templates in JTF](docs/templates.md)
 
