@@ -309,8 +309,8 @@
               <div class="card-head">
                 <h3 class="card-title">Auto (best match)</h3>
                 <p class="card-sub">
-                  If you upload multiple templates, JTF can pick the best one
-                  per record.
+                  If you upload multiple templates, JTF can automatically pick
+                  the best one per record in Records mode.
                 </p>
               </div>
               <div class="card-body">
@@ -403,7 +403,14 @@
                     In JTF, click <strong>Download</strong> in the Templates
                     panel to get a starter template.
                   </li>
-                  <li>Edit it (paths and labels) in any text editor.</li>
+                  <li>
+                    Edit it (paths and labels) in any text editor
+                    <span class="muted"
+                      >(supports <code>.json</code> and
+                      <code>.jsonc</code>)</span
+                    >.
+                  </li>
+
                   <li>Upload the template back into JTF.</li>
                   <li>Select it in the Template dropdown.</li>
                 </ol>
@@ -481,6 +488,9 @@
                   </div>
                   <div class="mini-card">
                     <strong>json</strong><span>Nested object/array</span>
+                  </div>
+                  <div class="mini-card">
+                    <strong>kvlist</strong><span>Key → value list</span>
                   </div>
                 </div>
                 <p class="note">
