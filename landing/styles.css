@@ -408,6 +408,17 @@ a.eyebrow,
   color: var(--muted2);
 }
 
+/* Template guide: keep the Basic workflow list vertical */
+.steps-list {
+  margin: 12px 0 0;
+  padding-left: 20px;
+  display: block;
+}
+
+.steps-list li {
+  margin: 10px 0;
+}
+
 .cta-box {
   margin-top: 18px;
   display: flex;
