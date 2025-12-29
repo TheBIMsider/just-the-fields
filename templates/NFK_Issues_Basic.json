@@ -1,0 +1,56 @@
+{
+  "templateVersion": 1,
+  "templateName": "Newforma Konekt - Issues (Basic v1)",
+  "match": {
+    "requiredKeys": ["Number", "Title"]
+  },
+  "recordLabel": {
+    "fields": [
+      { "path": "Number", "prefix": "#", "maxLen": 10 },
+      { "path": "Title", "prefix": " ", "maxLen": 60 },
+      { "path": "Status.Name", "prefix": " (", "suffix": ")", "maxLen": 22 }
+    ],
+    "fallback": "Issue {n}"
+  },
+  "layout": [
+    {
+      "section": "Issue",
+      "fields": [
+        { "path": "Number", "label": "Number", "format": "badge" },
+        { "path": "Title", "label": "Title", "format": "text" },
+        { "path": "Status.Name", "label": "Status", "format": "badge" },
+        { "path": "Description", "label": "Description", "format": "multiline" },
+
+        { "path": "AssignedTo.Email", "label": "Assigned to", "format": "text" },
+
+        { "path": "Confidentiality.Teams", "label": "Team involved", "format": "json" },
+
+        { "path": "NotifyList.TeamsToNotify", "label": "Notify (Teams)", "format": "json" },
+        { "path": "NotifyList.UsersToNotify", "label": "Notify (Users)", "format": "json" },
+
+        { "path": "Priority.Name", "label": "Priority", "format": "badge" },
+        { "path": "DueDate", "label": "Due date", "format": "date" },
+        { "path": "Type.Name", "label": "Type", "format": "badge" },
+
+        { "path": "Disciplines", "label": "Discipline", "format": "json" },
+        { "path": "ProjectZone.Name", "label": "Zone", "format": "badge" },
+        { "path": "ProjectPhase.Name", "label": "Phase", "format": "badge" },
+
+        { "path": "Group", "label": "Group", "format": "text" },
+
+        { "path": "IsRestricted", "label": "Visibility", "format": "badge" },
+
+        { "path": "Author.Email", "label": "Author", "format": "text" },
+
+        { "path": "CreationDate", "label": "Created", "format": "date" },
+        { "path": "LastModificationDate", "label": "Last changed", "format": "date" },
+        { "path": "LastModificationAuthor.Email", "label": "Last changed by", "format": "text" },
+
+        { "path": "ClosingDate", "label": "Closing date", "format": "date" },
+		{ "path": "Comments", "label": "Comments", "format": "json" },
+		{ "path": "Attachments", "label": "Attachments", "format": "json" },
+        { "path": "History", "label": "History", "format": "json" }
+      ]
+    }
+  ]
+}
