@@ -2305,12 +2305,17 @@ function renderKV(key, value, opts) {
         )}</div>`
       : '';
 
-  return `
-    <div class="kv">
-      <div class="k" title="${escapeHtml(key)}">${escapeHtml(key)}</div>
-      <div class="v">${pathHtml}${v}</div>
-    </div>
-  `;
+  // Build without template-literal indentation/newlines.
+  // This prevents extra blank lines when the parent uses white-space: pre-wrap.
+  return [
+    `<div class="kv">`,
+    `<div class="k" title="${escapeHtml(key)}">${escapeHtml(key)}</div>`,
+    `<div class="v">`,
+    pathHtml,
+    v,
+    `</div>`,
+    `</div>`,
+  ].join('');
 }
 
 /**
@@ -2333,12 +2338,16 @@ function renderKVHtml(key, htmlValue, opts) {
         )}</div>`
       : '';
 
-  return `
-    <div class="kv">
-      <div class="k" title="${escapeHtml(key)}">${escapeHtml(key)}</div>
-      <div class="v">${pathHtml}${v}</div>
-    </div>
-  `;
+  // Same no-whitespace strategy as renderKV().
+  return [
+    `<div class="kv">`,
+    `<div class="k" title="${escapeHtml(key)}">${escapeHtml(key)}</div>`,
+    `<div class="v">`,
+    pathHtml,
+    v,
+    `</div>`,
+    `</div>`,
+  ].join('');
 }
 
 /**
@@ -2370,29 +2379,46 @@ function renderValue(value, opts) {
 
   // Arrays
   if (Array.isArray(value)) {
+    const isEmpty = value.length === 0;
+    const emptyClass = isEmpty ? ' is-empty-array' : '';
+
+    // Non-collapsible arrays are printed as JSON text
     if (!o.collapsible) {
       return escapeHtml(JSON.stringify(value, null, 2));
     }
 
+    // Keep preview short and optional
     const previewCount = Math.min(3, value.length);
-    const preview = buildArrayPreview(value, previewCount);
+    const preview = previewCount ? buildArrayPreview(value, previewCount) : '';
 
-    return `
-      <div data-value-collapsible="true" data-open="false">
-      <button class="mini-btn" type="button" data-toggle-value="true">Expand array (${
-        value.length
-      })</button>
+    // Build markup with string joining so we do NOT emit newline/indent whitespace nodes.
+    // This matters because .kv .v uses white-space: pre-wrap, which will preserve those.
+    const parts = [
+      `<div data-value-collapsible="true" data-open="false" class="value-array${emptyClass}">`,
+      `<button class="mini-btn" type="button" data-toggle-value="true">`,
+      isEmpty ? `Expand array (0)` : `Expand array (${value.length})`,
+      `</button>`,
+    ];
 
-        <span style="color: var(--muted); font-size:12px; margin-left:8px;">
-          Preview: ${escapeHtml(preview)}${
-      value.length > previewCount ? ', …' : ''
+    // Only show preview for non-empty arrays (empty previews add visual noise)
+    if (!isEmpty) {
+      parts.push(
+        `<span class="array-preview">`,
+        `Preview: ${escapeHtml(preview)}${
+          value.length > previewCount ? ', …' : ''
+        }`,
+        `</span>`
+      );
     }
-        </span>
-        <div data-value-body="true" style="display:none; margin-top:10px;">
-          ${renderArrayAsList(value, o.path || '$')}
-        </div>
-      </div>
-    `;
+
+    parts.push(
+      `<div data-value-body="true" style="display:none; margin-top:10px;">`,
+      renderArrayAsList(value, o.path || '$'),
+      `</div>`,
+      `</div>`
+    );
+
+    return parts.join('');
   }
 
   // Objects
@@ -2404,21 +2430,16 @@ function renderValue(value, opts) {
     const keys = Object.keys(value);
     const preview = buildObjectPreview(value, 3);
 
-    return `
-      <div data-value-collapsible="true" data-open="false">
-      <button class="mini-btn" type="button" data-toggle-value="true">Expand object (${
-        keys.length
-      } keys)</button>
-
-        <span style="color: var(--muted); font-size:12px; margin-left:8px;">
-          Preview: ${escapeHtml(preview)}
-        </span>
-
-        <div data-value-body="true" style="display:none; margin-top:10px;">
-          ${renderObjectAsKv(value, o.path || '$')}
-        </div>
-      </div>
-    `;
+    // Same strategy as arrays: no newline/indent whitespace nodes.
+    return [
+      `<div data-value-collapsible="true" data-open="false" class="value-object">`,
+      `<button class="mini-btn" type="button" data-toggle-value="true">Expand object (${keys.length} keys)</button>`,
+      `<span class="object-preview">Preview: ${escapeHtml(preview)}</span>`,
+      `<div data-value-body="true" style="display:none; margin-top:10px;">`,
+      renderObjectAsKv(value, o.path || '$'),
+      `</div>`,
+      `</div>`,
+    ].join('');
   }
 
   // Anything else
@@ -2632,58 +2653,61 @@ function renderArrayAsList(arr, arrayPath) {
       ? `<div class="array-note">Note: showing the first ${HARD_MAX} items for performance.</div>`
       : '';
 
-  const itemsHtml = arr.slice(0, showCount).map((item, idx) => {
-    return renderArrayItem(arr, item, idx);
-  });
+  const itemsHtml = arr
+    .slice(0, showCount)
+    .map((item, idx) => renderArrayItem(arr, item, idx))
+    .join('');
 
-  return `
-    <div class="array-meta-row">
-      <div class="array-meta">${escapeHtml(metaLeft)}</div>
-    </div>
-    ${hardMaxNote}
-    <div class="array-list">
-      ${itemsHtml.join('')}
-    </div>
-  `;
+  // Important: build without template-literal indentation/newlines.
+  // This prevents extra vertical whitespace because the parent uses white-space: pre-wrap.
+  return [
+    `<div class="array-meta-row">`,
+    `<div class="array-meta">${escapeHtml(metaLeft)}</div>`,
+    `</div>`,
+    hardMaxNote,
+    `<div class="array-list">`,
+    itemsHtml,
+    `</div>`,
+  ].join('');
 }
 
 function renderArrayItem(parentArr, item, idx) {
   // Primitives: show as a single KV row
   if (item == null || typeof item !== 'object') {
-    return `
-      <div class="array-item">
-        ${renderKV(`[${idx}]`, item)}
-      </div>
-    `;
+    return [
+      `<div class="array-item">`,
+      renderKV(`[${idx}]`, item),
+      `</div>`,
+    ].join('');
   }
 
   // Arrays inside arrays: keep it collapsible
   if (Array.isArray(item)) {
-    return `
-      <div class="array-item">
-        ${renderKV(`[${idx}]`, item, { collapsible: true })}
-      </div>
-    `;
+    return [
+      `<div class="array-item">`,
+      renderKV(`[${idx}]`, item, { collapsible: true }),
+      `</div>`,
+    ].join('');
   }
 
   // Object item: collapsible block with a compact title
   const summary = buildItemSummary(item, idx);
 
-  return `
-    <div class="card" data-collapsible="true" data-open="false">
-      <div class="card-header">
-        <button class="card-header-button" type="button" aria-expanded="false">
-          <h3 class="card-title">${escapeHtml(summary)}</h3>
-          <div class="card-actions">
-            <div class="chevron" data-chevron="true">&gt;</div>
-          </div>
-        </button>
-      </div>
-      <div class="card-body" data-collapsible-body="true" style="display:none;">
-        ${renderObjectAsKv(item, `$[${idx}]`)}
-      </div>
-    </div>
-  `;
+  // Important: add array-item-card so compact CSS applies.
+  // Also build with join('') to avoid whitespace nodes.
+  return [
+    `<div class="card array-item-card" data-collapsible="true" data-open="false">`,
+    `<div class="card-header">`,
+    `<button class="card-header-button" type="button" aria-expanded="false">`,
+    `<h3 class="card-title">${escapeHtml(summary)}</h3>`,
+    `<div class="card-actions"><div class="chevron" data-chevron="true">&gt;</div></div>`,
+    `</button>`,
+    `</div>`,
+    `<div class="card-body" data-collapsible-body="true" style="display:none;">`,
+    renderObjectAsKv(item, `$[${idx}]`),
+    `</div>`,
+    `</div>`,
+  ].join('');
 }
 
 function buildItemSummary(obj, idx) {
