@@ -2,6 +2,7 @@
 
 [![Release](https://img.shields.io/github/v/release/thebimsider/just-the-fields?display_name=tag&sort=semver)](https://github.com/thebimsider/just-the-fields/releases/latest)
 [![License](https://img.shields.io/github/license/thebimsider/just-the-fields)](https://github.com/thebimsider/just-the-fields/blob/main/LICENSE)
+[![Open Source](https://img.shields.io/badge/Open%20Source-Yes-brightgreen)](LICENSE)
 ![Tech](https://img.shields.io/badge/Tech-HTML%20%7C%20CSS%20%7C%20JavaScript-informational)
 [![GitHub Pages](https://img.shields.io/badge/Hosted_on-GitHub_Pages-brightgreen)](https://thebimsider.github.io/just-the-fields/)
 
@@ -164,5 +165,6 @@ This project is licensed under the BSD-3-Clause License.
 
 _Built with ❤️ & 🤖 AI assistance from ChatGPT by The BIMsider for the AECO community_  
 _Just the Fields: Your JSON Detective - See what matters._
+
 
 
