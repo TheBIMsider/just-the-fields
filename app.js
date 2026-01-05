@@ -186,19 +186,39 @@ function safeOneLine(s, maxLen) {
   return str.length > maxLen ? `${str.slice(0, maxLen)}…` : str;
 }
 
+function updateThemeButton() {
+  if (!els.themeToggle) return;
+
+  // Button shows the *opposite* of what’s active:
+  // - active light => button says “Dark mode”
+  // - active dark  => button says “Light mode”
+  const nextTheme = state.theme === 'dark' ? 'light' : 'dark';
+  const nextLabel = nextTheme === 'dark' ? 'Dark mode' : 'Light mode';
+  const nextIcon = nextTheme === 'dark' ? '🌙' : '☀️';
+
+  const iconEl = els.themeToggle.querySelector('.theme-icon');
+  const textEl = els.themeToggle.querySelector('.theme-text');
+
+  if (iconEl) iconEl.textContent = nextIcon;
+  if (textEl) textEl.textContent = nextLabel;
+
+  // aria-pressed reflects the *current* active state (pressed = dark is active)
+  els.themeToggle.setAttribute('aria-pressed', String(state.theme === 'dark'));
+}
+
 function initTheme() {
   const saved = readThemePreference();
   state.theme = saved || 'light';
   applyTheme(state.theme);
+  updateThemeButton();
 
-  // Set toggle position
   if (els.themeToggle) {
-    els.themeToggle.checked = state.theme === 'dark';
-    els.themeToggle.addEventListener('change', () => {
-      const next = els.themeToggle.checked ? 'dark' : 'light';
+    els.themeToggle.addEventListener('click', () => {
+      const next = state.theme === 'dark' ? 'light' : 'dark';
       state.theme = next;
       applyTheme(next);
       writeThemePreference(next);
+      updateThemeButton();
     });
   }
 }

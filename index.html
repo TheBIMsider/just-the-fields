@@ -29,9 +29,23 @@
     </noscript>
 
     <header class="app-header">
-      <div class="brand">
-        <h1>Just the Fields</h1>
-        <p class="tagline">Your JSON Detective — See what matters.</p>
+      <div class="header-inner">
+        <div class="brand">
+          <h1>Just the Fields</h1>
+          <p class="tagline">Your JSON Detective — See what matters.</p>
+        </div>
+
+        <!-- Theme toggle (app-level, not buried in viewer controls) -->
+        <button
+          id="themeToggle"
+          class="theme-btn"
+          type="button"
+          aria-pressed="false"
+          title="Switch light/dark theme"
+        >
+          <span class="theme-icon" aria-hidden="true">🌙</span>
+          <span class="theme-text">Dark mode</span>
+        </button>
       </div>
     </header>
 
@@ -249,11 +263,6 @@
             <label class="toggle">
               <input id="rawToggle" type="checkbox" disabled />
               <span>Raw JSON</span>
-            </label>
-
-            <label class="toggle" title="Switch light/dark theme">
-              <input id="themeToggle" type="checkbox" />
-              <span>Dark</span>
             </label>
           </div>
         </div>
