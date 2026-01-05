@@ -6,7 +6,11 @@
 ![Tech](https://img.shields.io/badge/Tech-HTML%20%7C%20CSS%20%7C%20JavaScript-informational)
 [![GitHub Pages](https://img.shields.io/badge/Hosted_on-GitHub_Pages-brightgreen)](https://thebimsider.github.io/just-the-fields/)
 
-<img width="1150" height="450" alt="JTF_Logo_White_Banner" src="https://github.com/user-attachments/assets/c40bb4a8-f2c4-4339-8ebe-6c041748ae02" />
+<img width="1916" height="917" alt="JTF_D_LM" src="https://github.com/user-attachments/assets/b0de9c3e-5e45-432b-b85c-9c7b2803988c" />
+Dataset example in Light mode
+
+<img width="1920" height="945" alt="JTF_R_DM" src="https://github.com/user-attachments/assets/3993e7b8-fbed-457a-9431-85479e2ad170" />
+Recod example with NFK template in dark mode
 
 A lightweight JSON viewer that helps you focus on just the fields that matter.
 
@@ -165,6 +169,7 @@ This project is licensed under the BSD-3-Clause License.
 
 _Built with ❤️ & 🤖 AI assistance from ChatGPT by The BIMsider for the AECO community_  
 _Just the Fields: Your JSON Detective - See what matters._
+
 
 
 
