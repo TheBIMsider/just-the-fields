@@ -20,6 +20,24 @@
     if (icon) icon.textContent = theme === 'dark' ? '☾' : '☀';
   }
 
+  // Update landing screenshot to match current theme
+  function syncLandingScreenshot(theme) {
+    const img = document.getElementById('jtfThemeShot');
+    const cap = document.getElementById('jtfThemeShotCaption');
+    if (!img || !cap) return;
+
+    if (theme === 'dark') {
+      img.src = 'assets/JTF_R_DM.png';
+      img.alt =
+        'Records mode using a Newforma Konekt Issues template (dark theme)';
+      cap.textContent = 'Records mode using a Newforma Konekt Issues template';
+    } else {
+      img.src = 'assets/JTF_D_LM.png';
+      img.alt = 'Dataset mode showing a large JSON array (light theme)';
+      cap.textContent = 'Dataset mode showing a large JSON array';
+    }
+  }
+
   function getStoredTheme() {
     try {
       const v = localStorage.getItem(STORAGE_KEY);
@@ -47,12 +65,14 @@
   // Init: stored > system > dark
   const initial = getStoredTheme() || getSystemTheme();
   applyTheme(initial);
+  syncLandingScreenshot(initial);
 
   // Toggle on click + remember
   btn.addEventListener('click', () => {
     const cur = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
     const next = cur === 'dark' ? 'light' : 'dark';
     applyTheme(next);
+    syncLandingScreenshot(next);
     storeTheme(next);
   });
 })();

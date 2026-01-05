@@ -527,6 +527,28 @@ a.eyebrow,
   color: var(--muted);
 }
 
+/* Footer links: look like links, not labels */
+.footer-links a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.footer-links a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.footer-links a + a {
+  margin-left: 14px;
+}
+
 /* Responsive */
 /* Template guide accordion */
 .accordion {
@@ -828,4 +850,32 @@ html[data-theme='light'] .link-tile:hover {
 /* Light mode: remove all drop shadows */
 html[data-theme='light'] * {
   box-shadow: none !important;
+}
+
+/* Landing: full-width theme-aware screenshot */
+.jtf-shot {
+  margin: 32px 0;
+  width: 100%;
+
+  /* Key line: if inside .hero-inner grid, span full row (both columns) */
+  grid-column: 1 / -1;
+}
+
+/* Break the image out of the text column */
+.jtf-shot img {
+  display: block;
+  width: 100%;
+  max-width: 1200px; /* keeps it sane on ultrawide screens */
+  margin: 0 auto;
+  height: auto;
+  border-radius: 14px;
+}
+
+.jtf-shot-caption {
+  max-width: 1200px;
+  margin: 10px auto 0;
+  font-size: 0.95rem;
+  opacity: 0.85;
+  text-align: left;
+  font-style: italic;
 }
