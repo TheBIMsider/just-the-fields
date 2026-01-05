@@ -1,18 +1,16 @@
-/* Just the Fields (v1 scaffold)
+/* Just the Fields (JTF)
   Viewer-only, offline-friendly JSON viewer.
   No backend. No installs. GitHub Pages compatible.
 
-  This file starts with:
+  Core capabilities:
   - Drag/drop + file picker
   - Safe JSON parsing with per-file errors
-  - File list UI + selection
-  - Basic viewer shell
-  - Raw JSON toggle (works once a file is selected)
-
-  Next steps (we will do feature-by-feature):
-  1) Record type detection (Issue, RFI, Submittal, Generic)
-  2) Templates + collapsible sections + arrays collapsed
-  3) Search filtering on label/path/value
+  - Dataset vs Records mode
+  - Record selection + search
+  - Templates (download/upload, Auto best match, record labels)
+  - Collapsible objects/arrays + compact rendering
+  - Raw JSON view
+  - Light/Dark theme toggle
 */
 
 'use strict';
@@ -977,7 +975,7 @@ function renderViewer() {
       : lf.json;
 
     // Templates apply ONLY in Records Mode, and only if the template matches this record
-    const resolved = getTemplateForRecord(activeRecord);
+    const resolved = getTemplateForRecord(activeRecord, datasetMode);
     const tplForThisRecord = resolved ? resolved.templateObj : null;
 
     els.viewer.innerHTML = renderRecordView(
@@ -3834,6 +3832,17 @@ function getBestTemplateForRecord(record) {
 }
 
 /**
+ * Templates apply ONLY in Records Mode.
+ * Dataset mode is a browsing view and must never apply templates.
+ *
+ * @param {boolean} datasetMode
+ * @returns {boolean}
+ */
+function canApplyTemplates(datasetMode) {
+  return datasetMode !== true;
+}
+
+/**
  * Resolve the template to use for a given record, based on the template dropdown.
  * - None: null
  * - Explicit template: only if it matches the record
@@ -3842,7 +3851,10 @@ function getBestTemplateForRecord(record) {
  * @param {any} record
  * @returns {{ entry: any, templateObj: any } | null}
  */
-function getTemplateForRecord(record) {
+function getTemplateForRecord(record, datasetMode) {
+  // Hard stop: never apply templates in Dataset mode
+  if (!canApplyTemplates(datasetMode)) return null;
+
   const sel = state.activeTemplateId;
 
   // None selected
@@ -3906,20 +3918,14 @@ function templateMatchesRecord(tpl, record) {
   return true;
 }
 
-// ===============================
-// Session 10 – Templates (Step 1)
-// Default starter template download
-// ===============================
-
 /**
- * Default starter template.
  * Intent:
  * - Plain JSON
  * - Declarative layout only
- * - Safe if fields are missing (renderer will treat missing as empty later)
+ * - Safe if fields are missing (renderer treats missing as empty)
  *
- * Note: We are not applying templates yet in Step 1.
- * This is just the "download a starter file" capability.
+ * Note: Templates are supported now.
+ * This object is the downloadable “starter” template to help users author their own.
  */
 const DEFAULT_STARTER_TEMPLATE = {
   templateVersion: 1,

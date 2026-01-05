@@ -1,4 +1,4 @@
-# Just the Fields (JTF) 
+# Just the Fields (JTF)
 
 [![Release](https://img.shields.io/github/v/release/thebimsider/just-the-fields?display_name=tag&sort=semver)](https://github.com/thebimsider/just-the-fields/releases/latest)
 [![License](https://img.shields.io/github/license/thebimsider/just-the-fields)](https://github.com/thebimsider/just-the-fields/blob/main/LICENSE)
@@ -9,7 +9,7 @@
 A lightweight JSON viewer that helps you focus on just the fields that matter.
 
 JTF runs entirely in your browser and works great on GitHub Pages.  
-Drop in JSON files, explore them safely, and use templates to control what you see.
+Drop in JSON files, explore them safely, and use templates to control what you see — in light or dark mode.
 
 ### Live demo
 
@@ -26,11 +26,29 @@ Runs entirely in your browser. No uploads. No installs.
 - A template-driven layout tool for records like Issues, RFIs, or API responses
 - Offline-friendly and easy to host
 
-<img width="1916" height="917" alt="JTF_D_LM" src="https://github.com/user-attachments/assets/b0de9c3e-5e45-432b-b85c-9c7b2803988c" />
-Dataset example in Light mode
+<figure>
+  <img
+    width="1916"
+    height="917"
+    alt="Dataset view in light mode"
+    src="https://github.com/user-attachments/assets/b0de9c3e-5e45-432b-b85c-9c7b2803988c"
+  />
+  <figcaption>
+    Dataset mode showing a large JSON array (light theme)
+  </figcaption>
+</figure>
 
-<img width="1920" height="945" alt="JTF_R_DM" src="https://github.com/user-attachments/assets/3993e7b8-fbed-457a-9431-85479e2ad170" />
-Recod example with NFK template in dark mode
+<figure>
+  <img
+    width="1920"
+    height="945"
+    alt="Records view with NFK Issues template in dark mode"
+    src="https://github.com/user-attachments/assets/3993e7b8-fbed-457a-9431-85479e2ad170"
+  />
+  <figcaption>
+    Records mode using a Newforma Konekt Issues template (dark theme)
+  </figcaption>
+</figure>
 
 ---
 
