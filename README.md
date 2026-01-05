@@ -41,17 +41,16 @@ Runs entirely in your browser. No uploads. No installs.
 </figure>
 
 <figure>
-  <img
-    width="1920"
-    height="945"
-    alt="Records view with NFK Issues template in dark mode"
-    src="https://github.com/user-attachments/assets/3993e7b8-fbed-457a-9431-85479e2ad170"
+  <img 
+    width="1901" 
+    height="944" 
+    alt="alt="Record mode view in dark mode"
+    src="https://github.com/user-attachments/assets/862dedcd-b4c8-4571-82a6-38dcc1464ee1" 
   />
   <figcaption>
     Records mode using a Newforma Konekt Issues template (dark theme)
   </figcaption>
 </figure>
-
 
 ---
 
@@ -188,5 +187,6 @@ This project is licensed under the BSD-3-Clause License.
 
 _Built with ❤️ & 🤖 AI assistance from ChatGPT by The BIMsider for the AECO community_  
 _Just the Fields: Your JSON Detective - See what matters._
+
 
 
