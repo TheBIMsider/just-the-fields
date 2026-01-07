@@ -316,6 +316,125 @@ html[data-theme='dark'] .files-actions::-webkit-scrollbar-thumb {
   cursor: not-allowed;
 }
 
+/* ------------------------------------------------------------
+   Global Search (left panel)
+------------------------------------------------------------ */
+
+.global-search {
+  margin: 14px 14px 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.02);
+  overflow: hidden;
+}
+
+.global-search-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  background: transparent;
+  color: inherit;
+  border: 0;
+  cursor: pointer;
+}
+
+.global-search-toggle:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.global-search-title {
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.global-search-meta {
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.global-search-panel {
+  border-top: 1px solid var(--border);
+  padding: 10px 12px 12px;
+}
+
+.global-search-input input {
+  width: 100%;
+  padding: 9px 10px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.03);
+  color: inherit;
+}
+
+.global-search-actions {
+  margin-top: 8px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.global-search-results {
+  margin-top: 10px;
+  display: grid;
+  gap: 8px;
+  max-height: 260px;
+  overflow: auto;
+  padding-right: 2px;
+}
+
+.global-hit {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 9px 10px;
+  background: rgba(255, 255, 255, 0.03);
+  cursor: pointer;
+}
+
+.global-hit:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.global-hit-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: baseline;
+}
+
+.global-hit-file {
+  font-weight: 800;
+  font-size: 12.5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.global-hit-kind {
+  font-size: 11.5px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.global-hit-label {
+  margin-top: 4px;
+  font-size: 12.5px;
+}
+
+.global-hit-preview {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.global-hit-empty {
+  font-size: 12px;
+  color: var(--muted);
+  padding: 6px 2px;
+}
+
 .drop-zone {
   margin: 14px;
   border: 1.5px dashed rgba(255, 255, 255, 0.22);

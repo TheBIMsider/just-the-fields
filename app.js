@@ -80,6 +80,14 @@ const els = {
   templateSelect: document.getElementById('templateSelect'),
 
   clearBtn: document.getElementById('clearBtn'),
+
+  // Global Search (left panel)
+  globalSearchToggle: document.getElementById('globalSearchToggle'),
+  globalSearchPanel: document.getElementById('globalSearchPanel'),
+  globalSearchInput: document.getElementById('globalSearchInput'),
+  globalSearchResults: document.getElementById('globalSearchResults'),
+  globalSearchMeta: document.getElementById('globalSearchMeta'),
+  globalSearchClearBtn: document.getElementById('globalSearchClearBtn'),
 };
 
 /*
@@ -122,6 +130,13 @@ const state = {
   templates: [],
   /** @type {string|null} */
   activeTemplateId: null,
+
+  // Global Search (left panel)
+  globalSearch: {
+    isOpen: false,
+    query: '',
+    results: [],
+  },
 };
 
 /* ------------------------------------------------------------
@@ -136,6 +151,20 @@ function looksLikeUrl(s) {
 function clamp(n, min, max) {
   if (!Number.isFinite(n)) return min;
   return Math.min(max, Math.max(min, n));
+}
+
+/**
+ * Debounce: run a function only after the user stops typing for a moment.
+ * Great for search so we do not scan everything on every single keystroke.
+ * @param {(value: string) => void} fn
+ * @param {number} waitMs
+ */
+function makeDebouncedInputHandler(fn, waitMs) {
+  let t = 0;
+  return (value) => {
+    window.clearTimeout(t);
+    t = window.setTimeout(() => fn(value), waitMs);
+  };
 }
 
 function formatBytes(bytes) {
@@ -325,6 +354,29 @@ function init() {
     renderViewer();
   });
 
+  // Global Search (left panel)
+  const runGlobalSearchDebounced = makeDebouncedInputHandler((val) => {
+    state.globalSearch.query = (val || '').trim();
+    state.globalSearch.results = globalSearchAll(state.globalSearch.query);
+    renderGlobalSearch();
+  }, 200);
+
+  els.globalSearchToggle?.addEventListener('click', () => {
+    state.globalSearch.isOpen = !state.globalSearch.isOpen;
+    renderGlobalSearch();
+  });
+
+  els.globalSearchInput?.addEventListener('input', () => {
+    runGlobalSearchDebounced(els.globalSearchInput.value);
+  });
+
+  els.globalSearchClearBtn?.addEventListener('click', () => {
+    state.globalSearch.query = '';
+    state.globalSearch.results = [];
+    if (els.globalSearchInput) els.globalSearchInput.value = '';
+    renderGlobalSearch();
+  });
+
   els.includeCollapsedToggle.addEventListener('change', () => {
     state.includeCollapsedInSearch = els.includeCollapsedToggle.checked;
     renderViewer();
@@ -490,6 +542,11 @@ function init() {
 
   renderFileList();
   renderViewer();
+  syncViewerControlsEnabled();
+
+  // Global Search (left panel) initial state
+  syncGlobalSearchEnabled();
+  renderGlobalSearch();
 }
 
 /** Drag events */
@@ -545,6 +602,13 @@ async function addFiles(files) {
   renderFileList();
   renderViewer();
   renderTemplateSelect();
+
+  // If global search is open, keep it usable and refresh results for new files
+  syncGlobalSearchEnabled();
+  if (state.globalSearch.isOpen && (state.globalSearch.query || '').trim()) {
+    state.globalSearch.results = globalSearchAll(state.globalSearch.query);
+  }
+  renderGlobalSearch();
 }
 
 /**
@@ -636,6 +700,9 @@ function syncViewerControlsEnabled() {
 
   // recordSelect will be enabled in renderViewer if there are multiple records
   els.recordSelect.disabled = true;
+
+  // Global Search enable/disable
+  syncGlobalSearchEnabled();
 }
 
 /** @returns {LoadedFile|null} */
@@ -656,6 +723,15 @@ function clearAll() {
   state.includeCollapsedInSearch = false;
   state.showPaths = false;
   state.showRaw = false;
+
+  state.globalSearch.query = '';
+  state.globalSearch.results = [];
+  state.globalSearch.isOpen = false;
+
+  // Clear Global Search UI inputs and panel
+  if (els.globalSearchInput) els.globalSearchInput.value = '';
+  if (els.globalSearchResults) els.globalSearchResults.innerHTML = '';
+  if (els.globalSearchMeta) els.globalSearchMeta.textContent = 'Closed';
 
   els.includeCollapsedToggle.checked = false;
   els.pathToggle.checked = false;
@@ -728,6 +804,294 @@ function renderFileList() {
       }
     });
   });
+}
+
+// ===============================
+// Global Search (left panel)
+// ===============================
+
+/**
+ * Keep Global Search UI enabled/disabled based on whether we have any files.
+ * Call this after addFiles(), clearAll(), and setActiveFile() when needed.
+ */
+function syncGlobalSearchEnabled() {
+  const hasFiles = state.files.length > 0;
+  if (els.globalSearchInput) els.globalSearchInput.disabled = !hasFiles;
+  if (els.globalSearchClearBtn) els.globalSearchClearBtn.disabled = !hasFiles;
+}
+
+/**
+ * Render the Global Search panel (open/closed) and results.
+ */
+function renderGlobalSearch() {
+  if (
+    !els.globalSearchPanel ||
+    !els.globalSearchToggle ||
+    !els.globalSearchMeta
+  )
+    return;
+
+  const open = Boolean(state.globalSearch.isOpen);
+  els.globalSearchToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  els.globalSearchPanel.hidden = !open;
+
+  // Meta text
+  const q = (state.globalSearch.query || '').trim();
+  const count = Array.isArray(state.globalSearch.results)
+    ? state.globalSearch.results.length
+    : 0;
+
+  if (!open) {
+    els.globalSearchMeta.textContent = 'Closed';
+    return;
+  }
+
+  if (!q) {
+    els.globalSearchMeta.textContent = 'Type to search';
+  } else {
+    els.globalSearchMeta.textContent = `${count} result${
+      count === 1 ? '' : 's'
+    }`;
+  }
+
+  // Render results list
+  if (!els.globalSearchResults) return;
+
+  if (!q) {
+    els.globalSearchResults.innerHTML =
+      '<div class="global-hit-empty">Searches across all uploaded JSON files, including Dataset rows.</div>';
+    return;
+  }
+
+  if (!count) {
+    els.globalSearchResults.innerHTML =
+      '<div class="global-hit-empty">No matches found.</div>';
+    return;
+  }
+
+  const html = state.globalSearch.results
+    .map((r) => {
+      const kind = r.kind === 'dataset' ? 'Dataset row' : 'Record';
+      const preview = r.hitPreview ? escapeHtml(r.hitPreview) : '';
+      const path = r.hitPath ? escapeHtml(r.hitPath) : '';
+
+      return `
+        <div class="global-hit" role="button" tabindex="0"
+             data-global-hit="true"
+             data-file-id="${r.fileId}"
+             data-kind="${escapeHtml(r.kind)}"
+             data-record-index="${r.recordIndex ?? ''}"
+             data-row-index="${r.rowIndex ?? ''}">
+          <div class="global-hit-top">
+            <div class="global-hit-file" title="${escapeHtml(
+              r.fileName
+            )}">${escapeHtml(r.fileName)}</div>
+            <div class="global-hit-kind">${kind}</div>
+          </div>
+          <div class="global-hit-label">${escapeHtml(r.label || '')}</div>
+          <div class="global-hit-preview">${
+            path ? `<span>${path}:</span> ` : ''
+          }${preview}</div>
+        </div>
+      `;
+    })
+    .join('');
+
+  els.globalSearchResults.innerHTML = html;
+
+  // Click + keyboard open
+  els.globalSearchResults
+    .querySelectorAll('[data-global-hit="true"]')
+    .forEach((el) => {
+      el.addEventListener('click', () => onGlobalHitActivate(el));
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onGlobalHitActivate(el);
+        }
+      });
+    });
+}
+
+/**
+ * Open a clicked global search hit and jump to the right record/row.
+ * @param {Element} el
+ */
+function onGlobalHitActivate(el) {
+  const fileId = Number(el.getAttribute('data-file-id'));
+  if (!Number.isFinite(fileId)) return;
+
+  const kind = el.getAttribute('data-kind');
+  const recordIndex = Number(el.getAttribute('data-record-index'));
+  const rowIndex = Number(el.getAttribute('data-row-index'));
+
+  setActiveFile(fileId);
+
+  if (kind === 'dataset' && Number.isFinite(rowIndex)) {
+    // Force Dataset mode for this file and jump to that row
+    state.viewModeByFileId[fileId] = 'dataset';
+
+    if (!state.datasetUiByFileId[fileId]) {
+      state.datasetUiByFileId[fileId] = {
+        filter: '',
+        jumpIndex: null,
+        lastJumpInput: '',
+      };
+    }
+
+    state.datasetUiByFileId[fileId].jumpIndex = rowIndex;
+    state.datasetUiByFileId[fileId].lastJumpInput = String(rowIndex + 1);
+  } else {
+    // Records mode and record selection
+    state.viewModeByFileId[fileId] = 'records';
+    state.selectedRecordIndexByFileId[fileId] = Number.isFinite(recordIndex)
+      ? recordIndex
+      : 0;
+  }
+
+  // Re-render viewer + file list
+  renderFileList();
+  renderViewer();
+
+  // Optional: apply viewer search highlight using the same query
+  // This helps the user see the match immediately.
+  state.searchQuery = state.globalSearch.query || '';
+  if (els.searchInput) els.searchInput.value = state.searchQuery;
+  renderViewer();
+}
+
+/**
+ * Global search across all uploaded files.
+ * Includes Dataset rows (large flat arrays) and Records (everything else).
+ * @param {string} query
+ */
+function globalSearchAll(query) {
+  const q = (query || '').trim().toLowerCase();
+  if (!q) return [];
+
+  const results = [];
+  const HARD_MAX = 200;
+
+  for (const lf of state.files) {
+    if (!lf || lf.error || lf.json == null) continue;
+
+    const json = lf.json;
+
+    // If it looks like a dataset, search rows as dataset hits
+    if (isLargeFlatArrayDataset(json)) {
+      const arr = /** @type {any[]} */ (json);
+      for (let rowIndex = 0; rowIndex < arr.length; rowIndex++) {
+        const row = arr[rowIndex];
+        const hit = findFirstHit(row, q);
+        if (!hit) continue;
+
+        results.push({
+          kind: 'dataset',
+          fileId: lf.id,
+          fileName: lf.name,
+          rowIndex,
+          label: `Row ${rowIndex + 1}`,
+          hitPath: hit.path,
+          hitPreview: hit.preview,
+        });
+
+        if (results.length >= HARD_MAX) return results;
+      }
+      continue;
+    }
+
+    // Otherwise treat it as Records (extractRecords handles arrays, containers, and single objects)
+    const pack = extractRecords(json);
+    const records = (pack && pack.records) || [];
+    for (let i = 0; i < records.length; i++) {
+      const rec = records[i];
+      const hit = findFirstHit(rec, q);
+      if (!hit) continue;
+
+      results.push({
+        kind: 'record',
+        fileId: lf.id,
+        fileName: lf.name,
+        recordIndex: i,
+        label: safeBuildLabel(lf.recordType, rec, i),
+        hitPath: hit.path,
+        hitPreview: hit.preview,
+      });
+
+      if (results.length >= HARD_MAX) return results;
+    }
+  }
+
+  return results;
+}
+
+/**
+ * Build a record label safely (never crash global search).
+ * @param {RecordType} recordType
+ * @param {any} rec
+ * @param {number} idx
+ */
+function safeBuildLabel(recordType, rec, idx) {
+  try {
+    return buildRecordLabel(recordType, rec, idx, null);
+  } catch {
+    return `Record ${idx + 1}`;
+  }
+}
+
+/**
+ * Find the first matching value in an object/array tree.
+ * Bounded so a single giant file cannot lock the browser.
+ * @param {any} obj
+ * @param {string} needleLower
+ * @returns {{ path: string, preview: string } | null}
+ */
+function findFirstHit(obj, needleLower) {
+  const MAX_NODES = 4000;
+  let visited = 0;
+
+  function clip(s, max = 90) {
+    const str = String(s);
+    return str.length > max ? str.slice(0, max - 1) + '…' : str;
+  }
+
+  function walk(v, path) {
+    if (visited++ > MAX_NODES) return null;
+    if (v == null) return null;
+
+    const t = typeof v;
+
+    if (t === 'string') {
+      const s = v.toLowerCase();
+      if (s.includes(needleLower)) return { path, preview: clip(v) };
+      return null;
+    }
+
+    if (t === 'number' || t === 'boolean') {
+      const s = String(v).toLowerCase();
+      if (s.includes(needleLower)) return { path, preview: String(v) };
+      return null;
+    }
+
+    if (Array.isArray(v)) {
+      for (let i = 0; i < v.length; i++) {
+        const hit = walk(v[i], `${path}[${i}]`);
+        if (hit) return hit;
+      }
+      return null;
+    }
+
+    if (t === 'object') {
+      for (const k of Object.keys(v)) {
+        const hit = walk(v[k], path ? `${path}.${k}` : k);
+        if (hit) return hit;
+      }
+    }
+
+    return null;
+  }
+
+  return walk(obj, '');
 }
 
 /** Render main viewer based on active file and toggle state. */

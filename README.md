@@ -11,7 +11,7 @@
 A lightweight JSON viewer that helps you focus on just the fields that matter.
 
 JTF runs entirely in your browser and works great on GitHub Pages.  
-Drop in JSON files, explore them safely, and use templates to control what you see — in light or dark mode.
+Drop in JSON files, explore them safely, search across all uploads, and use templates to control what you see — in light or dark mode.
 
 ### Live demo
 
@@ -26,6 +26,7 @@ Runs entirely in your browser. No uploads. No installs.
 - A fast, browser-based JSON viewer
 - A way to explore large or messy JSON without writing code
 - A template-driven layout tool for records like Issues, RFIs, or API responses
+- A global search that finds matches across all uploaded JSON files
 - Offline-friendly and easy to host
 
 <figure style="margin-bottom: 24px;">
@@ -109,6 +110,19 @@ Best for API responses and structured objects.
 
 You can override the mode at any time.
 
+## Global search
+
+Global search lets you find values **across all uploaded JSON files**, regardless of how they are viewed.
+
+- Searches Records mode, Dataset mode, and single-object JSON files
+- Does not depend on templates or selected mode
+- Results show which file and record (or dataset row) matched
+- Clicking a result jumps directly to that location
+
+Global search is designed for discovery:
+use it to answer “where does this value exist?”
+and then use the main viewer search to inspect it in context.
+
 ---
 
 ## Templates
@@ -157,6 +171,7 @@ If a field path does not exist, it is simply skipped.
 - No build step
 - No framework lock-in
 - Easy to modify months or years later
+- Clear separation between global discovery and local inspection
 
 If someone opens this code cold in the future, they should be able to follow it.
 

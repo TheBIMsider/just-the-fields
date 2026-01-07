@@ -112,6 +112,51 @@
           </div>
         </div>
 
+        <!-- Global Search (search across ALL uploaded files, regardless of mode) -->
+        <section class="global-search" aria-label="Global search">
+          <button
+            id="globalSearchToggle"
+            class="global-search-toggle"
+            type="button"
+            aria-expanded="false"
+            title="Search across all uploaded JSON files"
+          >
+            <span class="global-search-title">Global search</span>
+            <span class="global-search-meta" id="globalSearchMeta">Closed</span>
+          </button>
+
+          <div id="globalSearchPanel" class="global-search-panel" hidden>
+            <label class="global-search-input">
+              <span class="sr-only">Global search</span>
+              <input
+                id="globalSearchInput"
+                type="search"
+                placeholder="Search across all uploaded files..."
+                autocomplete="off"
+                disabled
+              />
+            </label>
+
+            <div class="global-search-actions">
+              <button
+                id="globalSearchClearBtn"
+                class="mini-btn"
+                type="button"
+                disabled
+                title="Clear global search"
+              >
+                Clear
+              </button>
+            </div>
+
+            <div
+              id="globalSearchResults"
+              class="global-search-results"
+              aria-live="polite"
+            ></div>
+          </div>
+        </section>
+
         <div
           id="dropZone"
           class="drop-zone"
