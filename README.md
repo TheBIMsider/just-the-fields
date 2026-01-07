@@ -34,7 +34,7 @@ Runs entirely in your browser. No uploads. No installs.
     width="1916"
     height="917"
     alt="Dataset view in light mode"
-    src="https://github.com/user-attachments/assets/b0de9c3e-5e45-432b-b85c-9c7b2803988c"
+    src="https://github.com/user-attachments/assets/75ebfc14-1c24-40c9-9db6-2cf9567032e9"
   />
   <figcaption>
     Dataset mode showing a large JSON array (light theme)
@@ -46,7 +46,7 @@ Runs entirely in your browser. No uploads. No installs.
     width="1901" 
     height="944" 
     alt="alt="Record mode view in dark mode"
-    src="https://github.com/user-attachments/assets/862dedcd-b4c8-4571-82a6-38dcc1464ee1" 
+    src="https://github.com/user-attachments/assets/58e2e405-4cb9-4b04-8c61-04773235ccd7"
   />
   <figcaption>
     Records mode using a Newforma Konekt Issues template (dark theme)
@@ -202,3 +202,4 @@ This project is licensed under the BSD-3-Clause License.
 
 _Built with ❤️ & 🤖 AI assistance from ChatGPT by The BIMsider for the AECO community_  
 _Just the Fields: Your JSON Detective - See what matters._
+
