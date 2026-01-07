@@ -89,8 +89,9 @@
 
             <p class="lead">
               Just the Fields (JTF) is a lightweight JSON viewer that helps you
-              focus on the fields that matter. Drop in a file, browse safely,
-              and use templates to control what you see.
+              focus on the fields that matter. Drop in files, browse safely,
+              search across everything you loaded, and use templates to control
+              what you see.
             </p>
 
             <div class="cta-row">
@@ -134,8 +135,12 @@
                     arrays.
                   </li>
                   <li>
-                    <strong>Search</strong> across labels and values (optionally
-                    inside collapsed sections).
+                    <strong>Viewer search</strong> to find values in the active
+                    record (optionally inside collapsed sections).
+                  </li>
+                  <li>
+                    <strong>Global search</strong> to find matches across all
+                    uploaded files, including Dataset rows.
                   </li>
                 </ul>
               </div>
@@ -192,10 +197,10 @@
             </article>
 
             <article class="tile">
-              <h3>Search where it counts</h3>
+              <h3>Search local or global</h3>
               <p>
-                Search fields and values in Records mode, and optionally include
-                collapsed sections.
+                Use Viewer search to inspect the current record, or Global
+                search to scan all uploaded files (including Dataset rows).
               </p>
             </article>
 
@@ -251,8 +256,8 @@
               <div class="step-num">4</div>
               <h3>Search and inspect</h3>
               <p>
-                Find values fast, expand only what you need, and stay in
-                control.
+                Use Global search to find where something lives, then Viewer
+                search to inspect it in context.
               </p>
             </div>
           </div>
@@ -399,10 +404,10 @@
                     </div>
                   </div>
                 </div>
-
                 <p class="note">
                   If your template “does nothing”, the first thing to check is
-                  your mode.
+                  your mode. Global search ignores mode and searches everything
+                  you uploaded.
                 </p>
               </div>
             </details>
