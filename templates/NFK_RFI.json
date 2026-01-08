@@ -1,0 +1,156 @@
+{
+  "templateVersion": 1,
+  "templateName": "NFK — Request for Information (RFI)",
+  "description": "Template for Newforma Konekt RFIs.",
+  "match": {
+    "typeField": "type.name",
+    "typeValue": "Construction",
+    "requiredKeys": ["number", "question", "status"]
+  },
+  "recordLabel": {
+    "fields": ["number", "subject", "status.name"],
+    "fallback": "RFI {n}"
+  },
+  "layout": [
+    {
+      "section": "Header",
+      "fields": [
+        {
+          "path": "number",
+          "label": "RFI #",
+          "format": "text"
+        },
+        {
+          "path": "subject",
+          "label": "Subject",
+          "format": "text"
+        },
+        {
+          "path": "status.name",
+          "label": "Status",
+          "format": "badge"
+        },
+        {
+          "path": "isUrgent",
+          "label": "Urgent",
+          "format": "badge"
+        },
+        {
+          "path": "isOverdue",
+          "label": "Overdue",
+          "format": "badge"
+        }
+      ]
+    },
+    {
+      "section": "Question",
+      "fields": [
+        {
+          "path": "question",
+          "label": "Question",
+          "format": "multiline"
+        }
+      ]
+    },
+    {
+      "section": "Dates & version",
+      "fields": [
+        {
+          "path": "receivedDate",
+          "label": "Received date",
+          "format": "date"
+        },
+        {
+          "path": "dueDate",
+          "label": "Due date",
+          "format": "date"
+        },
+        {
+          "path": "version",
+          "label": "Version",
+          "format": "text"
+        }
+      ]
+    },
+    {
+      "section": "Impact",
+      "fields": [
+        {
+          "path": "impactSchedule.name",
+          "label": "Schedule impact",
+          "format": "badge"
+        },
+        {
+          "path": "impactCost.name",
+          "label": "Cost impact",
+          "format": "badge"
+        }
+      ]
+    },
+    {
+      "section": "Classification",
+      "fields": [
+        {
+          "path": "disciplines",
+          "label": "Disciplines",
+          "format": "chips"
+        },
+        {
+          "path": "reasons",
+          "label": "Reasons",
+          "format": "chips"
+        },
+        {
+          "path": "keywords",
+          "label": "Keywords",
+          "format": "chips"
+        }
+      ]
+    },
+    {
+      "section": "Workflow",
+      "fields": [
+        {
+          "path": "from.fullName",
+          "label": "From",
+          "format": "text"
+        },
+        {
+          "path": "workflowActionCount",
+          "label": "Workflow actions",
+          "format": "text"
+        },
+        {
+          "path": "hasInProgressWorkflowActions",
+          "label": "Has in-progress workflow",
+          "format": "badge"
+        },
+        {
+          "path": "mostRecentWorkflowAction",
+          "label": "Most recent workflow action",
+          "format": "object"
+        }
+      ]
+    },
+    {
+      "section": "Files",
+      "fields": [
+        {
+          "path": "fileCount",
+          "label": "File count",
+          "format": "text"
+        }
+      ]
+    },
+    {
+      "section": "Everything else",
+      "fields": [
+        {
+          "path": "id",
+          "label": "ID",
+          "format": "text"
+        }
+      ]
+    }
+  ]
+}

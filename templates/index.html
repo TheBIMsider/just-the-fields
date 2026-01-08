@@ -3,188 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!DOCTYPE html>
-    <html lang="en">
-      <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Just the Fields – Templates</title>
-
-        <style>
-          :root {
-            color-scheme: light dark;
-          }
-
-          body {
-            font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
-              Arial, sans-serif;
-            margin: 24px;
-            line-height: 1.5;
-          }
-
-          .wrap {
-            max-width: 900px;
-          }
-
-          h1 {
-            margin-top: 0;
-          }
-
-          ul {
-            padding-left: 18px;
-          }
-
-          li {
-            margin-bottom: 8px;
-          }
-
-          .note {
-            opacity: 0.85;
-          }
-
-          a {
-            color: inherit;
-          }
-
-          .footer {
-            margin-top: 32px;
-            font-size: 14px;
-            opacity: 0.8;
-          }
-        </style>
-      </head>
-
-      <body>
-        <div class="wrap">
-          <h1>Just the Fields – Templates</h1>
-
-          <h2>Quick start</h2>
-          <ol>
-            <li>Download the starter template below.</li>
-            <li>Edit it in any text editor (VS Code is great).</li>
-            <li>
-              In the app, go to <strong>Templates → Upload</strong> and pick
-              your edited file.
-            </li>
-            <li>
-              Select it from the Template dropdown (or use
-              <strong>Auto (best match)</strong>).
-            </li>
-          </ol>
-
-          <p class="note">
-            Templates apply in <strong>Records</strong> mode. They do not apply
-            in <strong>Dataset</strong> mode.
-          </p>
-
-          <p class="note">
-            Want the full guide (paths, match rules, record labels, formats)?
-            <a href="../docs/templates.md"
-              ><strong>Read: Templates in JTF</strong></a
-            >
-          </p>
-
-          <h2>Starter</h2>
-
-          <ul>
-            <li>
-              <a
-                href="https://raw.githubusercontent.com/TheBIMsider/just-the-fields/main/templates/jtf-template-starter.json"
-                download
-              >
-                Starter template
-              </a>
-              <div class="note">
-                Start here. Edit this to match your own JSON structure.
-              </div>
-            </li>
-          </ul>
-
-          <h2>Generic examples</h2>
-
-          <ul>
-            <li>
-              <a
-                href="https://raw.githubusercontent.com/TheBIMsider/just-the-fields/main/templates/example-issues.json"
-                download
-              >
-                Example: Issues-style records
-              </a>
-              <div class="note">
-                Common pattern for issue or task-based records.
-              </div>
-            </li>
-
-            <li>
-              <a
-                href="https://raw.githubusercontent.com/TheBIMsider/just-the-fields/main/templates/example-rfis.json"
-                download
-              >
-                Example: RFI-style records
-              </a>
-              <div class="note">
-                Question/response layout with clear sections.
-              </div>
-            </li>
-
-            <li>
-              <a
-                href="https://raw.githubusercontent.com/TheBIMsider/just-the-fields/main/templates/example-generic.json"
-                download
-              >
-                Example: Generic records
-              </a>
-              <div class="note">
-                Safe fallback when the data shape is unknown.
-              </div>
-            </li>
-          </ul>
-
-          <h2>Real-world examples</h2>
-
-          <p class="note">Newforma Konekt templates</p>
-
-          <ul>
-            <li>
-              <a
-                href="https://raw.githubusercontent.com/TheBIMsider/just-the-fields/main/templates/NFK_Issues_Basic.json"
-                download
-              >
-                NFK Issues – Basic
-              </a>
-              <div class="note">
-                Production-grade Issues template validated against real exports.
-              </div>
-            </li>
-
-            <li>
-              <a
-                href="https://raw.githubusercontent.com/TheBIMsider/just-the-fields/main/templates/NFK_Issues_Custom_Attributes.json"
-                download
-              >
-                NFK Issues – Custom Attributes
-              </a>
-              <div class="note">
-                Extends the basic template with dynamic custom attributes via
-                kvlist.
-              </div>
-            </li>
-          </ul>
-
-          <p class="note">
-            Tip: If a link opens the JSON in your browser, use
-            <strong>Right-click → Save As</strong>.
-          </p>
-
-          <div class="footer">
-            <p>
-              Back to the app:
-              <a href="../index.html">Just the Fields</a>
-            </p>
-          </div>
-        </div>
-      </body>
-    </html>
+    <title>Just the Fields – Starter Templates</title>
 
     <style>
       :root {
@@ -206,10 +25,6 @@
         margin-top: 0;
       }
 
-      h2 + .note {
-        margin-top: 4px;
-      }
-
       ul {
         padding-left: 18px;
       }
@@ -220,11 +35,6 @@
 
       .note {
         opacity: 0.85;
-      }
-
-      ul .note {
-        margin-top: 2px;
-        font-size: 14px;
       }
 
       a {
@@ -238,4 +48,101 @@
       }
     </style>
   </head>
+
+  <body>
+    <div class="wrap">
+      <h1>Just the Fields – Starter Templates</h1>
+
+      <h2>Quick start</h2>
+      <ol>
+        <li>Download the starter template below.</li>
+        <li>Edit it in any text editor (VS Code is great).</li>
+        <li>
+          In the app, go to <strong>Templates → Upload</strong> and pick your
+          edited file.
+        </li>
+        <li>
+          Select it from the Template dropdown (or use
+          <strong>Auto (best match)</strong>).
+        </li>
+      </ol>
+
+      <p class="note">
+        Templates apply in <strong>Records</strong> mode. They do not apply in
+        <strong>Dataset</strong> mode.
+      </p>
+
+      <p class="note">
+        Want the full guide (paths, match rules, record labels, formats)?
+        <a href="../docs/templates.md"
+          ><strong>Read: Templates in JTF</strong></a
+        >
+      </p>
+
+      <h2>Available templates</h2>
+
+      <ul>
+        <li>
+          <a
+            href="https://raw.githubusercontent.com/TheBIMsider/just-the-fields/main/templates/jtf-template-starter.json"
+            download
+          >
+            Starter template (edit this first)
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://raw.githubusercontent.com/TheBIMsider/just-the-fields/main/templates/example-issues.json"
+            download
+          >
+            Example – Issues-style records
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://raw.githubusercontent.com/TheBIMsider/just-the-fields/main/templates/example-rfis.json"
+            download
+          >
+            Example – RFI-style records
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://raw.githubusercontent.com/TheBIMsider/just-the-fields/main/templates/example-generic.json"
+            download
+          >
+            Example – Generic records
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://raw.githubusercontent.com/TheBIMsider/just-the-fields/main/templates/NFK_Issues_Basic.json"
+            download
+          >
+            Example – NFK Issues (Basic)
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://raw.githubusercontent.com/TheBIMsider/just-the-fields/main/templates/NFK_Issues_Custom_Attributes.json"
+            download
+          >
+            Example – NFK Issues (Custom Attributes)
+          </a>
+        </li>
+      </ul>
+
+      <p class="note">
+        Tip: If a link opens the JSON in your browser, use
+        <strong>Right-click → Save As</strong>.
+      </p>
+
+      <div class="footer">
+        <p>
+          Back to the app:
+          <a href="../index.html">Just the Fields</a>
+        </p>
+      </div>
+    </div>
+  </body>
 </html>

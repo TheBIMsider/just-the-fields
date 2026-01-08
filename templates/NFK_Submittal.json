@@ -1,0 +1,82 @@
+{
+  "templateVersion": 1,
+  "templateName": "NFK — Submittals",
+  "description": "Template for Newforma Konekt Submittals (all MasterFormat spec sections).",
+  "match": {
+    "typeField": null,
+    "typeValue": null,
+    "requiredKeys": ["specSection", "number", "status", "receivedDate", "mostRecentWorkflowAction"]
+  },
+  "recordLabel": {
+    "fields": ["number", "subject", "status.name"],
+    "fallback": "Submittal {n}"
+  },
+  "layout": [
+    {
+      "section": "Overview",
+      "fields": [
+        { "path": "number", "label": "Submittal #", "format": "text" },
+        { "path": "subject", "label": "Subject", "format": "text" },
+        { "path": "status.name", "label": "Status", "format": "badge" },
+		{ "path": "dueDate", "label": "Due date", "format": "date" },
+        { "path": "isOverdue", "label": "Overdue", "format": "badge" }
+      ]
+    },
+	    {
+      "section": "Most Recent Workflow Action",
+      "fields": [
+        { "path": "mostRecentWorkflowAction.response.name", "label": "Response", "format": "badge" },
+        { "path": "mostRecentWorkflowAction.remarks", "label": "Remarks", "format": "multiline" },
+        { "path": "mostRecentWorkflowAction.actionDate", "label": "Response date", "format": "date" }
+      ]
+    },
+    {
+      "section": "Submittal details",
+      "fields": [
+        { "path": "description", "label": "Description", "format": "multiline" },
+        { "path": "specSection.name", "label": "Spec section", "format": "text" },
+        { "path": "specSection.description", "label": "Spec section description", "format": "text" }
+      ]
+    },
+    {
+      "section": "Dates & version",
+      "fields": [
+        { "path": "receivedDate", "label": "Received date", "format": "date" },
+        { "path": "dueDate", "label": "Due date", "format": "date" },
+        { "path": "version", "label": "Version", "format": "text" }
+      ]
+    },
+
+    {
+      "section": "Classification",
+      "fields": [
+        { "path": "disciplines", "label": "Disciplines", "format": "chips" },
+        { "path": "keywords", "label": "Keywords", "format": "chips" }
+      ]
+    },
+    {
+      "section": "Workflow",
+      "fields": [
+        { "path": "from.fullName", "label": "From", "format": "text" },
+        { "path": "workflowActionCount", "label": "Workflow actions", "format": "text" },
+        { "path": "hasInProgressWorkflowActions", "label": "Has in-progress workflow", "format": "badge" },
+        { "path": "pendingReviewers", "label": "Pending reviewers", "format": "chips" },
+        { "path": "reviewers", "label": "Reviewers", "format": "table" },
+        { "path": "mostRecentWorkflowAction", "label": "Most recent workflow action", "format": "object" }
+      ]
+    },
+    {
+      "section": "Files",
+      "fields": [
+        { "path": "fileCount", "label": "File count", "format": "text" }
+      ]
+    },
+    {
+      "section": "Everything else",
+      "fields": [
+        { "path": "id", "label": "ID", "format": "text" }
+      ]
+    }
+  ]
+}
+

@@ -1,0 +1,136 @@
+{
+  "templateVersion": 1,
+  "templateName": "NFK Change Management — Supplemental Instructions (SI)",
+  "description": "Template for Newforma Konekt Change Management items where changeItemType.name = SI.",
+  "match": {
+    "typeField": "changeItemType.name",
+    "typeValue": "SI",
+    "requiredKeys": ["changeItemType", "number", "status"]
+  },
+  "recordLabel": {
+    "fields": ["number", "subject", "status.name"],
+    "fallback": "SI Record {n}"
+  },
+  "layout": [
+    {
+      "section": "Header",
+      "fields": [
+        {
+          "path": "number",
+          "label": "Number",
+          "format": "text"
+        },
+        {
+          "path": "subject",
+          "label": "Subject",
+          "format": "text"
+        },
+        {
+          "path": "status.name",
+          "label": "Status",
+          "format": "badge"
+        },
+        {
+          "path": "isOverdue",
+          "label": "Overdue",
+          "format": "badge"
+        },
+        {
+          "path": "changeItemType.description",
+          "label": "Type",
+          "format": "text"
+        }
+      ]
+    },
+    {
+      "section": "Details",
+      "fields": [
+        {
+          "path": "description",
+          "label": "Description",
+          "format": "multiline"
+        },
+        {
+          "path": "dueDate",
+          "label": "Due date",
+          "format": "date"
+        },
+        {
+          "path": "version",
+          "label": "Version",
+          "format": "text"
+        },
+        {
+          "path": "fileCount",
+          "label": "File count",
+          "format": "text"
+        },
+        {
+          "path": "disciplines",
+          "label": "Disciplines",
+          "format": "chips"
+        },
+        {
+          "path": "keywords",
+          "label": "Keywords",
+          "format": "chips"
+        },
+        {
+          "path": "reasons",
+          "label": "Reasons",
+          "format": "chips"
+        }
+      ]
+    },
+    {
+      "section": "Workflow",
+      "fields": [
+        {
+          "path": "from.fullName",
+          "label": "From",
+          "format": "text"
+        },
+        {
+          "path": "hasInProgressWorkflowActions",
+          "label": "Has in-progress workflow",
+          "format": "badge"
+        },
+        {
+          "path": "workflowActionCount",
+          "label": "Workflow actions",
+          "format": "text"
+        },
+        {
+          "path": "hasCreatedWorkflowAction",
+          "label": "Workflow created",
+          "format": "badge"
+        },
+        {
+          "path": "pendingReviewers",
+          "label": "Pending reviewers",
+          "format": "chips"
+        },
+        {
+          "path": "reviewers",
+          "label": "Reviewers",
+          "format": "table"
+        },
+        {
+          "path": "mostRecentWorkflowAction",
+          "label": "Most recent workflow action",
+          "format": "object"
+        }
+      ]
+    },
+    {
+      "section": "Everything else",
+      "fields": [
+        {
+          "path": "id",
+          "label": "ID",
+          "format": "text"
+        }
+      ]
+    }
+  ]
+}

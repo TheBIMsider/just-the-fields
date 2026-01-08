@@ -1,0 +1,136 @@
+{
+  "templateVersion": 1,
+  "templateName": "NFK Change Management — Proposal Request (PR)",
+  "description": "Template for Newforma Konekt Change Management items where changeItemType.name = PR.",
+  "match": {
+    "typeField": "changeItemType.name",
+    "typeValue": "PR",
+    "requiredKeys": ["changeItemType", "number", "status"]
+  },
+  "recordLabel": {
+    "fields": ["number", "subject", "status.name"],
+    "fallback": "PR Record {n}"
+  },
+  "layout": [
+    {
+      "section": "Header",
+      "fields": [
+        {
+          "path": "number",
+          "label": "Number",
+          "format": "text"
+        },
+        {
+          "path": "subject",
+          "label": "Subject",
+          "format": "text"
+        },
+        {
+          "path": "status.name",
+          "label": "Status",
+          "format": "badge"
+        },
+        {
+          "path": "isOverdue",
+          "label": "Overdue",
+          "format": "badge"
+        },
+        {
+          "path": "changeItemType.description",
+          "label": "Type",
+          "format": "text"
+        }
+      ]
+    },
+    {
+      "section": "Details",
+      "fields": [
+        {
+          "path": "description",
+          "label": "Description",
+          "format": "multiline"
+        },
+        {
+          "path": "receivedDate",
+          "label": "Received date",
+          "format": "date"
+        },
+        {
+          "path": "dueDate",
+          "label": "Due date",
+          "format": "date"
+        },
+        {
+          "path": "version",
+          "label": "Version",
+          "format": "text"
+        },
+        {
+          "path": "receivedVia.name",
+          "label": "Received via",
+          "format": "text"
+        },
+        {
+          "path": "disciplines",
+          "label": "Disciplines",
+          "format": "chips"
+        },
+        {
+          "path": "keywords",
+          "label": "Keywords",
+          "format": "chips"
+        },
+        {
+          "path": "reasons",
+          "label": "Reasons",
+          "format": "chips"
+        }
+      ]
+    },
+    {
+      "section": "Workflow",
+      "fields": [
+        {
+          "path": "from.fullName",
+          "label": "From",
+          "format": "text"
+        },
+        {
+          "path": "workflowActionCount",
+          "label": "Workflow actions",
+          "format": "text"
+        },
+        {
+          "path": "hasCreatedWorkflowAction",
+          "label": "Workflow created",
+          "format": "badge"
+        },
+        {
+          "path": "hasInProgressWorkflowActions",
+          "label": "Has in-progress workflow",
+          "format": "badge"
+        },
+        {
+          "path": "hasProposalSubmitted",
+          "label": "Proposal submitted",
+          "format": "badge"
+        },
+        {
+          "path": "mostRecentWorkflowAction",
+          "label": "Most recent workflow action",
+          "format": "object"
+        }
+      ]
+    },
+    {
+      "section": "Everything else",
+      "fields": [
+        {
+          "path": "id",
+          "label": "ID",
+          "format": "text"
+        }
+      ]
+    }
+  ]
+}
