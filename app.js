@@ -1754,6 +1754,10 @@ function detectRecordTypeFromObject(obj) {
       'SubmittalId',
       'submittalId',
     ]) ||
+    // Procore/imported submittals often have these even when specSection is missing
+    hasAny(obj, ['senderNumber', 'SenderNumber']) ||
+    (hasAny(obj, ['originId', 'OriginId']) &&
+      hasAny(obj, ['receivedVia', 'ReceivedVia'])) ||
     (hasAny(obj, [
       'ReviewStatus',
       'reviewStatus',
@@ -2143,6 +2147,49 @@ function renderTemplateField(record, field) {
       label,
       `<span class="badge">${escapeHtml(badgeText)}</span>`
     );
+  }
+
+  if (format === 'chips') {
+    if (!Array.isArray(value) || value.length === 0) return '';
+
+    const names = value
+      .map((x) => {
+        if (x == null) return null;
+        if (typeof x === 'string' || typeof x === 'number') return String(x);
+
+        if (typeof x === 'object') {
+          if (x.contact?.fullName && x.contact?.email) {
+            return `${x.contact.fullName} <${x.contact.email}>`;
+          }
+
+          if (x.fileName) {
+            return x.fileName;
+          }
+
+          return (
+            x.name ??
+            x.Name ??
+            x.fullName ??
+            x.FullName ??
+            x.contact?.fullName ??
+            x.contact?.email ??
+            null
+          );
+        }
+
+        return null;
+      })
+      .filter(Boolean)
+      .map((s) => safeOneLine(String(s), 80))
+      .filter(Boolean);
+
+    if (!names.length) return '';
+
+    const html = names
+      .map((t) => `<span class="badge">${escapeHtml(t)}</span>`)
+      .join(' ');
+
+    return renderKVHtml(label, html);
   }
 
   if (format === 'date') {
