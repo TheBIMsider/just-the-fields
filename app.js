@@ -213,6 +213,18 @@ function safeOneLine(s, maxLen) {
   return str.length > maxLen ? `${str.slice(0, maxLen)}…` : str;
 }
 
+/**
+ * Normalize "maybe-array" values:
+ * - array => same array
+ * - single object => [object]
+ * - null/undefined/other => []
+ */
+function asArray(value) {
+  if (Array.isArray(value)) return value;
+  if (value && typeof value === 'object') return [value];
+  return [];
+}
+
 function updateThemeButton() {
   if (!els.themeToggle) return;
 
@@ -2195,18 +2207,43 @@ function renderTemplateField(record, field) {
   // Missing path renders empty (silent)
   if (value === undefined) return '';
 
+  // NFK Issues History: flatten Changes[] into readable lines (no nested cards)
+  if (path === 'Changes' && Array.isArray(value)) {
+    const rows = value
+      .map((c) => {
+        if (!c || typeof c !== 'object') return null;
+
+        const prop = c.Property || 'Change';
+        const oldVal = c.OldValue ?? '';
+        const newVal = c.NewValue ?? '';
+
+        if (oldVal && newVal) return `${prop}: ${oldVal} → ${newVal}`;
+        if (newVal) return `${prop}: ${newVal}`;
+        return null;
+      })
+      .filter(Boolean);
+
+    // Hide the whole row when there are no changes
+    if (!rows.length) return '';
+
+    const html = rows
+      .map((r) => `<div>${escapeHtml(String(r))}</div>`)
+      .join('');
+
+    return renderKVHtml('Changes', html, { path: `$.$TEMPLATE.${path}` });
+  }
+
   // NEW: Template-driven array rendering (array cards) when a field defines sub-fields.
   // This is how we can render workflowactionsLite as readable cards without raw JSON.
-  if (
-    Array.isArray(value) &&
-    Array.isArray(field.fields) &&
-    field.fields.length
-  ) {
+  const cardItems =
+    Array.isArray(field.fields) && field.fields.length ? asArray(value) : [];
+
+  if (cardItems.length && Array.isArray(field.fields) && field.fields.length) {
     const maxItems = Number.isFinite(field.maxItems)
       ? Math.max(1, Math.floor(field.maxItems))
-      : value.length;
+      : cardItems.length;
 
-    const items = value.slice(0, maxItems);
+    const items = cardItems.slice(0, maxItems);
 
     const cardsHtml = items
       .map((item, i) => {
@@ -2246,9 +2283,11 @@ function renderTemplateField(record, field) {
   }
 
   if (format === 'chips') {
-    if (!Array.isArray(value) || value.length === 0) return '';
+    const arr = asArray(value);
+    if (arr.length === 0) return '';
 
-    const names = value
+    const names = arr
+
       .map((x) => {
         if (x == null) return null;
         if (typeof x === 'string' || typeof x === 'number') return String(x);
@@ -3666,6 +3705,47 @@ function buildItemSummary(obj, idx) {
   const bits = [];
 
   bits.push(`[${idx}]`);
+
+  // NFK Issue history: show Author + date + change type in the card title
+  if (
+    obj &&
+    typeof obj === 'object' &&
+    obj.ChangeType &&
+    obj.CreationDate &&
+    obj.Author &&
+    typeof obj.Author === 'object'
+  ) {
+    const fn = obj.Author.FirstName || '';
+    const ln = obj.Author.LastName || '';
+    const who = `${fn} ${ln}`.trim() || obj.Author.Email || 'History';
+    const when = formatDateTime(obj.CreationDate) || '';
+    const what = String(obj.ChangeType || '').trim();
+
+    if (who) bits.push(who);
+    if (when) bits.push(when);
+    if (what) bits.push(what);
+
+    return bits.join(' • ');
+  }
+
+  // NFK Issue comments: show author + date instead of generic object preview
+  if (
+    obj.Author &&
+    typeof obj.Author === 'object' &&
+    obj.CreationDate &&
+    typeof obj.Comment === 'string'
+  ) {
+    const fn = obj.Author.FirstName || '';
+    const ln = obj.Author.LastName || '';
+    const who = `${fn} ${ln}`.trim() || obj.Author.Email || 'Comment';
+
+    const when = formatDateTime(obj.CreationDate);
+
+    bits.push(who);
+    if (when) bits.push(when);
+
+    return bits.join(' • ');
+  }
 
   // Workflow actions: show a human title and date, not the internal Id
   if (wfDate && wfTitle) {

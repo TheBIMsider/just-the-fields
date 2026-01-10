@@ -202,4 +202,3 @@ This project is licensed under the BSD-3-Clause License.
 
 _Built with ❤️ & 🤖 AI assistance from ChatGPT by The BIMsider for the AECO community_  
 _Just the Fields: Your JSON Detective - See what matters._
-
