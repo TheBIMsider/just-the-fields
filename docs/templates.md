@@ -111,7 +111,7 @@ Example:
     { "path": "Size", "label": "Size", "format": "text" }
   ]
 }
-
+```
 
 ## 7) Match rules (what they do, and what they do not)
 
