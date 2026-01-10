@@ -307,6 +307,14 @@
                     <code>Status.Name</code>).
                   </li>
                   <li>
+                    Use <strong>chips</strong> for people, teams, and simple
+                    lists.
+                  </li>
+                  <li>
+                    Render arrays as compact <strong>cards</strong> using
+                    <code>format: "json"</code> plus sub <code>fields</code>.
+                  </li>
+                  <li>
                     Missing fields are skipped, so templates are forgiving.
                   </li>
                   <li>
@@ -510,6 +518,9 @@
                     <strong>json</strong><span>Nested object/array</span>
                   </div>
                   <div class="mini-card">
+                    <strong>chips</strong><span>Compact badges</span>
+                  </div>
+                  <div class="mini-card">
                     <strong>kvlist</strong><span>Key → value list</span>
                   </div>
                 </div>
@@ -523,10 +534,11 @@
             <details class="acc">
               <summary>
                 <span class="acc-title">Match rules</span>
-                <span class="acc-hint"
-                  >Apply the right template to the right record</span
-                >
+                <span class="acc-hint">
+                  Apply the right template to the right record
+                </span>
               </summary>
+
               <div class="acc-body">
                 <ul class="bullets">
                   <li>
@@ -541,6 +553,11 @@
                     Keep match rules simple so templates stay predictable.
                   </li>
                 </ul>
+
+                <p class="note">
+                  Tip: some exports have different shapes, so they require
+                  different templates.
+                </p>
               </div>
             </details>
 
