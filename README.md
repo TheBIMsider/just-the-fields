@@ -45,7 +45,7 @@ Runs entirely in your browser. No uploads. No installs.
   <img 
     width="1901" 
     height="944" 
-    alt="alt="Record mode view in dark mode"
+    alt="Record mode view in dark mode"
     src="https://github.com/user-attachments/assets/58e2e405-4cb9-4b04-8c61-04773235ccd7"
   />
   <figcaption>
@@ -136,9 +136,16 @@ They are:
 - Safe if fields are missing
 - Easy to edit in any text editor
 
-Templates control layout only.
+Templates control layout only.  
 When multiple templates are available, JTF can automatically pick the best match per record in Records mode.
-They cannot change app behavior or data.
+
+Templates support several display patterns, including:
+
+- **Badges** for status-like values
+- **Chips** for people, teams, and simple lists
+- **Array cards** for readable rendering of comments, attachments, and history
+
+They cannot change app behavior or data.  
 Want the how-to? Start here: [Templates in JTF](docs/templates.md)
 
 ---
@@ -150,6 +157,8 @@ Want the how-to? Start here: [Templates in JTF](docs/templates.md)
 - Edit paths and labels (templates can be `.json` or `.jsonc`)
 - Upload the template back into JTF
 - Read the full guide: [Templates in JTF](docs/templates.md)
+
+Note: some data types (for example RFIs) can be exported in different shapes, which may require different templates.
 
 ---
 
