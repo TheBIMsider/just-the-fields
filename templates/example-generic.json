@@ -1,9 +1,11 @@
 {
   "templateVersion": 1,
   "templateName": "Example – Generic",
-  "description": "Broad example template for general record-style JSON.",
+  "description": "Broad example template for record-style JSON. Shows badges, chips, and array cards.",
 
-  "match": {},
+  "match": {
+    "requiredKeys": []
+  },
 
   "recordLabel": {
     "fields": [
@@ -27,19 +29,35 @@
         { "path": "Title", "label": "Title", "format": "text" },
         { "path": "Name", "label": "Name", "format": "text" },
         { "path": "Id", "label": "ID", "format": "text" },
-        { "path": "Status", "label": "Status", "format": "badge" }
+
+        { "path": "Status.Name", "label": "Status", "format": "badge" },
+        { "path": "Priority.Name", "label": "Priority", "format": "badge" },
+
+        { "path": "Tags", "label": "Tags", "format": "chips" }
       ]
     },
     {
       "section": "Body",
       "fields": [
-        {
-          "path": "Description",
-          "label": "Description",
-          "format": "multiline"
-        },
+        { "path": "Description", "label": "Description", "format": "multiline" },
         { "path": "Url", "label": "URL", "format": "link" }
+      ]
+    },
+    {
+      "section": "Example Array (Cards)",
+      "fields": [
+        {
+          "path": "Items",
+          "label": "Items",
+          "format": "json",
+          "fields": [
+            { "path": "Name", "label": "Name", "format": "text" },
+            { "path": "Date", "label": "Date", "format": "date" },
+            { "path": "Notes", "label": "Notes", "format": "multiline" }
+          ]
+        }
       ]
     }
   ]
 }
+

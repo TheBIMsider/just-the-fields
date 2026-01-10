@@ -1,11 +1,11 @@
 {
   "templateVersion": 1,
-  "templateName": "NFK RFI – Advanced",
+  "templateName": "NFK RFI – Advanced (Combined Export)",
   "description": "Advanced template for combined RFI exports. Includes full workflow actions, all files, and full event history.",
   "match": {
     "typeField": null,
     "typeValue": null,
-    "requiredKeys": ["rfiId", "payloads", "listItem", "project"]
+    "requiredKeys": ["payloads", "listItem"]
   },
 	"recordLabel": {
 	  "fields": [

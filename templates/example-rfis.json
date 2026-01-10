@@ -1,7 +1,7 @@
 {
   "templateVersion": 1,
   "templateName": "Example – RFIs",
-  "description": "Example template for RFI-style question and answer records.",
+  "description": "Legacy example template for RFI-style records. Kept for reference only. For a modern example, use the NFK - RFI templates (Plain Export / Combined Export).",
 
   "match": {
     "requiredKeys": ["Question"]
@@ -25,42 +25,18 @@
     {
       "section": "RFI",
       "fields": [
-        {
-          "path": "Question",
-          "label": "Question",
-          "format": "multiline"
-        },
-        {
-          "path": "Answer",
-          "label": "Answer",
-          "format": "multiline"
-        },
-        {
-          "path": "Status.Name",
-          "label": "Status",
-          "format": "badge"
-        }
+        { "path": "Question", "label": "Question", "format": "multiline" },
+        { "path": "Answer", "label": "Answer", "format": "multiline" },
+        { "path": "Status.Name", "label": "Status", "format": "badge" }
       ]
     },
     {
       "section": "Meta",
       "fields": [
         { "path": "Number", "label": "Number", "format": "text" },
-        {
-          "path": "CreatedBy.Email",
-          "label": "Created by",
-          "format": "text"
-        },
-        {
-          "path": "CreationDate",
-          "label": "Created",
-          "format": "date"
-        },
-        {
-          "path": "DueDate",
-          "label": "Due",
-          "format": "date"
-        }
+        { "path": "CreatedBy.Email", "label": "Created by", "format": "text" },
+        { "path": "CreationDate", "label": "Created", "format": "date" },
+        { "path": "DueDate", "label": "Due", "format": "date" }
       ]
     }
   ]

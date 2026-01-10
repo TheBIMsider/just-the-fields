@@ -1,7 +1,7 @@
 {
   "templateVersion": 1,
   "templateName": "Example – Issues",
-  "description": "Example template for issue-style records (issues, tasks, punch items).",
+  "description": "Legacy example template for issue-style records. Kept for reference only. For a modern example, use the NFK - Issues templates.",
 
   "match": {
     "requiredKeys": ["Title", "Status"]
@@ -34,31 +34,15 @@
     {
       "section": "Details",
       "fields": [
-        {
-          "path": "Description",
-          "label": "Description",
-          "format": "multiline"
-        },
-        {
-          "path": "Assignee.Email",
-          "label": "Assignee",
-          "format": "text"
-        }
+        { "path": "Description", "label": "Description", "format": "multiline" },
+        { "path": "Assignee.Email", "label": "Assignee", "format": "text" }
       ]
     },
     {
       "section": "Dates",
       "fields": [
-        {
-          "path": "CreationDate",
-          "label": "Created",
-          "format": "date"
-        },
-        {
-          "path": "DueDate",
-          "label": "Due",
-          "format": "date"
-        }
+        { "path": "CreationDate", "label": "Created", "format": "date" },
+        { "path": "DueDate", "label": "Due", "format": "date" }
       ]
     }
   ]
