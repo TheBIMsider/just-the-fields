@@ -54,7 +54,7 @@ Practical tip:
 
 ## 5) Layout: sections and fields
 
-`layout` is an ordered list of sections.
+`layout` is an ordered list of sections.  
 Each section has an ordered list of fields.
 
 That is the whole trick.
@@ -75,62 +75,216 @@ Common formats used in templates:
 - `date`: readable date/time
 - `link`: clickable URL
 - `multiline`: preserves line breaks
-- `json`: shows a nested object (can be collapsible)
-- `kvlist`: Renders an array of objects as a compact key → value list, where each item becomes a single labeled row.
-  This format is useful when the shape of items is consistent, but the number or names of items are not known in advance.
-
-  **kvlist options**
-
-  - `itemKeyPath` (string, default `"Name"`): where the item label comes from
-  - `valuePaths` (string[], optional): paths checked in order to find the value
-    - Defaults include `TextValue` and `PredefinedValues` patterns
-  - `maxItems` (number, default `6`): limit rows shown
-  - `showEmpty` (boolean, default `false`): show rows even when the value is blank
-  - `emptyText` (string, default `"(empty)"`): what to show when `showEmpty` is true
+- `json`: shows a nested object or array (can be collapsible)
+- `chips`: renders an array of values as compact badges (great for people, teams, disciplines, recipients)
+- `kvlist`: renders an array of objects as a compact key → value list, where each item becomes a single labeled row
 
 If a value is the wrong type for a format, the field is skipped.
+
+### chips
+
+`chips` expects an array most of the time, but JTF can also handle “object-or-array” shapes (single object treated like a 1-item array).
+
+Use it for things like:
+
+- Notify users / teams
+- Disciplines
+- Recipient lists
+- Simple attachment lists (file names)
+
+### json (cards for arrays)
+
+`json` normally renders nested data with collapsible viewing.
+
+If the field includes a `fields` list and the value is an array, JTF renders it as a set of compact cards (one card per array item). This is how Comments, Attachments, and History can be readable without dumping raw JSON.
+
+Example:
+
+```json
+{
+  "path": "Attachments",
+  "label": "Attachments",
+  "format": "json",
+  "fields": [
+    { "path": "Name", "label": "Name", "format": "text" },
+    { "path": "Date", "label": "Date", "format": "date" },
+    { "path": "Size", "label": "Size", "format": "text" }
+  ]
+}
+
 
 ## 7) Match rules (what they do, and what they do not)
 
 Match rules decide whether a template applies to a given record.
 
-**Auto template selection**
+### Auto template selection
 If the template dropdown is set to **Auto (best match)**, JTF picks the best matching template for each record while you browse in **Records** mode.
 
-Notes:
+Important notes:
 
 - Templates apply in **Records** mode only (Dataset mode never uses templates).
+- JTF match rules check **top-level keys only**.
 - If nothing matches, JTF falls back to its built-in views.
 
-Match is not filtering.
-Match is not a query language.
-Match does not transform data.
+Match rules are intentionally simple.
 
-Keep match rules simple so templates stay predictable.
+Match is **not** filtering.  
+Match is **not** a query language.  
+Match does **not** transform data.
+
+Keep match rules small and predictable.
+
+### Plain Export vs Combined Export
+
+Some tools export the same type of data in different shapes.
+
+Example: RFIs
+
+- **Plain export**  
+  Top-level keys like:
+  - `number`
+  - `subject`
+  - `question`
+
+- **Combined export**  
+  Wrapped records with top-level keys like:
+  - `rfiId`
+  - `listItem`
+  - `payloads`
+  - `project`
+
+These shapes require **different templates**.
+
+If a template technically matches but shows little or no data, the most common cause is using the **right template with the wrong export shape**.
 
 ## 8) Record labels (the Record dropdown)
 
-A template can build record labels from multiple fields in order.
-If fields are missing, JTF falls back safely.
+Templates can define how records are labeled in the **Record** dropdown.  
+This is one of the most useful (and most overlooked) parts of a template.
 
-Use this to make “Record 12” become “#RFI-1042 Window detail (Open)”.
+A record label is built from one or more fields, evaluated **in order**.
+
+If a field does not exist or is empty, JTF skips it and moves on.  
+If none of the fields produce a value, JTF uses the fallback label.
+
+### Basic example
+
+```json
+"recordLabel": {
+  "fields": [
+    { "path": "Number", "prefix": "#", "maxLen": 10 },
+    { "path": "Title", "prefix": " ", "maxLen": 60 }
+  ],
+  "fallback": "Record {n}"
+}
+```
+
+This turns a generic label like:
+
+```
+Record 12
+```
+
+Into something meaningful:
+
+```
+#ISSUE-1042 Door clearance
+```
+
+### Combining multiple fields
+
+You can combine several fields to create richer labels:
+
+```json
+"recordLabel": {
+  "fields": [
+    { "path": "Number", "prefix": "#", "maxLen": 10 },
+    { "path": "Subject", "prefix": " ", "maxLen": 60 },
+    {
+      "path": "Status.Name",
+      "prefix": " (",
+      "suffix": ")",
+      "maxLen": 20
+    }
+  ],
+  "fallback": "Item {n}"
+}
+```
+
+Example output:
+
+```
+#RFI-231 Window detail (Open)
+```
+
+### Prefixes, suffixes, and limits
+
+Each label field supports:
+
+- `prefix`: text added before the value
+- `suffix`: text added after the value
+- `maxLen`: maximum characters to keep
+- `lastChars`: keep the last *N* characters (useful for IDs)
+
+Example:
+
+```json
+{ "path": "Id", "prefix": " [", "suffix": "]", "lastChars": 8 }
+```
+
+Which renders like:
+
+```
+[9f3a2c1b]
+```
+
+### Fallback behavior
+
+If none of the label fields resolve to a value, JTF uses the fallback:
+
+```json
+"fallback": "Record {n}"
+```
+
+`{n}` is replaced with the record index.
+
+This guarantees the dropdown is never empty or confusing.
+
+### Best practices
+
+- Use short, stable fields (numbers, titles, subjects)
+- Avoid long text or descriptions
+- Include status when it helps scanning
+- Do not rely on optional fields unless you provide a good fallback
+
+Good record labels make browsing large datasets faster and far less frustrating.
 
 ## 9) When a template matches but shows nothing
 
-Sometimes the template technically matches, but none of its paths exist on that record.
+Sometimes a template matches a record, but no fields render.
 
-JTF will show a friendly hint instead of a blank viewer, and you still have access to the full record view.
+This usually means one of the following:
 
-Fix is usually one of:
+- You are in **Dataset mode** instead of **Records mode**
+- A field path is wrong (typo, casing, or different property name)
+- The template is designed for a **different record shape**
+  (for example, combined export vs plain export)
 
-- Wrong mode (Dataset vs Records)
-- Wrong path (typo or different casing)
-- Template is for a different record shape
+When this happens, JTF shows a friendly hint and still allows access to the raw record view.
+
+Nothing is broken. The template just does not line up with the data.
+
+---
 
 ## 10) Guardrails (important)
 
-Templates are declarative only.
-No scripting.
-No conditional logic.
-No data mutation.
-JTF reads data. It does not change data.
+Templates are **declarative only**.
+
+- No scripting
+- No conditional logic
+- No data mutation
+
+Templates describe **how data is displayed**, not how it behaves.
+
+JTF reads data.  
+It does not change data.
