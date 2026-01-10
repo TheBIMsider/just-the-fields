@@ -2215,18 +2215,6 @@ function renderTemplateField(record, field) {
     return renderKVHtml(label, html, { path: `$.$TEMPLATE.${path}` });
   }
 
-  if (format === 'kvlist') {
-    const html = renderKvListValue(value, field);
-    if (!html) return '';
-    return renderKVHtml(label, html, { path: `$.$TEMPLATE.${path}` });
-  }
-
-  if (format === 'kvlist') {
-    const html = renderKvListValue(value, field);
-    if (!html) return '';
-    return renderKVHtml(label, html, { path: `$.$TEMPLATE.${path}` });
-  }
-
   if (format === 'json') {
     const isHeavy = value && typeof value === 'object';
     return renderKV(label, value, {
@@ -2235,12 +2223,6 @@ function renderTemplateField(record, field) {
       link: false,
       rich: false,
     });
-  }
-
-  if (format === 'kvlist') {
-    const html = renderKvListValue(value, field);
-    if (!html) return '';
-    return renderKVHtml(label, html, { path: `$.$TEMPLATE.${path}` });
   }
 
   // Default: text
