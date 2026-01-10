@@ -611,6 +611,64 @@ async function addFiles(files) {
   renderGlobalSearch();
 }
 
+function addWorkflowActionsLite(record) {
+  if (!record || typeof record !== 'object') return;
+
+  const items = record?.payloads?.workflowactions?.items;
+  if (!Array.isArray(items) || items.length === 0) return;
+
+  const liteItems = items.map((a) => {
+    const actionName = a?.actionType?.name ?? '';
+    const purposeName = a?.purpose?.name ?? '';
+    const title =
+      actionName && purposeName
+        ? `${actionName} - ${purposeName}`
+        : actionName || purposeName || '';
+
+    const from = a?.from?.contact ?? null;
+
+    const to = Array.isArray(a?.to)
+      ? a.to.map((x) => x?.contact ?? x).filter(Boolean)
+      : [];
+
+    const attachments = Array.isArray(a?.files)
+      ? a.files.map((f) => {
+          if (!f || typeof f !== 'object') return f;
+
+          // Ensure chips can show a filename
+          const fileName =
+            f.fileName ??
+            f.filename ??
+            f.originalName ??
+            f.originalFilename ??
+            f.name ??
+            f.Name ??
+            null;
+
+          return fileName ? { ...f, fileName } : f;
+        })
+      : [];
+
+    return {
+      title,
+      date: a?.actionDate ?? null,
+      from,
+      to,
+      attachments,
+      remarks: a?.remarks ?? null,
+      response: a?.response ?? null,
+      isInProgress: a?.isInProgress ?? null,
+      reviewDueDate: a?.reviewDueDate ?? null,
+
+      // keep the raw id if someone needs it
+      id: a?.id ?? null,
+    };
+  });
+
+  record.payloads = record.payloads || {};
+  record.payloads.workflowactionsLite = { items: liteItems };
+}
+
 /**
  * Basic filter for JSON-ish files.
  * Accepts:
@@ -642,7 +700,10 @@ async function readAndParse(lf) {
     lf.json = JSON.parse(lf.text);
     lf.error = null;
 
-    // Detect type (Issue/RFI/Submittal/Generic) based on the JSON we parsed.
+    // Add derived fields (non-breaking, additive)
+    addWorkflowActionsLite(lf.json);
+
+    // Detect type...
     lf.recordType = detectRecordType(lf.json);
   } catch (err) {
     lf.json = null;
@@ -2134,6 +2195,41 @@ function renderTemplateField(record, field) {
   // Missing path renders empty (silent)
   if (value === undefined) return '';
 
+  // NEW: Template-driven array rendering (array cards) when a field defines sub-fields.
+  // This is how we can render workflowactionsLite as readable cards without raw JSON.
+  if (
+    Array.isArray(value) &&
+    Array.isArray(field.fields) &&
+    field.fields.length
+  ) {
+    const maxItems = Number.isFinite(field.maxItems)
+      ? Math.max(1, Math.floor(field.maxItems))
+      : value.length;
+
+    const items = value.slice(0, maxItems);
+
+    const cardsHtml = items
+      .map((item, i) => {
+        // Title comes from buildItemSummary(), which you already updated for workflow actions.
+        const title = buildItemSummary(item, i);
+
+        const bodyParts = field.fields
+          .map((sf) => {
+            if (!sf || typeof sf !== 'object') return '';
+            // Reuse the same renderer for each sub-field, but against the array item.
+            return renderTemplateField(item, sf);
+          })
+          .filter(Boolean);
+
+        // Default closed, like other arrays
+        return renderCollapsibleCard(title, false, bodyParts);
+      })
+      .join('');
+
+    if (!cardsHtml) return '';
+    return renderKVHtml(label, cardsHtml, { path: `$.$TEMPLATE.${path}` });
+  }
+
   // Normalize formatting behavior
   if (format === 'badge') {
     // Keep badges readable; null shows as a "null" badge like the generic renderer
@@ -2158,23 +2254,34 @@ function renderTemplateField(record, field) {
         if (typeof x === 'string' || typeof x === 'number') return String(x);
 
         if (typeof x === 'object') {
+          // Files
+          if (x.fileName) return x.fileName;
+
+          // Prefer explicit contact object when present
           if (x.contact?.fullName && x.contact?.email) {
             return `${x.contact.fullName} <${x.contact.email}>`;
           }
 
-          if (x.fileName) {
-            return x.fileName;
-          }
-
-          return (
+          // Generic name + email (covers Workflow 'to' objects)
+          const name =
             x.name ??
             x.Name ??
             x.fullName ??
             x.FullName ??
+            x.displayName ??
+            x.DisplayName ??
             x.contact?.fullName ??
-            x.contact?.email ??
-            null
-          );
+            x.contact?.name ??
+            null;
+
+          const email =
+            x.email ?? x.Email ?? x.mail ?? x.Mail ?? x.contact?.email ?? null;
+
+          if (name && email) return `${name} <${email}>`;
+          if (name) return String(name);
+          if (email) return `<${email}>`;
+
+          return null;
         }
 
         return null;
@@ -3548,16 +3655,86 @@ function buildItemSummary(obj, idx) {
     'reviewStatus',
   ]);
 
+  const wfAction = obj?.actionType?.name;
+  const wfPurpose = obj?.purpose?.name;
+  const wfTitle =
+    wfAction && wfPurpose
+      ? `${wfAction} - ${wfPurpose}`
+      : wfAction || wfPurpose || null;
+  const wfDate = obj?.actionDate;
+
   const bits = [];
 
   bits.push(`[${idx}]`);
 
-  if (id != null) bits.push(`Id ${String(id)}`);
-  if (num != null) bits.push(`#${String(num)}`);
+  // Workflow actions: show a human title and date, not the internal Id
+  if (wfDate && wfTitle) {
+    bits.shift(); // optional: remove [idx] for workflow actions only
 
-  if (title && typeof title === 'string' && title.trim()) {
-    const t = title.trim();
-    bits.push(t.length > 60 ? `${t.slice(0, 60)}…` : t);
+    const t = String(wfTitle).trim();
+    if (t) bits.push(t.length > 60 ? `${t.slice(0, 60)}…` : t);
+
+    const d = formatDateTime(wfDate);
+    if (d) bits.push(d);
+  } else {
+    // Event/audit objects (payloads.events.items): never show Id as the summary
+    const isEvent =
+      obj &&
+      typeof obj === 'object' &&
+      typeof obj.type === 'string' &&
+      (obj.performedOn || obj.performedAt) &&
+      (obj.performedBy || obj.actor || obj.user);
+
+    if (isEvent) {
+      // 1) Type
+      const t = String(obj.type).trim();
+      if (t) bits.push(t);
+
+      // 2) Who
+      const who =
+        obj.performedBy?.fullName ||
+        obj.performedBy?.name ||
+        obj.actor?.fullName ||
+        obj.actor?.name ||
+        obj.user?.fullName ||
+        obj.user?.name ||
+        obj.performedBy?.email ||
+        obj.actor?.email ||
+        obj.user?.email ||
+        null;
+      if (who) bits.push(String(who));
+
+      // 3) Best “detail” from data payload
+      const d = obj.data || {};
+      const detail =
+        d.workflowActionFileName ||
+        d.fileName ||
+        d.filename ||
+        d.itemDisplayName ||
+        d.subject ||
+        d.title ||
+        d.number ||
+        null;
+      if (detail) {
+        const s = String(detail).trim();
+        if (s) bits.push(s.length > 60 ? `${s.slice(0, 60)}…` : s);
+      }
+
+      // 4) Date (nice to have)
+      const when = formatDateTime(obj.performedOn || obj.performedAt);
+      if (when) bits.push(when);
+    } else {
+      // Normal objects
+      if (num != null) bits.push(`#${String(num)}`);
+
+      if (title && typeof title === 'string' && title.trim()) {
+        const t = title.trim();
+        bits.push(t.length > 60 ? `${t.slice(0, 60)}…` : t);
+      }
+
+      // Only show Id if we have nothing better
+      if (id != null && bits.length === 1) bits.push(`Id ${String(id)}`);
+    }
   }
 
   if (status && typeof status === 'string' && status.trim()) {

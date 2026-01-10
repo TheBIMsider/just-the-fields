@@ -1285,3 +1285,91 @@ mark.jtf-mark {
     width: min(520px, 70vw);
   }
 }
+
+/* === Workflow timeline / array item cards (CLEAN) === */
+
+/* Array list container */
+.array-list {
+  margin: 0;
+  padding: 0;
+  gap: 2px;
+}
+
+/* Remove the outer wrapper look (no floating container) */
+.array-item {
+  border: 0;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+}
+
+/* Card header + button density */
+.card.array-item-card .card-header {
+  padding: 4px;
+}
+
+.card.array-item-card .card-header-button {
+  padding: 4px 8px;
+}
+
+/* Card body density */
+.card.array-item-card .card-body {
+  padding: 4px 8px;
+}
+
+/* Rows inside expanded cards */
+.card.array-item-card .kv,
+.card.array-item-card .field {
+  padding: 2px 0;
+  gap: 6px;
+}
+
+/* Text density inside */
+.card.array-item-card .kv .v,
+.card.array-item-card .field-value {
+  line-height: 1.2;
+}
+
+/* Chips inside workflow cards */
+.card.array-item-card .badge {
+  padding: 1px 7px;
+  font-size: 11.5px;
+}
+
+/* Meta spacing (above the list) */
+.array-meta {
+  margin: 2px 0 4px;
+}
+.array-meta-row {
+  margin: 2px 0 4px;
+}
+.array-note {
+  margin: 0 0 4px;
+}
+
+/* Optional: tighten generic fields a bit */
+.field {
+  padding: 5px 0;
+}
+
+/* ================================
+   Fix “mystery whitespace” in arrays/cards
+   ================================ */
+
+/* Only disable pre-wrap when the value contains structured UI */
+.field-value:has(.array-list),
+.field-value:has(.kvlist),
+.field-value:has(.card),
+.field-value:has(.raw-json),
+.kv .v:has(.array-list),
+.kv .v:has(.kvlist),
+.kv .v:has(.card),
+.kv .v:has(.raw-json) {
+  white-space: normal;
+}
+
+/* Keep JSON/code blocks formatted */
+.field-value .raw-json,
+.kv .v .raw-json {
+  white-space: pre;
+}
