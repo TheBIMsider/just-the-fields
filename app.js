@@ -4559,7 +4559,7 @@ function templateMatchesRecord(tpl, record) {
   ) {
     const field = m.typeField.trim();
     const expected = String(m.typeValue).trim();
-    const actual = record[field];
+    const actual = getValueAtPath(record, field);
 
     if (actual == null) return false;
     if (String(actual).trim() !== expected) return false;

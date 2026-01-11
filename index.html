@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Just the Fields</title>
+    <meta
+      name="description"
+      content="Just the Fields: Your JSON Detective — See what matters."
+    />
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Prism themes (we toggle which one is active) -->
+    <link id="prismLight" rel="stylesheet" href="vendor/prism/prism.css" />
+    <link
+      id="prismDark"
+      rel="stylesheet"
+      href="vendor/prism/prism-tomorrow.css"
+      disabled
+    />
+  </head>
+
+  <body>
+    <noscript>
+      <div class="empty-state" style="margin: 14px">
+        This tool needs JavaScript to run. Please enable JavaScript (or
+        whitelist this page) and reload.
+      </div>
+    </noscript>
+
+    <header class="app-header">
+      <div class="header-inner">
+        <div class="brand">
+          <h1>Just the Fields</h1>
+          <p class="tagline">Your JSON Detective — See what matters.</p>
+        </div>
+
+        <!-- Theme toggle (app-level, not buried in viewer controls) -->
+        <button
+          id="themeToggle"
+          class="theme-btn"
+          type="button"
+          aria-pressed="false"
+          title="Switch light/dark theme"
+        >
+          <span class="theme-icon" aria-hidden="true">🌙</span>
+          <span class="theme-text">Dark mode</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="app">
+      <section class="left-panel" aria-label="Files">
+        <div class="panel-header files-header">
+          <div class="files-header-row files-header-top">
+            <h2>Templates</h2>
+
+            <div class="files-actions">
+              <button
+                id="downloadTemplateBtn"
+                class="btn"
+                type="button"
+                title="Download a starter template JSON you can edit and upload later"
+              >
+                Download
+              </button>
+
+              <input
+                id="templateInput"
+                class="file-input"
+                type="file"
+                accept=".json,.jsonc,application/json"
+                hidden
+                multiple
+              />
+
+              <button
+                id="uploadTemplateBtn"
+                class="btn"
+                type="button"
+                title="Upload one or more template files (.json or .jsonc)"
+              >
+                Upload
+              </button>
+            </div>
+          </div>
+
+          <!-- Row 2: Template selection -->
+          <div class="files-header-row files-header-bottom">
+            <div class="template-row">
+              <label
+                class="template-picker"
+                for="templateSelect"
+                title="Pick a template. Auto tries the best match per record (Records mode only)."
+              >
+                <span class="sr-only">Template</span>
+                <select id="templateSelect" disabled>
+                  <option value="">None</option>
+                </select>
+              </label>
+
+              <button
+                id="clearBtn"
+                class="btn"
+                type="button"
+                disabled
+                title="Clear the active template selection (does not remove files)"
+              >
+                Clear
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Global Search (search across ALL uploaded files, regardless of mode) -->
+        <section class="global-search" aria-label="Global search">
+          <button
+            id="globalSearchToggle"
+            class="global-search-toggle"
+            type="button"
+            aria-expanded="false"
+            title="Search across all uploaded JSON files"
+          >
+            <span class="global-search-title">Global search</span>
+            <span class="global-search-meta" id="globalSearchMeta">Closed</span>
+          </button>
+
+          <div id="globalSearchPanel" class="global-search-panel" hidden>
+            <label class="global-search-input">
+              <span class="sr-only">Global search</span>
+              <input
+                id="globalSearchInput"
+                type="search"
+                placeholder="Search across all uploaded files..."
+                autocomplete="off"
+                disabled
+              />
+            </label>
+
+            <div class="global-search-actions">
+              <button
+                id="globalSearchClearBtn"
+                class="mini-btn"
+                type="button"
+                disabled
+                title="Clear global search"
+              >
+                Clear
+              </button>
+            </div>
+
+            <div
+              id="globalSearchResults"
+              class="global-search-results"
+              aria-live="polite"
+            ></div>
+          </div>
+        </section>
+
+        <div
+          id="dropZone"
+          class="drop-zone"
+          role="button"
+          tabindex="0"
+          aria-label="Drag and drop JSON files here or click to select"
+          aria-describedby="dropZoneHelp"
+        >
+          <input
+            id="fileInput"
+            class="file-input"
+            type="file"
+            accept=".json,application/json"
+            multiple
+          />
+          <div class="drop-zone-inner">
+            <div class="files-subtitle">Files</div>
+            <div class="drop-title">Drag and drop JSON files</div>
+            <div class="drop-subtitle">or click to select</div>
+            <div class="drop-hint" id="dropZoneHelp">
+              Viewer-only. Nothing leaves your browser.
+            </div>
+          </div>
+        </div>
+
+        <div id="fileList" class="file-list" aria-live="polite">
+          <!-- Populated by app.js -->
+        </div>
+      </section>
+
+      <section class="right-panel" aria-label="Viewer">
+        <div class="viewer-toolbar">
+          <div class="toolbar-left">
+            <h2 id="viewerTitle" class="viewer-title">No file selected</h2>
+            <div id="viewerMeta" class="viewer-meta"></div>
+          </div>
+
+          <div class="toolbar-right">
+            <label
+              class="mode-picker"
+              for="modeSelect"
+              title="Auto: JTF picks the best view. Dataset: browse large arrays (templates do not apply). Records: view one record at a time (templates apply)."
+            >
+              <span class="mode-label">Mode</span>
+              <select id="modeSelect" disabled>
+                <option value="auto">Auto</option>
+                <option value="dataset">Dataset</option>
+                <option value="records">Records</option>
+              </select>
+            </label>
+
+            <label
+              class="record-picker"
+              for="recordSelect"
+              title="Choose which record you are viewing. Applies in Records mode only."
+            >
+              <span class="record-label">Record</span>
+              <select id="recordSelect" disabled>
+                <option value="0">1</option>
+              </select>
+            </label>
+
+            <div id="datasetBar" class="dataset-bar" hidden>
+              <div class="dataset-title">Dataset</div>
+
+              <label class="dataset-filter">
+                <span class="sr-only">Filter rows</span>
+                <input
+                  id="datasetFilter"
+                  type="search"
+                  placeholder="Filter rows..."
+                  autocomplete="off"
+                  disabled
+                  title="Filter dataset rows. This is the main way to explore large datasets beyond the first page."
+                />
+              </label>
+
+              <div class="dataset-jump">
+                <label
+                  for="datasetJump"
+                  class="dataset-jump-label"
+                  title="Jump directly to a specific row number in the dataset."
+                >
+                  Row
+                </label>
+
+                <input
+                  id="datasetJump"
+                  type="number"
+                  min="1"
+                  step="1"
+                  disabled
+                  title="Enter a row number to jump directly to that entry."
+                />
+
+                <button
+                  id="datasetGoBtn"
+                  class="mini-btn"
+                  type="button"
+                  disabled
+                  title="Jump to the entered row number."
+                >
+                  Go
+                </button>
+
+                <button
+                  id="datasetResetBtn"
+                  class="mini-btn"
+                  type="button"
+                  disabled
+                  title="Clear the jump and return to the first rows."
+                >
+                  Reset
+                </button>
+              </div>
+            </div>
+
+            <label
+              class="search-wrap search-group record-search"
+              id="recordSearchGroup"
+              for="searchInput"
+              title="Search within the current record. In Dataset mode, use the filter above."
+            >
+              <span class="search-tag">Record</span>
+
+              <input
+                id="searchInput"
+                type="search"
+                placeholder="Search fields, paths, values..."
+                autocomplete="off"
+                disabled
+              />
+            </label>
+
+            <label
+              class="toggle"
+              id="includeCollapsedLabel"
+              title="Also search inside collapsed sections. Useful for deep records, but may add noise."
+            >
+              <input id="includeCollapsedToggle" type="checkbox" />
+              <span>Include collapsed</span>
+            </label>
+
+            <label class="toggle" title="Show JSON paths in Generic view">
+              <input id="pathToggle" type="checkbox" disabled />
+              <span>Paths</span>
+            </label>
+
+            <label class="toggle">
+              <input id="rawToggle" type="checkbox" disabled />
+              <span>Raw JSON</span>
+            </label>
+          </div>
+        </div>
+
+        <div id="viewer" class="viewer">
+          <div class="empty-state">
+            Drop a JSON file on the left to start snooping. 🕵️
+            <div class="empty-state-sub">
+              Tip: Try Records mode for API-style JSON. Dataset mode is for big
+              arrays.
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <small>
+        Offline-friendly. Viewer-only. Works on GitHub Pages.
+        <span class="footer-links">
+          <a
+            href="https://github.com/TheBIMsider/just-the-fields"
+            target="_blank"
+            rel="noopener"
+            >GitHub</a
+          >
+          <span aria-hidden="true">•</span>
+          <a href="templates/index.html">Templates</a>
+          <span aria-hidden="true">•</span>
+          <a href="docs/templates.md">Templates guide</a>
+        </span>
+      </small>
+    </footer>
+
+    <script src="vendor/prism/prism.min.js" defer></script>
+    <script src="app.js" defer></script>
+  </body>
+</html>
