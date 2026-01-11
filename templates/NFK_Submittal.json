@@ -43,8 +43,11 @@
         { "path": "mostRecentWorkflowAction.reviewDueDate", "label": "Review due date", "format": "date" },
         { "path": "mostRecentWorkflowAction.closedBy.contact.fullName", "label": "Closed by", "format": "text" },
         { "path": "mostRecentWorkflowAction.actionDate", "label": "Action date", "format": "date" },
-		{ "path": "from.fullName", "label": "From", "format": "text" },
-		{ "path": "from.email", "label": "From email", "format": "text" },
+		{
+		  "path": "mostRecentWorkflowAction.from.contact",
+		  "label": "From",
+		  "format": "chips"
+		},
 		{ "path": "mostRecentWorkflowAction.from.contact", "label": "Action from", "format": "chips" },
 		{ "path": "mostRecentWorkflowAction.to", "label": "To", "format": "chips" },
 		{ "path": "mostRecentWorkflowAction.cc", "label": "CC", "format": "chips" },

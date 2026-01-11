@@ -1,15 +1,13 @@
 {
   "templateVersion": 1,
-  "templateName": "NFK Change Management — Proposal Request (PR)",
-  "description": "Simple template for NFK Change Management items where changeItemType.name = PR.",
+  "templateName": "NFK Change Management — Simple (All types)",
+  "description": "Simple template for NFK Change Management items (SI, PR, CP, CCD). Matches any record with changeItemType.",
   "match": {
-    "typeField": "changeItemType.name",
-    "typeValue": "PR",
     "requiredKeys": ["changeItemType", "number", "status", "mostRecentWorkflowAction"]
   },
   "recordLabel": {
     "fields": ["number", "subject", "status.name"],
-    "fallback": "PR {n}"
+    "fallback": "CM {n}"
   },
   "layout": [
     {
@@ -28,6 +26,7 @@
       "fields": [
         { "path": "receivedVia.name", "label": "Received via", "format": "badge" },
         { "path": "description", "label": "Description", "format": "multiline" },
+
         { "path": "disciplines", "label": "Disciplines", "format": "chips" },
         { "path": "reasons", "label": "Reasons", "format": "chips" },
         { "path": "keywords", "label": "Keywords", "format": "chips" },
@@ -37,7 +36,15 @@
           "path": "suggestedRecipientsForSubmitProposal",
           "label": "Suggested recipients to submit proposal",
           "format": "chips"
-        }
+        },
+        {
+          "path": "suggestedRecipientsForSendSignedProposal",
+          "label": "Suggested recipients to send signed proposal",
+          "format": "chips"
+        },
+
+        { "path": "proposedTotalAmount", "label": "Proposed total amount", "format": "text" },
+        { "path": "proposedTotalDays", "label": "Proposed duration (days)", "format": "text" }
       ]
     },
     {
@@ -53,6 +60,12 @@
         { "path": "mostRecentWorkflowAction.from.contact", "label": "From", "format": "chips" },
         { "path": "mostRecentWorkflowAction.to", "label": "To", "format": "chips" },
         { "path": "mostRecentWorkflowAction.cc", "label": "CC", "format": "chips" },
+
+        {
+          "path": "mostRecentWorkflowAction.closedBy.contact.fullName",
+          "label": "Closed by",
+          "format": "text"
+        },
 
         { "path": "hasInProgressWorkflowActions", "label": "Has in-progress workflow", "format": "badge" },
         { "path": "pendingReviewers", "label": "Pending reviewers", "format": "chips" },
