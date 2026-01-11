@@ -1,0 +1,71 @@
+{
+  "templateVersion": 1,
+  "templateName": "NFK Change Management — Construction Change Directive (CCD)",
+  "description": "Simple template for NFK Change Management items where changeItemType.name = CCD.",
+  "match": {
+    "typeField": "changeItemType.name",
+    "typeValue": "CCD",
+    "requiredKeys": ["changeItemType", "number", "status", "mostRecentWorkflowAction"]
+  },
+  "recordLabel": {
+    "fields": ["number", "subject", "status.name"],
+    "fallback": "CCD {n}"
+  },
+  "layout": [
+    {
+      "section": "Overview",
+      "fields": [
+        { "path": "number", "label": "Number", "format": "text" },
+        { "path": "subject", "label": "Subject", "format": "text" },
+        { "path": "status.name", "label": "Status", "format": "badge" },
+        { "path": "dueDate", "label": "Due date", "format": "date" },
+        { "path": "isOverdue", "label": "Overdue", "format": "badge" },
+        { "path": "changeItemType.name", "label": "Type", "format": "badge" }
+      ]
+    },
+    {
+      "section": "Details",
+      "fields": [
+        { "path": "receivedVia.name", "label": "Received via", "format": "badge" },
+        { "path": "description", "label": "Description", "format": "multiline" },
+        { "path": "disciplines", "label": "Disciplines", "format": "chips" },
+        { "path": "reasons", "label": "Reasons", "format": "chips" },
+        { "path": "keywords", "label": "Keywords", "format": "chips" }
+      ]
+    },
+    {
+      "section": "Latest Action & Workflow",
+      "fields": [
+        { "path": "mostRecentWorkflowAction.actionType.name", "label": "Action", "format": "badge" },
+        { "path": "mostRecentWorkflowAction.purpose.name", "label": "Purpose", "format": "text" },
+        { "path": "mostRecentWorkflowAction.action.name", "label": "Action detail", "format": "badge" },
+        { "path": "mostRecentWorkflowAction.remarks", "label": "Remarks", "format": "multiline" },
+        { "path": "mostRecentWorkflowAction.reviewDueDate", "label": "Review due date", "format": "date" },
+        { "path": "mostRecentWorkflowAction.actionDate", "label": "Action date", "format": "date" },
+
+        { "path": "mostRecentWorkflowAction.from.contact", "label": "From", "format": "chips" },
+        { "path": "mostRecentWorkflowAction.to", "label": "To", "format": "chips" },
+        { "path": "mostRecentWorkflowAction.cc", "label": "CC", "format": "chips" },
+
+        { "path": "hasInProgressWorkflowActions", "label": "Has in-progress workflow", "format": "badge" },
+        { "path": "pendingReviewers", "label": "Pending reviewers", "format": "chips" },
+        { "path": "reviewers", "label": "Reviewers", "format": "chips" }
+      ]
+    },
+    {
+      "section": "Dates & version",
+      "fields": [
+        { "path": "receivedDate", "label": "Received date", "format": "date" },
+        { "path": "reopenedDate", "label": "Reopened date", "format": "date" },
+        { "path": "version", "label": "Version", "format": "text" }
+      ]
+    },
+    {
+      "section": "Files",
+      "fields": [
+        { "path": "fileCount", "label": "File count", "format": "text" },
+        { "path": "mostRecentWorkflowAction.files", "label": "Files", "format": "chips" }
+      ]
+    }
+  ]
+}
