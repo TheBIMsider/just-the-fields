@@ -137,13 +137,16 @@ They are:
 - Easy to edit in any text editor
 
 Templates control layout only.  
-When multiple templates are available, JTF can automatically pick the best match per record in Records mode.
+When multiple templates are available, JTF can automatically pick the best match per record in Records mode.  
+For Combined exports, Auto works best with general templates (for example “Change Items – All types”).
+Different export shapes (Plain vs Combined) require different templates.
 
 Templates support several display patterns, including:
 
 - **Badges** for status-like values
 - **Chips** for people, teams, and simple lists
 - **Array cards** for readable rendering of comments, attachments, and history
+- **History cards** for versions, workflow actions, and file activity
 
 They cannot change app behavior or data.  
 Want the how-to? Start here: [Templates in JTF](docs/templates.md)
@@ -158,7 +161,7 @@ Want the how-to? Start here: [Templates in JTF](docs/templates.md)
 - Upload the template back into JTF
 - Read the full guide: [Templates in JTF](docs/templates.md)
 
-Note: some data types (for example RFIs) can be exported in different shapes, which may require different templates.
+Note: Newforma Konekt data (Issues, RFIs, Submittals, Change Items, Files) can be exported in different shapes (Plain vs Combined), which always require different templates.
 
 ---
 
