@@ -1,0 +1,105 @@
+{
+  "templateVersion": 1,
+  "templateName": "NFK Files (Combined)",
+  "description": "Combined Template for Newforma Konekt Files Management items.",
+  "match": {
+    "requiredKeys": ["details"]
+  },
+  "recordLabel": {
+    "fields": [
+      { "path": "details.name", "maxLen": 80 },
+      { "path": "displayPath", "prefix": " (", "suffix": ")", "maxLen": 60 }
+    ],
+    "fallback": "File {n}"
+  },
+  "layout": [
+    {
+      "section": "Overview",
+      "fields": [
+        { "path": "details.name", "label": "File name", "format": "text" },
+        { "path": "details.folder.name", "label": "Folder", "format": "badge" },
+        { "path": "details.versionNumber", "label": "Current version", "format": "badge" },
+        { "path": "details.modifiedDate", "label": "Last modified", "format": "date" }
+      ]
+    },
+	{
+	  "section": "Details",
+	  "fields": [
+		{ "path": "details.name", "label": "File name", "format": "text" },
+		{ "path": "details.folder.name", "label": "Folder", "format": "badge" },
+		{ "path": "details.versionNumber", "label": "Current version", "format": "badge" },
+		{ "path": "details.size", "label": "Size (bytes)", "format": "text" },
+
+		{ "path": "details.disciplines", "label": "Disciplines", "format": "chips" },
+		{ "path": "details.fileSets", "label": "File Sets", "format": "chips" },
+
+		{ "path": "details.createdDate", "label": "Created", "format": "date" },
+		{ "path": "details.createdByUser.email", "label": "Created by", "format": "text" },
+		{ "path": "details.modifiedDate", "label": "Last modified", "format": "date" },
+		{ "path": "details.modifiedByUser.email", "label": "Last modified by", "format": "text" }
+	  ]
+	},
+	{
+	  "section": "Versions",
+	  "fields": [
+		{
+		  "path": "versions.versionFiles",
+		  "label": "Versions",
+		  "fields": [
+			{ "path": "versionNumber", "label": "Version #", "format": "badge" },
+			{ "path": "modifiedDate", "label": "Date done", "format": "date" },
+			{ "path": "modifiedByUser.email", "label": "By who", "format": "text" },
+
+			{ "path": "disciplines", "label": "Disciplines", "format": "chips" },
+			{ "path": "fileSets", "label": "File Sets", "format": "chips" }
+		  ]
+		},
+		{ "path": "versions.skipToken", "label": "Versions skip token", "format": "text" }
+	  ]
+	},
+	{
+	  "section": "History",
+	  "fields": [
+		{
+		  "path": "history.items",
+		  "label": "History",
+		  "fields": [
+			{ "path": "eventType", "label": "Event", "format": "badge" },
+			{ "path": "performedOn", "label": "Date", "format": "date" },
+			{ "path": "performedBy.email", "label": "By who", "format": "text" },
+			{ "path": "name", "label": "Name", "format": "text" },
+
+			{
+			  "path": "properties",
+			  "label": "Properties",
+			  "format": "kvlist",
+			  "itemKeyPath": "property",
+			  "valuePaths": ["value"],
+			  "maxItems": 20
+			},
+
+			{
+			  "path": "changes",
+			  "label": "Changes (was)",
+			  "format": "kvlist",
+			  "itemKeyPath": "property",
+			  "valuePaths": ["previousValue"],
+			  "maxItems": 20
+			},
+			{
+			  "path": "changes",
+			  "label": "Changes (now)",
+			  "format": "kvlist",
+			  "itemKeyPath": "property",
+			  "valuePaths": ["newValue"],
+			  "maxItems": 20
+			}
+		  ]
+		},
+		{ "path": "history.skipToken", "label": "History skip token", "format": "text" }
+	  ]
+	}
+  ]
+}
+
+

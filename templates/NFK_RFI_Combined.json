@@ -1,0 +1,205 @@
+{
+  "templateVersion": 1,
+  "templateName": "NFK RFI (Combined)",
+  "description": "Combined template for Newforma Konekt RFIs.", 
+  "match": {
+    "typeField": null,
+    "typeValue": null,
+    "requiredKeys": ["payloads", "listItem"]
+  },
+	"recordLabel": {
+	  "fields": [
+		{ "path": "listItem.number", "prefix": "", "maxLen": 30 },
+		{ "path": "listItem.subject", "prefix": " • ", "maxLen": 80 }
+	  ],
+	  "fallback": "Record {n}"
+	},
+  "layout": [
+    {
+      "section": "Overview",
+      "fields": [
+	  { "path": "listItem.number", "label": "Number", "format": "badge" },
+	  { "path": "listItem.subject", "label": "Subject", "format": "text" },
+	  { "path": "listItem.status.name", "label": "Status", "format": "badge" },
+	  { "path": "listItem.isUrgent", "label": "Urgent", "format": "badge" },
+	  { "path": "listItem.isOverdue", "label": "Overdue", "format": "badge" },
+	  { "path": "listItem.dueDate", "label": "Due", "format": "date" },
+	  { "path": "listItem.receivedDate", "label": "Received", "format": "date" },
+	  { "path": "listItem.disciplines", "label": "Disciplines", "format": "chips" },
+	  { "path": "project.name", "label": "Project", "format": "text" }
+      ]
+    },
+	{
+	  "section": "Details",
+	  "fields": [
+		{ "path": "payloads.rfi.receivedVia.name", "label": "Received via", "format": "badge" },
+		{ "path": "payloads.rfi.question", "label": "Question", "format": "multiline" },
+		{ "path": "payloads.rfi.suggestion", "label": "Suggestion", "format": "multiline" },
+		{ "path": "listItem.disciplines", "label": "Disciplines", "format": "chips" },
+		{ "path": "payloads.rfi.specSection.name", "label": "Spec section", "format": "text" },
+		{ "path": "payloads.rfi.reasons", "label": "Reasons", "format": "chips" },
+		{ "path": "payloads.rfi.type.name", "label": "Type", "format": "badge" },
+		{ "path": "payloads.rfi.impactSchedule.name", "label": "Schedule impact", "format": "badge" },
+		{ "path": "payloads.rfi.impactCost.name", "label": "Cost impact", "format": "badge" },
+		{ "path": "payloads.rfi.senderNumber", "label": "Sender #", "format": "text" },
+		{ "path": "payloads.rfi.keywords", "label": "Keywords", "format": "chips" }
+	  ]
+	},
+	{
+	  "section": "Latest Action & Workflow",
+	  "fields": [
+		{ "path": "payloads.rfi.from.fullName", "label": "From", "format": "text" },
+		{ "path": "payloads.rfi.from.email", "label": "From email", "format": "text" },
+		{
+		  "path": "payloads.rfi.mostRecentWorkflowAction.to",
+		  "label": "To",
+		  "format": "chips"
+		},
+		{
+		  "path": "payloads.rfi.workflowActionCount",
+		  "label": "Workflow actions",
+		  "format": "text"
+		},
+		{
+		  "path": "payloads.rfi.hasInProgressWorkflowActions",
+		  "label": "Has in-progress workflow",
+		  "format": "badge"
+		},
+		{
+		  "path": "payloads.rfi.pendingReviewers",
+		  "label": "Pending reviewers",
+		  "format": "chips"
+		},
+		{
+		  "path": "payloads.rfi.reviewers",
+		  "label": "Reviewers",
+		  "format": "chips"
+		}
+	  ]
+	},
+	{
+	  "section": "Workflow actions (all)",
+	  "fields": [
+		{ "path": "payloads.rfi.workflowActionCount", "label": "Action count", "format": "text" },
+		{ "path": "payloads.rfi.hasInProgressWorkflowActions", "label": "Has in-progress actions", "format": "badge" },
+		{
+		  "path": "payloads.workflowactionsLite.items",
+		  "label": "Workflow actions",
+		  "fields": [
+			{ "path": "title", "label": "Action", "format": "text" },
+			{ "path": "date", "label": "Date", "format": "date" },
+			{ "path": "from.fullName", "label": "From", "format": "text" },
+			{ "path": "from.email", "label": "From email", "format": "text" },
+			{ "path": "to", "label": "To", "format": "chips" },
+			{ "path": "remarks", "label": "Remarks", "format": "multiline" },
+			{ "path": "response", "label": "Response", "format": "multiline" },
+			{ "path": "attachments", "label": "Attachments", "format": "chips" }
+		  ]
+		}
+	  ]
+	},
+	{
+	  "section": "Files",
+	  "fields": [
+		{ "path": "payloads.rfi.fileCount", "label": "File count", "format": "text" },
+		{ "path": "payloads.files.items", "label": "File names", "format": "chips" }
+	  ]
+	},
+    {
+      "section": "History (events)",
+      "fields": [
+        {
+          "path": "payloads.events.items",
+          "label": "Events",
+          "fields": [
+            {
+              "path": "type",
+              "label": "Type",
+              "format": "badge"
+            },
+            {
+              "path": "performedOn",
+              "label": "Date",
+              "format": "date"
+            },
+            {
+              "path": "performedBy.fullName",
+              "label": "By",
+              "format": "text"
+            },
+            {
+              "path": "performedBy.email",
+              "label": "By email",
+              "format": "text"
+            },
+            {
+              "path": "data.itemType",
+              "label": "Related type",
+              "format": "badge"
+            },
+            {
+              "path": "data.itemDisplayName",
+              "label": "Related item",
+              "format": "text"
+            },
+            {
+              "path": "data.number",
+              "label": "RFI #",
+              "format": "text"
+            },
+            {
+              "path": "data.subject",
+              "label": "Subject",
+              "format": "text"
+            },
+            {
+              "path": "data.workflowActionFileName",
+              "label": "File",
+              "format": "text"
+            },
+            {
+              "path": "data.reviewDueDate",
+              "label": "Review due",
+              "format": "date"
+            },
+            {
+              "path": "data.from.fullName",
+              "label": "From",
+              "format": "text"
+            },
+            {
+              "path": "data.from.email",
+              "label": "From email",
+              "format": "text"
+            },
+            {
+              "path": "data.to",
+              "label": "To",
+              "format": "chips"
+            },
+            {
+              "path": "data.dueDate.previousValue",
+              "label": "Due (was)",
+              "format": "date"
+            },
+            {
+              "path": "data.dueDate.currentValue",
+              "label": "Due (now)",
+              "format": "date"
+            },
+            {
+              "path": "data.isUrgent.previousValue",
+              "label": "Urgent (was)",
+              "format": "badge"
+            },
+            {
+              "path": "data.isUrgent.currentValue",
+              "label": "Urgent (now)",
+              "format": "badge"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

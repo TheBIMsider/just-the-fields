@@ -1,6 +1,7 @@
 {
   "templateVersion": 1,
-  "templateName": "NFK - Issues",
+  "templateName": "NFK Issues",
+  "description": "Template for Newforma Konekt Issues.",
   "match": {
     "requiredKeys": ["Number", "Title"]
   },

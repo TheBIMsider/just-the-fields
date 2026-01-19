@@ -1,6 +1,6 @@
 {
   "templateVersion": 1,
-  "templateName": "NFK — Request for Information (RFI)",
+  "templateName": "NFK RFI",
   "description": "Template for Newforma Konekt RFIs.",
   "match": {
     "typeField": null,
