@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="dark">
   <head>
     <meta charset="utf-8" />
@@ -288,7 +288,8 @@
             <h2>Templates</h2>
             <p>
               Templates are plain JSON files. They define layout only: what
-              fields appear and in what order.
+              fields appear and in what order. Different export shapes (Plain vs
+              Combined) require different templates.
             </p>
           </header>
 
@@ -321,6 +322,10 @@
                     Optional match rules help templates apply only to the right
                     records.
                   </li>
+                  <li>
+                    Plain and Combined exports have different shapes and usually
+                    need separate templates.
+                  </li>
                 </ul>
                 <div class="cta-row">
                   <a
@@ -344,7 +349,7 @@
               <div class="card-body">
                 <ul class="bullets">
                   <li>
-                    Templates must match record keys (optional) and hit real
+                    Templates must match top-level record keys and hit real
                     paths.
                   </li>
                   <li>
@@ -353,6 +358,10 @@
                   <li>
                     If nothing fits, JTF falls back safely to the full record
                     view.
+                  </li>
+                  <li>
+                    For Combined exports, Auto works best with general templates
+                    (for example “Change Items – All types”).
                   </li>
                 </ul>
               </div>
@@ -555,8 +564,8 @@
                 </ul>
 
                 <p class="note">
-                  Tip: some exports have different shapes, so they require
-                  different templates.
+                  Tip: Plain and Combined exports use different data shapes and
+                  always require separate templates.
                 </p>
               </div>
             </details>
