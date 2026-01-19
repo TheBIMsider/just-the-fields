@@ -112,18 +112,29 @@ Example:
   ]
 }
 ```
+### Files templates (special case)
+
+Files exports include version history and activity events.
+
+To keep these readable, Files templates commonly use:
+- `json` with `fields` to render history as cards
+- `kvlist` to flatten property/value arrays (for example version numbers)
+
+This avoids deeply nested dropdowns while keeping all data visible.
 
 ## 7) Match rules (what they do, and what they do not)
 
 Match rules decide whether a template applies to a given record.
 
 ### Auto template selection
+
 If the template dropdown is set to **Auto (best match)**, JTF picks the best matching template for each record while you browse in **Records** mode.
 
 Important notes:
 
 - Templates apply in **Records** mode only (Dataset mode never uses templates).
-- JTF match rules check **top-level keys only**.
+- JTF match rules check **top-level keys and values only**.
+  Nested paths (for example `listItem.type.name`) are not supported for matching.
 - If nothing matches, JTF falls back to its built-in views.
 
 Match rules are intentionally simple.
@@ -134,28 +145,70 @@ Match does **not** transform data.
 
 Keep match rules small and predictable.
 
+---
+
 ### Plain Export vs Combined Export
 
 Some tools export the same type of data in different shapes.
 
 Example: RFIs
 
-- **Plain export**  
-  Top-level keys like:
-  - `number`
-  - `subject`
-  - `question`
+**Plain export**  
+Top-level keys like:
 
-- **Combined export**  
-  Wrapped records with top-level keys like:
-  - `rfiId`
-  - `listItem`
-  - `payloads`
-  - `project`
+- `number`
+- `subject`
+- `question`
+
+**Combined export**  
+Wrapped records with top-level keys like:
+
+- `rfiId`
+- `listItem`
+- `payloads`
+- `project`
 
 These shapes require **different templates**.
 
 If a template technically matches but shows little or no data, the most common cause is using the **right template with the wrong export shape**.
+
+For Newforma Konekt data (Issues, RFIs, Submittals, Change Items, Files), Plain and Combined exports always require **separate templates**.
+
+---
+
+### Good match rule examples
+
+**Combined Change Items**
+
+```json
+"match": {
+  "requiredKeys": ["payloads", "listItem", "changeItemId"]
+}
+```
+
+This works because `changeItemId` exists only on Change Item exports and is a top-level key.
+
+**Combined RFIs / Submittals / Issues**
+
+```json
+"match": {
+  "requiredKeys": ["payloads", "listItem"]
+}
+```
+
+Use additional top-level keys (such as `rfiId`, `issueId`, `submittalId`) when you need to distinguish between record types.
+
+---
+
+### Common mistakes
+
+- Using nested paths in match rules (for example `listItem.type.name`)
+- Reusing a Plain template for a Combined export
+- Over-specifying match rules when a single unique key is enough
+
+When in doubt:
+- Match on **one or two unique top-level keys**
+- Let layout paths handle the rest
 
 ## 8) Record labels (the Record dropdown)
 
@@ -216,6 +269,42 @@ Example output:
 ```
 #RFI-231 Window detail (Open)
 ```
+
+### Record labels in Combined exports
+
+Combined exports usually wrap summary fields under a `listItem` object.
+
+Record labels work the same way, but the paths must point to the combined shape:
+
+```json
+"recordLabel": {
+  "fields": [
+    { "path": "listItem.number", "maxLen": 20 },
+    { "path": "listItem.subject", "prefix": " • ", "maxLen": 80 },
+    {
+      "path": "listItem.status.name",
+      "prefix": " (",
+      "suffix": ")",
+      "maxLen": 20
+    }
+  ],
+  "fallback": "Item {n}"
+}
+```
+
+Example output:
+
+```
+SI-03 • Windows (Open)
+```
+
+This pattern is commonly used for:
+- Combined RFIs
+- Combined Submittals
+- Combined Change Items
+- Combined Issues
+
+If a combined record is not showing a label, double-check that the paths use `listItem.*` (or the correct combined wrapper) rather than plain export paths.
 
 ### Prefixes, suffixes, and limits
 
