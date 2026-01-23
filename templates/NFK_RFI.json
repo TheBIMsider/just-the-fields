@@ -7,10 +7,14 @@
     "typeValue": null,
     "requiredKeys": ["number", "question", "status", "mostRecentWorkflowAction"]
   },
-  "recordLabel": {
-    "fields": ["number", "subject", "status.name"],
-    "fallback": "RFI {n}"
-  },
+	"recordLabel": {
+	  "fields": [
+		{ "path": "number", "prefix": "RFI ", "maxLen": 16 },
+		{ "path": "subject", "prefix": " - ", "maxLen": 60 },
+		{ "path": "status.name", "prefix": " (", "suffix": ")", "maxLen": 22 }
+	  ],
+	  "fallback": "RFI {n}"
+	},
   "layout": [
     {
       "section": "Overview",

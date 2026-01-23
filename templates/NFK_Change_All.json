@@ -5,10 +5,14 @@
   "match": {
     "requiredKeys": ["changeItemType", "number", "status", "mostRecentWorkflowAction"]
   },
-  "recordLabel": {
-    "fields": ["number", "subject", "status.name"],
-    "fallback": "CM {n}"
-  },
+	"recordLabel": {
+	  "fields": [
+		{ "path": "number", "prefix": "", "maxLen": 16 },
+		{ "path": "subject", "prefix": " - ", "maxLen": 60 },
+		{ "path": "status.name", "prefix": " (", "suffix": ")", "maxLen": 22 }
+	  ],
+	  "fallback": "CM {n}"
+	},
   "layout": [
     {
       "section": "Overview",
