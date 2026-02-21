@@ -269,7 +269,7 @@ function initTheme() {
 function applyTheme(theme) {
   document.documentElement.setAttribute(
     'data-theme',
-    theme === 'dark' ? 'dark' : 'light'
+    theme === 'dark' ? 'dark' : 'light',
   );
 
   // Prism theme links
@@ -476,7 +476,7 @@ function init() {
       }
 
       state.datasetUiByFileId[lf.id].lastJumpInput = String(
-        els.datasetJump.value || ''
+        els.datasetJump.value || '',
       );
     });
   }
@@ -836,11 +836,11 @@ function renderFileList() {
 
       return `
         <div class="file-item ${isActive ? 'active' : ''}" data-file-id="${
-        f.id
-      }" role="button" tabindex="0">
+          f.id
+        }" role="button" tabindex="0">
           <div class="file-name" title="${escapeHtml(f.name)}">${escapeHtml(
-        f.name
-      )}</div>
+            f.name,
+          )}</div>
           <div class="file-meta">
             <span class="file-badge">Size: ${size}</span>
             <span class="file-badge">Modified: ${escapeHtml(modified)}</span>
@@ -957,7 +957,7 @@ function renderGlobalSearch() {
              data-row-index="${r.rowIndex ?? ''}">
           <div class="global-hit-top">
             <div class="global-hit-file" title="${escapeHtml(
-              r.fileName
+              r.fileName,
             )}">${escapeHtml(r.fileName)}</div>
             <div class="global-hit-kind">${kind}</div>
           </div>
@@ -1203,7 +1203,7 @@ function renderViewer() {
 
     els.viewer.innerHTML = `
   <pre class="raw-json language-json"><code class="language-json">${escapeHtml(
-    raw
+    raw,
   )}</code></pre>
 `;
 
@@ -1222,8 +1222,8 @@ function renderViewer() {
     (userMode === 'dataset'
       ? true
       : userMode === 'records'
-      ? false
-      : autoDataset);
+        ? false
+        : autoDataset);
 
   // Records search is not applicable in Dataset Mode (dataset has its own filter)
   if (els.searchInput) {
@@ -1301,7 +1301,7 @@ function renderViewer() {
               lf.recordType,
               rec,
               i,
-              tplForThisRecord
+              tplForThisRecord,
             );
             return `<option value="${i}">${escapeHtml(label)}</option>`;
           })
@@ -1319,11 +1319,11 @@ function renderViewer() {
           lf.recordType,
           firstRecord,
           0,
-          tplForThisRecord
+          tplForThisRecord,
         );
 
         els.recordSelect.innerHTML = `<option value="0">${escapeHtml(
-          label
+          label,
         )}</option>`;
       }
     }
@@ -1418,7 +1418,7 @@ function renderViewer() {
     els.viewer.innerHTML = renderRecordView(
       lf.recordType,
       activeRecord,
-      tplForThisRecord
+      tplForThisRecord,
     );
   }
 
@@ -1629,8 +1629,8 @@ function buildDatasetSummary(arr) {
     nestedRatio <= 0.15
       ? 'Mostly flat (table-like)'
       : nestedRatio <= 0.35
-      ? 'Some nested fields'
-      : 'Nested-heavy rows';
+        ? 'Some nested fields'
+        : 'Nested-heavy rows';
 
   return {
     total,
@@ -1661,11 +1661,11 @@ function renderDatasetSummaryCard(arr) {
         ${renderKV('Rows', s.total)}
         ${renderKV(
           'Sampled rows',
-          `${s.sampleSize} (object rows: ${s.objectRows})`
+          `${s.sampleSize} (object rows: ${s.objectRows})`,
         )}
         ${renderKV(
           'Shape',
-          `${s.shapeHint} • Nested fields (sample): ${nestedPct}`
+          `${s.shapeHint} • Nested fields (sample): ${nestedPct}`,
         )}
         ${renderKV('Common keys (sample)', keyHint)}
       </div>
@@ -1693,7 +1693,7 @@ function renderDatasetView(arr, lfId) {
 
     const jumpNote = outOfRange
       ? `<div class="array-note">Row ${escapeHtml(
-          requestedLabel
+          requestedLabel,
         )} is out of range (valid: 1–${arr.length}). Showing Row ${
           safe + 1
         } instead.</div>`
@@ -2278,7 +2278,7 @@ function renderTemplateField(record, field) {
     // and we still escape the text inside it.
     return renderKVHtml(
       label,
-      `<span class="badge">${escapeHtml(badgeText)}</span>`
+      `<span class="badge">${escapeHtml(badgeText)}</span>`,
     );
   }
 
@@ -2352,7 +2352,13 @@ function renderTemplateField(record, field) {
 
   if (format === 'multiline') {
     if (typeof value !== 'string') return '';
-    return renderKV(label, value, { rich: true });
+    // Decode HTML entities (e.g. &nbsp; &#8221; &quot;) that some
+    // exporters bake into stored text. Uses a textarea as a safe
+    // browser-native decoder -- no innerHTML is written to the page.
+    const txt = document.createElement('textarea');
+    txt.innerHTML = value;
+    const decoded = txt.value;
+    return renderKV(label, decoded, { rich: true });
   }
 
   if (format === 'kvlist') {
@@ -2457,11 +2463,11 @@ function renderTemplateRecordView(template, record) {
           ${renderKV('Template', tplName)}
           ${renderKV(
             'What happened',
-            'This record does not contain any of the fields defined in the template.'
+            'This record does not contain any of the fields defined in the template.',
           )}
           ${renderKV(
             'What to do',
-            'Check your template paths, or adjust match.requiredKeys so the template only applies to the right records.'
+            'Check your template paths, or adjust match.requiredKeys so the template only applies to the right records.',
           )}
           ${renderKV('Fallback', 'Showing the full record below (collapsed).')}
           ${renderKV('Record', record, { collapsible: true })}
@@ -2581,11 +2587,11 @@ function renderIssueTemplate(issue) {
       renderKV('Group', pickFirst(issue, ['Group', 'group'])),
       renderKV(
         'Creation Source',
-        pickFirst(issue, ['CreationSource', 'creationSource'])
+        pickFirst(issue, ['CreationSource', 'creationSource']),
       ),
       renderKV(
         'Restricted',
-        pickFirst(issue, ['IsRestricted', 'isRestricted'])
+        pickFirst(issue, ['IsRestricted', 'isRestricted']),
       ),
       renderKV('Viewer URL', pickFirst(issue, ['ViewerUrl', 'viewerUrl']), {
         link: true,
@@ -2651,7 +2657,7 @@ function renderGenericPrettyView(record) {
         ? renderCollapsibleCard(
             'Likely important fields',
             true,
-            summary.highValue
+            summary.highValue,
           )
         : '',
       renderKV('Record', record, { collapsible: true }),
@@ -2777,7 +2783,7 @@ function buildHighValueFieldRows(value) {
   // If it is an array of objects, try the first object as a "representative"
   if (Array.isArray(value)) {
     const firstObj = value.find(
-      (x) => x && typeof x === 'object' && !Array.isArray(x)
+      (x) => x && typeof x === 'object' && !Array.isArray(x),
     );
     if (firstObj) return buildHighValueFieldRows(firstObj);
     return [];
@@ -2832,7 +2838,7 @@ function buildHighValueFieldRows(value) {
     // Keep it readable. If the value is a big object/array, render it collapsed.
     const isHeavy = typeof v === 'object';
     rows.push(
-      renderKV(c.label, v, { collapsible: isHeavy, link: c.label === 'URL' })
+      renderKV(c.label, v, { collapsible: isHeavy, link: c.label === 'URL' }),
     );
   }
 
@@ -2847,7 +2853,7 @@ function buildHighValueFieldRows(value) {
   ]);
   if (owner != null) {
     rows.push(
-      renderKV('Owner-like', owner, { collapsible: typeof owner === 'object' })
+      renderKV('Owner-like', owner, { collapsible: typeof owner === 'object' }),
     );
   }
 
@@ -2896,7 +2902,7 @@ function renderKV(key, value, opts) {
   const pathHtml =
     state.showPaths && o.path
       ? `<div class="path-hint" title="${escapeHtml(o.path)}">${escapeHtml(
-          o.path
+          o.path,
         )}</div>`
       : '';
 
@@ -2929,7 +2935,7 @@ function renderKVHtml(key, htmlValue, opts) {
   const pathHtml =
     state.showPaths && o.path
       ? `<div class="path-hint" title="${escapeHtml(o.path)}">${escapeHtml(
-          o.path
+          o.path,
         )}</div>`
       : '';
 
@@ -2983,7 +2989,7 @@ function renderKvListValue(arrValue, cfg) {
       // Handle dropdown values (arrays like PredefinedValues)
       if (Array.isArray(v)) {
         const names = v
-          .map((x) => (x && typeof x === 'object' ? x.Name ?? x.name : x))
+          .map((x) => (x && typeof x === 'object' ? (x.Name ?? x.name) : x))
           .filter((x) => x != null)
           .map((x) => String(x).trim())
           .filter(Boolean);
@@ -3015,13 +3021,13 @@ function renderKvListValue(arrValue, cfg) {
       [
         `<div class="kvlist-row">`,
         `<div class="kvlist-k" title="${escapeHtml(key)}">${escapeHtml(
-          key
+          key,
         )}</div>`,
         `<div class="kvlist-v${
           finalText === emptyText ? ' is-empty' : ''
         }">${escapeHtml(finalText)}</div>`,
         `</div>`,
-      ].join('')
+      ].join(''),
     );
 
     if (rows.length >= maxItems) break;
@@ -3083,7 +3089,7 @@ function renderKvListValue(arrValue, cfg) {
       // If path returns an array (e.g., PredefinedValues), join names.
       if (Array.isArray(v)) {
         const names = v
-          .map((x) => (x && typeof x === 'object' ? x.Name ?? x.name : x))
+          .map((x) => (x && typeof x === 'object' ? (x.Name ?? x.name) : x))
           .filter((x) => x != null)
           .map((x) => String(x).trim())
           .filter(Boolean);
@@ -3113,12 +3119,12 @@ function renderKvListValue(arrValue, cfg) {
     rows.push(
       `<div class="kvlist-row">` +
         `<div class="kvlist-k" title="${escapeHtml(key)}">${escapeHtml(
-          key
+          key,
         )}</div>` +
         `<div class="kvlist-v${
           finalText === emptyText ? ' is-empty' : ''
         }">${escapeHtml(finalText)}</div>` +
-        `</div>`
+        `</div>`,
     );
 
     if (rows.length >= maxItems) break;
@@ -3185,7 +3191,7 @@ function renderKvListValue(arrValue, cfg) {
       // Special handling: arrays like PredefinedValues (could be 0..n)
       if (Array.isArray(v)) {
         const names = v
-          .map((x) => (x && typeof x === 'object' ? x.Name ?? x.name : x))
+          .map((x) => (x && typeof x === 'object' ? (x.Name ?? x.name) : x))
           .filter((x) => x != null)
           .map((x) => String(x).trim())
           .filter(Boolean);
@@ -3216,12 +3222,12 @@ function renderKvListValue(arrValue, cfg) {
     rows.push(
       `<div class="kvlist-row">` +
         `<div class="kvlist-k" title="${escapeHtml(key)}">${escapeHtml(
-          key
+          key,
         )}</div>` +
         `<div class="kvlist-v${
           finalText === emptyText ? ' is-empty' : ''
         }">${escapeHtml(finalText)}</div>` +
-        `</div>`
+        `</div>`,
     );
 
     if (rows.length >= maxItems) break;
@@ -3276,7 +3282,7 @@ function renderKvListValue(arrValue, cfg) {
       // Special handling: arrays like PredefinedValues (could be 0..n)
       if (Array.isArray(v)) {
         const names = v
-          .map((x) => (x && typeof x === 'object' ? x.Name ?? x.name : x))
+          .map((x) => (x && typeof x === 'object' ? (x.Name ?? x.name) : x))
           .filter((x) => x != null)
           .map((x) => String(x).trim())
           .filter(Boolean);
@@ -3300,7 +3306,7 @@ function renderKvListValue(arrValue, cfg) {
       `<div class="kvlist-row">` +
         `<div class="kvlist-k">${escapeHtml(key)}</div>` +
         `<div class="kvlist-v">${escapeHtml(String(val))}</div>` +
-        `</div>`
+        `</div>`,
     );
 
     if (rows.length >= maxItems) break;
@@ -3324,7 +3330,7 @@ function renderValue(value, opts) {
   // If link option is set and it looks like a URL, make it clickable
   if (o.link && typeof value === 'string' && looksLikeUrl(value)) {
     return `<a href="${escapeHtml(
-      value
+      value,
     )}" target="_blank" rel="noreferrer">${escapeHtml(value)}</a>`;
   }
 
@@ -3368,7 +3374,7 @@ function renderValue(value, opts) {
         `Preview: ${escapeHtml(preview)}${
           value.length > previewCount ? ', …' : ''
         }`,
-        `</span>`
+        `</span>`,
       );
     }
 
@@ -3376,7 +3382,7 @@ function renderValue(value, opts) {
       `<div data-value-body="true" style="display:none; margin-top:10px;">`,
       renderArrayAsList(value, o.path || '$'),
       `</div>`,
-      `</div>`
+      `</div>`,
     );
 
     return parts.join('');
@@ -4404,7 +4410,7 @@ function renderTemplateSelect() {
     ...state.templates.map((t) => {
       const label = `${t.name} (${t.sourceFileName})`;
       return `<option value="${escapeHtml(t.id)}">${escapeHtml(
-        label
+        label,
       )}</option>`;
     }),
   ].join('');
@@ -4465,7 +4471,7 @@ function getBestTemplateForRecord(record) {
         ? m.requiredKeys.filter(Boolean).length
         : 0;
     const hasTypeField = Boolean(
-      m && typeof m.typeField === 'string' && m.typeField.trim()
+      m && typeof m.typeField === 'string' && m.typeField.trim(),
     );
 
     // Score: hits dominate, then specificity
