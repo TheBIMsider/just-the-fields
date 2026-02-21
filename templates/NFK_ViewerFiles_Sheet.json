@@ -1,0 +1,31 @@
+{
+  "templateVersion": 1,
+  "templateName": "NFK Viewer Files – Sheet",
+  "description": "Template for a single Newforma Konekt Viewer sheet record (PDF, plain export). For sheets viewed in the NFK Viewer created on or before Aug. 19, 2024.",
+  "match": {
+    "requiredKeys": ["FileName", "Version", "ActiveVersionDate"]
+  },
+  "recordLabel": {
+    "fields": [
+      { "path": "Name", "prefix": "", "maxLen": 80 },
+      { "path": "Version", "prefix": " v", "maxLen": 10 }
+    ],
+    "fallback": "Sheet {n}"
+  },
+  "layout": [
+    {
+      "section": "Overview",
+      "fields": [
+        { "path": "Name", "label": "Sheet name", "format": "text" },
+        { "path": "FileName", "label": "File name", "format": "text" },
+        { "path": "Version", "label": "Version", "format": "badge" },
+        {
+          "path": "ActiveVersionDate",
+          "label": "Version date",
+          "format": "date"
+        },
+        { "path": "FileSets", "label": "File sets", "format": "chips" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "templateVersion": 1,
+  "templateName": "NFK Email",
+  "description": "Template for a single Newforma Konekt email record (plain export).",
+  "match": {
+    "requiredKeys": ["messageId", "sentDate", "filedVia"]
+  },
+  "recordLabel": {
+    "fields": [
+      { "path": "displaySubject", "prefix": "", "maxLen": 80 },
+      { "path": "from.name", "prefix": " — ", "maxLen": 40 }
+    ],
+    "fallback": "Email {n}"
+  },
+  "layout": [
+    {
+      "section": "Overview",
+      "fields": [
+        { "path": "displaySubject", "label": "Subject", "format": "text" },
+        { "path": "from.name", "label": "From", "format": "text" },
+        { "path": "from.email", "label": "From email", "format": "text" },
+        { "path": "sentDate", "label": "Sent", "format": "date" },
+        { "path": "receivedDate", "label": "Received", "format": "date" },
+        { "path": "hasAttachments", "label": "Attachments", "format": "badge" },
+        { "path": "filedVia", "label": "Filed via", "format": "badge" }
+      ]
+    },
+    {
+      "section": "Recipients",
+      "fields": [
+        { "path": "to", "label": "To", "format": "chips" },
+        { "path": "cc", "label": "CC", "format": "chips" },
+        { "path": "replyTo", "label": "Reply-To", "format": "chips" }
+      ]
+    },
+    {
+      "section": "Message",
+      "fields": [{ "path": "body.0", "label": "Body", "format": "multiline" }]
+    },
+    {
+      "section": "Filing Details",
+      "fields": [
+        { "path": "filedTimestamp", "label": "Filed", "format": "date" },
+        { "path": "filedBy", "label": "Filed by", "format": "text" }
+      ]
+    }
+  ]
+}
