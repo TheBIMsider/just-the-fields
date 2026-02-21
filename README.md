@@ -161,7 +161,7 @@ Want the how-to? Start here: [Templates in JTF](docs/templates.md)
 - Upload the template back into JTF
 - Read the full guide: [Templates in JTF](docs/templates.md)
 
-Note: Newforma Konekt data (Issues, RFIs, Submittals, Change Items, Files) can be exported in different shapes (Plain vs Combined), which always require different templates.
+Note: Newforma Konekt data (Issues, RFIs, Submittals, Change Items, Files, Emails, and Viewer Files) can be exported in different shapes (Plain vs Combined), which always require different templates. Viewer Files templates cover 3D models (IFC) and sheets viewed in the NFK Viewer created on or before Aug. 19, 2024. Files created after that date use the standard Files templates.
 
 ---
 
