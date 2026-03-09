@@ -44,7 +44,12 @@
       }
 
       a {
-        color: inherit;
+        color: #0a7a2f;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
       }
 
       .footer {
@@ -87,7 +92,10 @@
 
       <h2>Available templates</h2>
 
-      <h3>Getting started</h3>
+      <h3>Starter template</h3>
+
+      <p class="note">Start here when building your own templates.</p>
+
       <ul>
         <li>
           <a
@@ -100,6 +108,9 @@
       </ul>
 
       <h3>Example templates</h3>
+
+      <p class="note">Simple examples showing common template patterns.</p>
+
       <ul>
         <li>
           <a
@@ -129,9 +140,65 @@
         </li>
       </ul>
 
-      <h3>Newforma Konekt templates</h3>
+      <h3>Mock sample templates</h3>
+
+      <p class="note">
+        Templates designed to work with the sample datasets included in the
+        repository. These are great for learning how templates work. Sample JSON
+        files are available in the
+        <a href="../samples/">samples folder</a>.
+      </p>
+
       <ul>
-        <!-- Issues -->
+        <li>
+          <a
+            href="https://raw.githubusercontent.com/TheBIMsider/just-the-fields/main/templates/Mock_Cars_Simple_Template.json"
+            download
+          >
+            Mock – Cars (Simple)
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="https://raw.githubusercontent.com/TheBIMsider/just-the-fields/main/templates/Mock_Cars_Advanced_Template.json"
+            download
+          >
+            Mock – Cars (Advanced)
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="https://raw.githubusercontent.com/TheBIMsider/just-the-fields/main/templates/Mock_Projects_Template.json"
+            download
+          >
+            Mock – Projects
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="https://raw.githubusercontent.com/TheBIMsider/just-the-fields/main/templates/Mock_Support_Tickets_Template.json"
+            download
+          >
+            Mock – Support Tickets
+          </a>
+        </li>
+      </ul>
+      <p class="note">
+        Each mock template corresponds to a dataset in <code>/samples</code>.
+      </p>
+
+      <h3>Newforma Konekt templates</h3>
+
+      <p class="note">
+        Real-world templates built for Newforma Konekt exports. Separate
+        templates exist for Plain and Combined exports.
+      </p>
+      <!-- Issues -->
+      <h4>Issues</h4>
+      <ul>
         <li>
           <a
             href="https://raw.githubusercontent.com/TheBIMsider/just-the-fields/main/templates/NFK_Issues.json"
@@ -149,8 +216,11 @@
             NFK – Issues (Combined)
           </a>
         </li>
+      </ul>
 
-        <!-- Files -->
+      <!-- Files -->
+      <h4>Files</h4>
+      <ul>
         <li>
           <a
             href="https://raw.githubusercontent.com/TheBIMsider/just-the-fields/main/templates/NFK_Files.json"
@@ -168,8 +238,11 @@
             NFK – Files (Combined)
           </a>
         </li>
+      </ul>
 
-        <!-- RFIs -->
+      <!-- RFIs -->
+      <h4>RFIs</h4>
+      <ul>
         <li>
           <a
             href="https://raw.githubusercontent.com/TheBIMsider/just-the-fields/main/templates/NFK_RFI.json"
@@ -187,8 +260,11 @@
             NFK – RFI (Combined)
           </a>
         </li>
+      </ul>
 
-        <!-- Submittals -->
+      <!-- Submittals -->
+      <h4>Submittals</h4>
+      <ul>
         <li>
           <a
             href="https://raw.githubusercontent.com/TheBIMsider/just-the-fields/main/templates/NFK_Submittal.json"
@@ -206,8 +282,11 @@
             NFK – Submittals (Combined)
           </a>
         </li>
+      </ul>
 
-        <!-- Change Items -->
+      <!-- Change Items -->
+      <h4>Change Items</h4>
+      <ul>
         <li>
           <a
             href="https://raw.githubusercontent.com/TheBIMsider/just-the-fields/main/templates/NFK_Change_All.json"
@@ -297,8 +376,11 @@
             NFK – Change Items – CCD (Combined)
           </a>
         </li>
+      </ul>
 
-        <!-- Emails -->
+      <!-- Emails -->
+      <h4>Email</h4>
+      <ul>
         <li>
           <a
             href="https://raw.githubusercontent.com/TheBIMsider/just-the-fields/main/templates/NFK_Email.json"
@@ -316,8 +398,11 @@
             NFK – Email (Combined)
           </a>
         </li>
+      </ul>
 
-        <!-- Viewer Files -->
+      <!-- Viewer Files -->
+      <h4>Viewer Files</h4>
+      <ul>
         <li>
           <a
             href="https://raw.githubusercontent.com/TheBIMsider/just-the-fields/main/templates/NFK_ViewerFiles_Model.json"
@@ -367,7 +452,7 @@
         NFK Viewer created on or before Aug. 19, 2024. Files created after that
         date use the standard <strong>NFK – Files</strong> templates.
         <br />
-        • If a link opens the JSON in your browser, use
+        • If a template opens in your browser instead of downloading, use
         <strong>Right-click → Save As</strong>.
         <br />
         • For Change Items (Combined exports),
