@@ -11,7 +11,7 @@
 A lightweight JSON viewer that helps you focus on just the fields that matter.
 
 JTF runs entirely in your browser and works great on GitHub Pages.  
-Drop in JSON files, explore them safely, search across all uploads, and use templates to control what you see — in light or dark mode.
+Drop in JSON files, explore them safely, search across uploads, and use templates to control what you see — in light or dark mode.
 
 ### Live demo
 
@@ -143,10 +143,10 @@ Different export shapes (Plain vs Combined) require different templates.
 
 Templates support several display patterns, including:
 
-- **Badges** for status-like values
-- **Chips** for people, teams, and simple lists
-- **Array cards** for readable rendering of comments, attachments, and history
-- **History cards** for versions, workflow actions, and file activity
+- **Badges** for status-like values (`badge`)
+- **Chips** for people, teams, and simple lists (`chips`)
+- **Array cards** using the `json` format with nested `fields`
+- **Key → value lists** using `kvlist` for property/value arrays
 
 They cannot change app behavior or data.  
 Want the how-to? Start here: [Templates in JTF](docs/templates.md)
@@ -214,4 +214,3 @@ This project is licensed under the BSD-3-Clause License.
 
 _Built with ❤️ & 🤖 AI assistance from ChatGPT by The BIMsider for the AECO community_  
 _Just the Fields: Your JSON Detective - See what matters._
-
