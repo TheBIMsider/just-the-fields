@@ -129,6 +129,20 @@ body {
   gap: 12px;
 }
 
+.files-header {
+  padding-bottom: 10px;
+}
+
+.global-search {
+  border-color: var(--border);
+}
+
+.files-subtitle {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--muted);
+}
+
 .theme-btn {
   display: inline-flex;
   align-items: center;
@@ -513,16 +527,6 @@ html[data-theme='dark'] .files-actions::-webkit-scrollbar-thumb {
 .drop-zone.dragover {
   border-color: rgba(92, 200, 255, 0.85);
   background: rgba(92, 200, 255, 0.08);
-}
-
-/* Small "Files" title inside the drop zone */
-.files-subtitle {
-  width: 100%;
-  text-align: left;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--muted);
-  margin-bottom: 10px;
 }
 
 .file-input {

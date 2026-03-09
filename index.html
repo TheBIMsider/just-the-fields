@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -60,7 +60,7 @@
                 id="downloadTemplateBtn"
                 class="btn"
                 type="button"
-                title="Download a starter template JSON you can edit and upload later"
+                title="Download a starter template you can edit and upload later (.json or .jsonc)"
               >
                 Download
               </button>
@@ -91,7 +91,7 @@
               <label
                 class="template-picker"
                 for="templateSelect"
-                title="Pick a template. Auto tries the best match per record (Records mode only)."
+                title="Choose a template to control field layout. Auto selects the best match per record. Templates apply in Records mode only."
               >
                 <span class="sr-only">Template</span>
                 <select id="templateSelect" disabled>
@@ -110,6 +110,9 @@
               </button>
             </div>
           </div>
+
+          <!-- Small hint for first-time users -->
+          <div class="files-subtitle">Templates apply in Records mode.</div>
         </div>
 
         <!-- Global Search (search across ALL uploaded files, regardless of mode) -->
@@ -337,7 +340,10 @@
           <span aria-hidden="true">•</span>
           <a href="templates/index.html">Templates</a>
           <span aria-hidden="true">•</span>
-          <a href="docs/templates.md">Templates guide</a>
+          <a
+            href="https://github.com/TheBIMsider/just-the-fields/blob/main/docs/templates.md"
+            >Templates guide</a
+          >
         </span>
       </small>
     </footer>
