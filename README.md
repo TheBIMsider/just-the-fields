@@ -23,16 +23,21 @@ Runs entirely in your browser. No uploads. No installs.
 
 ## Sample data
 
-Want something quick to try?
+Want something quick to test with?
 
-Download one of the sample datasets and drop it into the viewer:
+Download one of the sample datasets and drop it into JTF:
 
-- [Cars (50 records)](samples/mock_cars_50.json)
-- [Cars (1000 records)](samples/mock_cars_1000.json)
-- [Projects](samples/mock_projects.json)
-- [Support tickets](samples/mock_support_tickets.json)
+- [cars_50.json](samples/mock_cars_50.json)
+- [cars_1000.json](samples/mock_cars_1000.json)
+- [projects.json](samples/mock_projects.json)
+- [support_tickets.json](samples/mock_support_tickets.json)
 
-These files demonstrate both **Dataset mode** and **Records mode**.
+These files help demonstrate how JTF handles different JSON shapes.
+
+Dataset-style arrays work well in **Dataset mode**, while structured objects and API-style records are best explored in **Records mode**, which is where most of JTF’s layout and template features live.
+
+*Special thanks to ChatGPT and [Mockaroo](https://mockaroo.com/) for helping generate the sample datasets used in this repository.  
+Mockaroo provides free sample data generation (up to 1,000 rows), which made it easy to create realistic testing datasets.*
 
 ---
 
