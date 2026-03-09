@@ -2276,23 +2276,19 @@ function renderTemplateField(record, field) {
       styleClass = ` badge-${field.style}`;
     }
 
-    // smart status coloring
     if (field && field.style === 'status') {
       const v = badgeText.toLowerCase();
 
-      // good / active
       if (['open', 'active', 'available'].includes(v))
         styleClass += ' badge-status-open';
-      // waiting
+      else if (['in progress', 'working', 'processing', 'running'].includes(v))
+        styleClass += ' badge-status-progress';
       else if (['pending', 'waiting', 'review'].includes(v))
         styleClass += ' badge-status-pending';
-      // closed / complete
       else if (['closed', 'complete', 'done', 'resolved'].includes(v))
         styleClass += ' badge-status-closed';
-      // failure states
       else if (['cancelled', 'rejected', 'failed'].includes(v))
-        styleClass += ' badge-status-bad';
-      // priorities
+        styleClass += ' badge-status-closed';
       else if (['critical', 'urgent', 'blocker'].includes(v))
         styleClass += ' badge-status-critical';
       else if (['high'].includes(v)) styleClass += ' badge-status-high';

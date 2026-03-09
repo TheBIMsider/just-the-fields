@@ -1098,12 +1098,13 @@ mark.jtf-mark {
   word-break: break-word;
 }
 
+/* Base badge */
 .badge {
   display: inline-flex;
   padding: 2px 8px;
   border-radius: 999px;
   border: 1px solid var(--border);
-  background: rgba(92, 200, 255, 0.06);
+  background: rgba(92, 200, 255, 0.05);
   color: var(--text);
   font-family: var(--sans);
   font-size: 12px;
@@ -1111,6 +1112,7 @@ mark.jtf-mark {
   align-items: center;
 }
 
+/* Generic semantic badges */
 .badge-neutral {
   background: rgba(100, 116, 139, 0.14);
   border-color: rgba(100, 116, 139, 0.25);
@@ -1139,6 +1141,31 @@ mark.jtf-mark {
   background: rgba(10, 122, 47, 0.15);
   border-color: rgba(10, 122, 47, 0.25);
   color: #0a7a2f;
+}
+
+/* Status / priority system */
+.badge-status-open {
+  background: rgba(10, 122, 47, 0.15);
+  border-color: rgba(10, 122, 47, 0.25);
+  color: #0a7a2f;
+}
+
+.badge-status-pending {
+  background: rgba(245, 158, 11, 0.18);
+  border-color: rgba(245, 158, 11, 0.3);
+  color: #b45309;
+}
+
+.badge-status-closed {
+  background: rgba(100, 116, 139, 0.16);
+  border-color: rgba(100, 116, 139, 0.28);
+  color: #475569;
+}
+
+.badge-status-progress {
+  background: rgba(59, 130, 246, 0.16);
+  border-color: rgba(59, 130, 246, 0.28);
+  color: #2563eb;
 }
 
 .badge-status-critical {
