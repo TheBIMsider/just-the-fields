@@ -1,0 +1,92 @@
+[
+{
+"id": 1001,
+"title": "Login page returns 500 error",
+"status": "Open",
+"priority": "High",
+"created_date": "2025-02-01",
+"customer": {"name": "Acme Corp","contact": "it@acme.com"},
+"assigned_to": "Sarah Chen"
+},
+{
+"id": 1002,
+"title": "Export to CSV not working",
+"status": "In Progress",
+"priority": "Medium",
+"created_date": "2025-02-03",
+"customer": {"name": "Globex Inc","contact": "support@globex.com"},
+"assigned_to": "David Ortiz"
+},
+{
+"id": 1003,
+"title": "User permissions reset after logout",
+"status": "Open",
+"priority": "High",
+"created_date": "2025-02-04",
+"customer": {"name": "Innotech","contact": "admin@innotech.com"},
+"assigned_to": "Priya Sharma"
+},
+{
+"id": 1004,
+"title": "Mobile layout breaks on dashboard",
+"status": "In Progress",
+"priority": "Low",
+"created_date": "2025-02-06",
+"customer": {"name": "Hooli","contact": "support@hooli.com"},
+"assigned_to": "Carlos Vega"
+},
+{
+"id": 1005,
+"title": "Password reset email not sent",
+"status": "Open",
+"priority": "High",
+"created_date": "2025-02-07",
+"customer": {"name": "Umbrella Corp","contact": "help@umbrella.com"},
+"assigned_to": "Sarah Chen"
+},
+{
+"id": 1006,
+"title": "Search results missing recent items",
+"status": "Resolved",
+"priority": "Medium",
+"created_date": "2025-02-09",
+"customer": {"name": "Stark Industries","contact": "it@stark.com"},
+"assigned_to": "David Ortiz"
+},
+{
+"id": 1007,
+"title": "Notification emails duplicated",
+"status": "Open",
+"priority": "Low",
+"created_date": "2025-02-11",
+"customer": {"name": "Wayne Enterprises","contact": "support@wayne.com"},
+"assigned_to": "Priya Sharma"
+},
+{
+"id": 1008,
+"title": "API token expires too early",
+"status": "In Progress",
+"priority": "Medium",
+"created_date": "2025-02-13",
+"customer": {"name": "Cyberdyne Systems","contact": "api@cyberdyne.com"},
+"assigned_to": "Carlos Vega"
+},
+{
+"id": 1009,
+"title": "Dashboard widgets fail to load",
+"status": "Open",
+"priority": "High",
+"created_date": "2025-02-15",
+"customer": {"name": "Soylent Corp","contact": "tech@soylent.com"},
+"assigned_to": "Sarah Chen"
+},
+{
+"id": 1010,
+"title": "Bulk upload stuck at 90%",
+"status": "Investigating",
+"priority": "High",
+"created_date": "2025-02-17",
+"customer": {"name": "Wonka Industries","contact": "ops@wonka.com"},
+"assigned_to": "David Ortiz"
+}
+]

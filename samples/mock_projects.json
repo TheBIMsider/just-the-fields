@@ -1,0 +1,92 @@
+[
+{
+"id": 1,
+"project_name": "City Library Renovation",
+"status": "Active",
+"budget": 2500000,
+"start_date": "2024-01-15",
+"manager": {"first_name": "Laura","last_name": "Nguyen","email": "laura.nguyen@example.com"},
+"location": {"city": "Seattle","country": "USA"}
+},
+{
+"id": 2,
+"project_name": "Airport Terminal Expansion",
+"status": "Planning",
+"budget": 12000000,
+"start_date": "2025-03-01",
+"manager": {"first_name": "Marco","last_name": "Silva","email": "marco.silva@example.com"},
+"location": {"city": "Lisbon","country": "Portugal"}
+},
+{
+"id": 3,
+"project_name": "Downtown Office Tower",
+"status": "Active",
+"budget": 8000000,
+"start_date": "2024-06-10",
+"manager": {"first_name": "Emily","last_name": "Ross","email": "emily.ross@example.com"},
+"location": {"city": "Chicago","country": "USA"}
+},
+{
+"id": 4,
+"project_name": "Highway Bridge Rehabilitation",
+"status": "Construction",
+"budget": 5400000,
+"start_date": "2023-09-20",
+"manager": {"first_name": "Daniel","last_name": "Kim","email": "daniel.kim@example.com"},
+"location": {"city": "Vancouver","country": "Canada"}
+},
+{
+"id": 5,
+"project_name": "Hospital Wing Expansion",
+"status": "Design",
+"budget": 9600000,
+"start_date": "2024-11-01",
+"manager": {"first_name": "Sophia","last_name": "Martinez","email": "sophia.martinez@example.com"},
+"location": {"city": "Madrid","country": "Spain"}
+},
+{
+"id": 6,
+"project_name": "University Science Center",
+"status": "Active",
+"budget": 7200000,
+"start_date": "2024-02-12",
+"manager": {"first_name": "Oliver","last_name": "Bennett","email": "oliver.bennett@example.com"},
+"location": {"city": "Melbourne","country": "Australia"}
+},
+{
+"id": 7,
+"project_name": "City Transit Hub",
+"status": "Planning",
+"budget": 15000000,
+"start_date": "2025-07-01",
+"manager": {"first_name": "Hannah","last_name": "Fischer","email": "hannah.fischer@example.com"},
+"location": {"city": "Berlin","country": "Germany"}
+},
+{
+"id": 8,
+"project_name": "Water Treatment Facility",
+"status": "Construction",
+"budget": 6300000,
+"start_date": "2023-12-05",
+"manager": {"first_name": "Lucas","last_name": "Moreau","email": "lucas.moreau@example.com"},
+"location": {"city": "Lyon","country": "France"}
+},
+{
+"id": 9,
+"project_name": "Convention Center Upgrade",
+"status": "Design",
+"budget": 4100000,
+"start_date": "2024-08-19",
+"manager": {"first_name": "Isabella","last_name": "Conti","email": "isabella.conti@example.com"},
+"location": {"city": "Rome","country": "Italy"}
+},
+{
+"id": 10,
+"project_name": "Riverfront Park Redevelopment",
+"status": "Active",
+"budget": 3200000,
+"start_date": "2024-04-22",
+"manager": {"first_name": "Ethan","last_name": "Walker","email": "ethan.walker@example.com"},
+"location": {"city": "Portland","country": "USA"}
+}
+]
