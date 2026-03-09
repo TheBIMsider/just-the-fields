@@ -21,6 +21,21 @@ Runs entirely in your browser. No uploads. No installs.
 
 ---
 
+## Sample data
+
+Want something quick to try?
+
+Download one of the sample datasets and drop it into the viewer:
+
+- [Cars (50 records)](samples/mock_cars_50.json)
+- [Cars (1000 records)](samples/mock_cars_1000.json)
+- [Projects](samples/mock_projects.json)
+- [Support tickets](samples/mock_support_tickets.json)
+
+These files demonstrate both **Dataset mode** and **Records mode**.
+
+---
+
 ## What JTF is
 
 - A fast, browser-based JSON viewer
