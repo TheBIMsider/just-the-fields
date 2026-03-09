@@ -1,0 +1,61 @@
+{
+  "templateVersion": 1,
+  "templateName": "Mock Cars Advanced",
+  "description": "Rich demo template for mock car ownership data with combined vehicle and owner fields.",
+
+  "match": {
+    "requiredKeys": ["car_make", "car_model", "car_model_year", "car_vin"]
+  },
+
+  "recordLabel": {
+    "fields": [
+      { "path": "car_model_year" },
+      { "path": "car_make", "prefix": " ", "maxLen": 18 },
+      { "path": "car_model", "prefix": " ", "maxLen": 22 },
+      { "path": "last_name", "prefix": " - ", "maxLen": 20 }
+    ],
+    "fallback": "Car {n}"
+  },
+
+  "layout": [
+
+    {
+      "section": "Vehicle",
+      "fields": [
+        { "path": "car_model_year", "label": "Year", "format": "badge", "style": "meta" },
+        { "path": "car_make", "label": "Make", "format": "badge" },
+        { "path": "car_model", "label": "Model", "format": "text" },
+        { "path": "car_trim_type", "label": "Trim Type", "format": "text", "style": "info" },
+        { "path": "car_fuel", "label": "Fuel", "format": "badge" },
+        { "path": "car_transmission", "label": "Transmission", "format": "badge" },
+        { "path": "car_description", "label": "Car Details", "format": "text" },
+        { "path": "car_price", "label": "Price", "format": "badge", "style": "money" }
+      ]
+    },
+
+    {
+      "section": "Vehicle Identification",
+      "fields": [
+        { "path": "car_vin", "label": "VIN", "format": "badge" }
+      ]
+    },
+
+    {
+      "section": "Owner",
+      "fields": [
+        { "path": "first_name", "label": "First Name", "format": "text" },
+        { "path": "last_name", "label": "Last Name", "format": "badge", "style": "neutral" },
+        { "path": "email", "label": "Email", "format": "email" }
+      ]
+    },
+
+    {
+      "section": "Owner Details",
+      "fields": [
+        { "path": "owner_job", "label": "Occupation", "format": "text" },
+        { "path": "owner_city", "label": "City", "format": "badge", "style": "location" }
+      ]
+    }
+
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "templateVersion": 1,
+  "templateName": "Mock Projects Template",
+  "description": "Template demonstrating nested project data.",
+
+  "match": {
+    "requiredKeys": ["project_name", "manager", "location"]
+  },
+
+  "recordLabel": {
+    "fields": [
+      { "path": "project_name", "maxLen": 40 },
+      { "path": "status", "prefix": " (", "suffix": ")" }
+    ],
+    "fallback": "Project {n}"
+  },
+
+  "layout": [
+
+    {
+      "section": "Project Overview",
+      "fields": [
+        { "path": "project_name", "label": "Project", "format": "text" },
+        { "path": "status", "label": "Status", "format": "badge" },
+        { "path": "budget", "label": "Budget", "format": "text" },
+        { "path": "start_date", "label": "Start Date", "format": "date" }
+      ]
+    },
+
+    {
+      "section": "Project Manager",
+      "fields": [
+        { "path": "manager.first_name", "label": "First Name" },
+        { "path": "manager.last_name", "label": "Last Name" },
+        { "path": "manager.email", "label": "Email", "format": "email" }
+      ]
+    },
+
+    {
+      "section": "Location",
+      "fields": [
+        { "path": "location.city", "label": "City" },
+        { "path": "location.country", "label": "Country" }
+      ]
+    }
+
+  ]
+}
