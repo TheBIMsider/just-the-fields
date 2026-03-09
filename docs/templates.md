@@ -3,7 +3,11 @@
 > This document is written in Markdown.  
 > If it looks unstyled here, view it on GitHub for a formatted version.
 
-Templates let you define what fields appear and in what order. They are plain JSON files you can edit in any text editor. Templates control layout only. They cannot change app behavior or data.
+Templates let you define what fields appear and in what order.
+They are plain JSON files you can edit in any text editor.
+
+Templates control layout only.
+They cannot change app behavior or data.
 
 ## 1) The mental model (two modes)
 
@@ -71,7 +75,7 @@ Example shape:
 Common formats used in templates:
 
 - `text`: default
-- `badge`: compact label pill (great for status)
+- `badge`: compact label pill (great for status values)
 - `date`: readable date/time
 - `link`: clickable URL
 - `multiline`: preserves line breaks
@@ -79,9 +83,40 @@ Common formats used in templates:
 - `chips`: renders an array of values as compact badges (great for people, teams, disciplines, recipients)
 - `kvlist`: renders an array of objects as a compact key → value list, where each item becomes a single labeled row
 
+`kvlist` resolves values in priority order.  
+If multiple value properties exist (for example dropdown values and text values), JTF chooses the first non-empty value.
+
 If a value is the wrong type for a format, the field is skipped.
 
-### chips
+### Badge styles
+
+Badges support style hints that help visually group similar values.
+
+| Style      | Typical use            |
+|------------|------------------------|
+| `meta`     | identifiers, IDs       |
+| `info`     | descriptive attributes |
+| `location` | place or grouping      |
+| `money`    | numeric values         |
+| `status`   | workflow or priority   |
+
+Example:
+
+```json
+{
+  "path": "Status.Name",
+  "label": "Status",
+  "format": "badge",
+  "style": "status"
+}
+```
+
+Styles affect appearance only.  
+If no style is provided, the default badge styling is used.
+
+Colors adapt automatically to light and dark themes.
+
+### Chips
 
 `chips` expects an array most of the time, but JTF can also handle “object-or-array” shapes (single object treated like a 1-item array).
 
@@ -92,7 +127,7 @@ Use it for things like:
 - Recipient lists
 - Simple attachment lists (file names)
 
-### json (cards for arrays)
+### JSON (cards for arrays)
 
 `json` normally renders nested data with collapsible viewing.
 
@@ -172,7 +207,7 @@ These shapes require **different templates**.
 
 If a template technically matches but shows little or no data, the most common cause is using the **right template with the wrong export shape**.
 
-For Newforma Konekt data (Issues, RFIs, Submittals, Change Items, Files), Plain and Combined exports always require **separate templates**.
+For Newforma Konekt data (Issues, RFIs, Submittals, Change Items, Files, Emails, and Viewer Files), Plain and Combined exports always require **separate templates**. Viewer Files templates cover 3D models (IFC) and sheets viewed in the NFK Viewer created on or before Aug. 19, 2024. Files created after that date use the standard Files templates.
 
 ---
 
