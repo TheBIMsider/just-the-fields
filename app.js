@@ -2267,13 +2267,39 @@ function renderTemplateField(record, field) {
     return renderKVHtml(label, cardsHtml, { path: `$.$TEMPLATE.${path}` });
   }
 
-  // Normalize formatting behavior
   if (format === 'badge') {
     const badgeText = value == null ? '' : safeOneLine(String(value), 60) || '';
     if (!badgeText) return '';
 
-    // optional template style
-    const styleClass = field && field.style ? ` badge-${field.style}` : '';
+    let styleClass = '';
+    if (field && field.style) {
+      styleClass = ` badge-${field.style}`;
+    }
+
+    // smart status coloring
+    if (field && field.style === 'status') {
+      const v = badgeText.toLowerCase();
+
+      // good / active
+      if (['open', 'active', 'available'].includes(v))
+        styleClass += ' badge-status-open';
+      // waiting
+      else if (['pending', 'waiting', 'review'].includes(v))
+        styleClass += ' badge-status-pending';
+      // closed / complete
+      else if (['closed', 'complete', 'done', 'resolved'].includes(v))
+        styleClass += ' badge-status-closed';
+      // failure states
+      else if (['cancelled', 'rejected', 'failed'].includes(v))
+        styleClass += ' badge-status-bad';
+      // priorities
+      else if (['critical', 'urgent', 'blocker'].includes(v))
+        styleClass += ' badge-status-critical';
+      else if (['high'].includes(v)) styleClass += ' badge-status-high';
+      else if (['medium', 'normal'].includes(v))
+        styleClass += ' badge-status-medium';
+      else if (['low', 'minor'].includes(v)) styleClass += ' badge-status-low';
+    }
 
     return renderKVHtml(
       label,

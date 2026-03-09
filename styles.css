@@ -1103,40 +1103,66 @@ mark.jtf-mark {
   padding: 2px 8px;
   border-radius: 999px;
   border: 1px solid var(--border);
-  background: rgba(92, 200, 255, 0.08);
+  background: rgba(92, 200, 255, 0.06);
   color: var(--text);
   font-family: var(--sans);
   font-size: 12px;
+  gap: 4px;
+  align-items: center;
 }
 
 .badge-neutral {
-  background: #6b7280;
-  color: white;
+  background: rgba(100, 116, 139, 0.14);
+  border-color: rgba(100, 116, 139, 0.25);
+  color: #475569;
 }
 
 .badge-meta {
-  background: #334155;
-  color: white;
+  background: rgba(71, 85, 105, 0.16);
+  border-color: rgba(71, 85, 105, 0.28);
+  color: #334155;
 }
 
 .badge-info {
-  background: #2563eb;
-  color: white;
+  background: rgba(37, 99, 235, 0.15);
+  border-color: rgba(37, 99, 235, 0.25);
+  color: #2563eb;
 }
 
 .badge-location {
-  background: #7c3aed;
-  color: white;
+  background: rgba(124, 58, 237, 0.15);
+  border-color: rgba(124, 58, 237, 0.25);
+  color: #7c3aed;
 }
 
 .badge-money {
-  background: #0a7a2f;
-  color: white;
+  background: rgba(10, 122, 47, 0.15);
+  border-color: rgba(10, 122, 47, 0.25);
+  color: #0a7a2f;
 }
 
-.badge-status {
-  background: #f59e0b;
-  color: black;
+.badge-status-critical {
+  background: rgba(220, 38, 38, 0.18);
+  border-color: rgba(220, 38, 38, 0.3);
+  color: #dc2626;
+}
+
+.badge-status-high {
+  background: rgba(245, 158, 11, 0.18);
+  border-color: rgba(245, 158, 11, 0.3);
+  color: #b45309;
+}
+
+.badge-status-medium {
+  background: rgba(37, 99, 235, 0.15);
+  border-color: rgba(37, 99, 235, 0.25);
+  color: #2563eb;
+}
+
+.badge-status-low {
+  background: rgba(100, 116, 139, 0.16);
+  border-color: rgba(100, 116, 139, 0.28);
+  color: #475569;
 }
 
 .raw-json {
