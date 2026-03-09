@@ -2269,16 +2269,15 @@ function renderTemplateField(record, field) {
 
   // Normalize formatting behavior
   if (format === 'badge') {
-    // Keep badges readable; null shows as a "null" badge like the generic renderer
-    const badgeText =
-      value == null ? 'null' : safeOneLine(String(value), 60) || '';
+    const badgeText = value == null ? '' : safeOneLine(String(value), 60) || '';
     if (!badgeText) return '';
 
-    // IMPORTANT: we generate the <span> ourselves (not from user input),
-    // and we still escape the text inside it.
+    // optional template style
+    const styleClass = field && field.style ? ` badge-${field.style}` : '';
+
     return renderKVHtml(
       label,
-      `<span class="badge">${escapeHtml(badgeText)}</span>`,
+      `<span class="badge${styleClass}">${escapeHtml(badgeText)}</span>`,
     );
   }
 
