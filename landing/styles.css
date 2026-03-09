@@ -56,7 +56,13 @@ html[data-theme='light'] {
 
 body {
   margin: 0;
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial,
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
     sans-serif;
   background: var(--bg);
   color: var(--text);
@@ -73,8 +79,9 @@ a:hover {
 }
 
 code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    'Liberation Mono', 'Courier New', monospace;
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
   font-size: 0.95em;
   background: rgba(234, 241, 255, 0.08);
   padding: 2px 6px;
@@ -201,15 +208,10 @@ html[data-theme='light'] .hero-logo-img--dark {
   font-weight: 600;
   font-size: 14px;
   text-decoration: none;
-  transition: transform 120ms ease, background 120ms ease,
+  transition:
+    transform 120ms ease,
+    background 120ms ease,
     border-color 120ms ease;
-}
-
-.btn:hover {
-  text-decoration: none;
-  transform: translateY(-1px);
-  background: var(--btnBg2);
-  border-color: rgba(234, 241, 255, 0.3);
 }
 
 .btn.primary {
@@ -218,7 +220,18 @@ html[data-theme='light'] .hero-logo-img--dark {
     rgba(99, 214, 255, 0.2),
     rgba(124, 255, 163, 0.18)
   );
-  border-color: rgba(234, 241, 255, 0.26);
+  border: 1px solid var(--accent);
+}
+
+.btn.primary:hover {
+  border-color: var(--accent-2);
+}
+
+.btn:hover {
+  text-decoration: none;
+  transform: translateY(-1px);
+  background: var(--btnBg2);
+  border-color: rgba(234, 241, 255, 0.3);
 }
 
 .btn.ghost {
@@ -428,7 +441,8 @@ a.eyebrow,
   padding: 16px;
   border-radius: var(--radius);
   border: 1px solid var(--border);
-  background: radial-gradient(
+  background:
+    radial-gradient(
       700px 260px at 30% 30%,
       rgba(99, 214, 255, 0.12),
       transparent 65%
@@ -474,7 +488,9 @@ a.eyebrow,
   border-radius: var(--radius);
   border: 1px solid var(--border);
   background: var(--card);
-  transition: transform 120ms ease, border-color 120ms ease,
+  transition:
+    transform 120ms ease,
+    border-color 120ms ease,
     background 120ms ease;
 }
 
@@ -623,8 +639,9 @@ a.eyebrow,
 }
 
 .code-slab code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    'Liberation Mono', 'Courier New', monospace;
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
   font-size: 13px;
   padding: 6px 10px;
   border-radius: 10px;
