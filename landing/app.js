@@ -28,9 +28,8 @@
 
     if (theme === 'dark') {
       img.src = 'assets/JTF_R_DM.png';
-      img.alt =
-        'Records mode using a Newforma Konekt Issues template (dark theme)';
-      cap.textContent = 'Records mode using a Newforma Konekt Issues template';
+      img.alt = 'Records mode using a custom Issues template (dark theme)';
+      cap.textContent = 'Records mode using a custom Issues template';
     } else {
       img.src = 'assets/JTF_D_LM.png';
       img.alt = 'Dataset mode showing a large JSON array (light theme)';
