@@ -93,7 +93,7 @@ If a value is the wrong type for a format, the field is skipped.
 Badges support style hints that help visually group similar values.
 
 | Style      | Typical use            |
-|------------|------------------------|
+| ---------- | ---------------------- |
 | `meta`     | identifiers, IDs       |
 | `info`     | descriptive attributes |
 | `location` | place or grouping      |
@@ -147,11 +147,13 @@ Example:
   ]
 }
 ```
+
 ### Files templates (special case)
 
 Files exports include version history and activity events.
 
 To keep these readable, Files templates commonly use:
+
 - `json` with `fields` to render history as cards
 - `kvlist` to flatten property/value arrays (for example version numbers)
 
@@ -207,7 +209,7 @@ These shapes require **different templates**.
 
 If a template technically matches but shows little or no data, the most common cause is using the **right template with the wrong export shape**.
 
-For Newforma Konekt data (Issues, RFIs, Submittals, Change Items, Files, Emails, and Viewer Files), Plain and Combined exports always require **separate templates**. Viewer Files templates cover 3D models (IFC) and sheets viewed in the NFK Viewer created on or before Aug. 19, 2024. Files created after that date use the standard Files templates.
+Plain and Combined exports always require **separate templates**. If you are switching between export shapes, swap the template as well.
 
 ---
 
@@ -242,6 +244,7 @@ Use additional top-level keys (such as `rfiId`, `issueId`, `submittalId`) when y
 - Over-specifying match rules when a single unique key is enough
 
 When in doubt:
+
 - Match on **one or two unique top-level keys**
 - Let layout paths handle the rest
 
@@ -334,6 +337,7 @@ SI-03 • Windows (Open)
 ```
 
 This pattern is commonly used for:
+
 - Combined RFIs
 - Combined Submittals
 - Combined Change Items
@@ -348,7 +352,7 @@ Each label field supports:
 - `prefix`: text added before the value
 - `suffix`: text added after the value
 - `maxLen`: maximum characters to keep
-- `lastChars`: keep the last *N* characters (useful for IDs)
+- `lastChars`: keep the last _N_ characters (useful for IDs)
 
 Example:
 
