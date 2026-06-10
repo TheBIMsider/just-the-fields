@@ -1,7 +1,7 @@
 {
   "templateVersion": 1,
   "templateName": "Example – RFIs",
-  "description": "Legacy example template for RFI-style records. Kept for reference only. For a modern example, use the NFK - RFI templates (Plain Export / Combined Export).",
+  "description": "Example template for RFI-style records.",
 
   "match": {
     "requiredKeys": ["Question"]

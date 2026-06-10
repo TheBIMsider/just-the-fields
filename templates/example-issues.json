@@ -1,7 +1,7 @@
 {
   "templateVersion": 1,
   "templateName": "Example – Issues",
-  "description": "Legacy example template for issue-style records. Kept for reference only. For a modern example, use the NFK - Issues templates.",
+  "description": "Example template for issue-style records.",
 
   "match": {
     "requiredKeys": ["Title", "Status"]
@@ -34,7 +34,11 @@
     {
       "section": "Details",
       "fields": [
-        { "path": "Description", "label": "Description", "format": "multiline" },
+        {
+          "path": "Description",
+          "label": "Description",
+          "format": "multiline"
+        },
         { "path": "Assignee.Email", "label": "Assignee", "format": "text" }
       ]
     },
