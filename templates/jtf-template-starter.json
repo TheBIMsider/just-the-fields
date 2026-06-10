@@ -1,0 +1,59 @@
+{
+  "templateVersion": 1,
+  "templateName": "Starter Template (Edit Me)",
+  "description": "Copy this file, update paths/labels, then upload it back to JTF. Badge styles include: meta, info, location, money, and status.",
+  "match": {
+    "requiredKeys": []
+  },
+  "recordLabel": {
+    "fields": [
+      { "path": "Number", "prefix": "#", "maxLen": 10 },
+      { "path": "Title", "prefix": " ", "maxLen": 60 }
+    ],
+    "fallback": "Record {n}"
+  },
+  "layout": [
+    {
+      "section": "Header",
+      "fields": [
+        { "path": "Title", "label": "Title", "format": "text" },
+        { "path": "Status.Name", "label": "Status", "format": "badge", "style": "status" },
+        { "path": "Priority.Name", "label": "Priority", "format": "badge", "style": "status" }
+      ]
+    },
+    {
+      "section": "Details",
+      "fields": [
+        { "path": "Description", "label": "Description", "format": "multiline" },
+        { "path": "DueDate", "label": "Due Date", "format": "date" },
+        { "path": "ViewerUrl", "label": "Viewer URL", "format": "link" },
+        { "path": "AssignedTo", "label": "Assigned To", "format": "chips" },
+        { "path": "NotifyList.UsersToNotify", "label": "Notify Users", "format": "chips" }
+      ]
+    },
+    {
+      "section": "Example Badges",
+      "fields": [
+        { "path": "Id", "label": "Record ID", "format": "badge", "style": "meta" },
+        { "path": "Category", "label": "Category", "format": "badge", "style": "info" },
+        { "path": "Location", "label": "Location", "format": "badge", "style": "location" },
+        { "path": "Cost", "label": "Cost", "format": "badge", "style": "money" }
+      ]
+    },
+    {
+      "section": "Example Array (Cards)",
+      "fields": [
+        {
+          "path": "Items",
+          "label": "Items",
+          "format": "json",
+          "fields": [
+            { "path": "Name", "label": "Name", "format": "text" },
+            { "path": "Date", "label": "Date", "format": "date" },
+            { "path": "Notes", "label": "Notes", "format": "multiline" }
+          ]
+        }
+      ]
+    }
+  ]
+}

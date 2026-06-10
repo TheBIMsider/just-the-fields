@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Just the Fields – Templates</title>
+
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Helvetica,
+          Arial,
+          sans-serif;
+        margin: 24px;
+        line-height: 1.5;
+      }
+
+      .wrap {
+        max-width: 900px;
+      }
+
+      h1 {
+        margin-top: 0;
+      }
+
+      ul {
+        padding-left: 18px;
+      }
+
+      li {
+        margin-bottom: 8px;
+      }
+
+      .note {
+        opacity: 0.85;
+      }
+
+      a {
+        color: #0a7a2f;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .footer {
+        margin-top: 32px;
+        font-size: 14px;
+        opacity: 0.8;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrap">
+      <h1>Just the Fields – Templates</h1>
+
+      <h2>Quick start</h2>
+      <ol>
+        <li>Download the starter template below.</li>
+        <li>Edit it in any text editor (VS Code is great).</li>
+        <li>
+          In the app, go to <strong>Templates → Upload</strong> and pick your
+          edited file.
+        </li>
+        <li>
+          Select it from the Template dropdown (or use
+          <strong>Auto (best match)</strong>).
+        </li>
+      </ol>
+
+      <p class="note">
+        Templates apply in <strong>Records</strong> mode. They do not apply in
+        <strong>Dataset</strong> mode.
+      </p>
+
+      <p class="note">
+        Want the full guide (paths, match rules, record labels, formats)?
+        <a href="../docs/templates.md"
+          ><strong>Read: Templates in JTF</strong></a
+        >
+      </p>
+
+      <h2>Available templates</h2>
+
+      <h3>Starter template</h3>
+
+      <p class="note">Start here when building your own templates.</p>
+
+      <ul>
+        <li>
+          <a
+            href="https://raw.githubusercontent.com/TheBIMsider/just-the-fields/main/templates/jtf-template-starter.json"
+            download
+          >
+            Starter template (edit this first)
+          </a>
+        </li>
+      </ul>
+
+      <h3>Example templates</h3>
+
+      <p class="note">Simple examples showing common template patterns.</p>
+
+      <ul>
+        <li>
+          <a
+            href="https://raw.githubusercontent.com/TheBIMsider/just-the-fields/main/templates/example-generic.json"
+            download
+          >
+            Example – Generic
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="https://raw.githubusercontent.com/TheBIMsider/just-the-fields/main/templates/example-issues.json"
+            download
+          >
+            Example – Issues
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="https://raw.githubusercontent.com/TheBIMsider/just-the-fields/main/templates/example-rfis.json"
+            download
+          >
+            Example – RFIs
+          </a>
+        </li>
+      </ul>
+
+      <h3>Mock sample templates</h3>
+
+      <p class="note">
+        Templates designed to work with the sample datasets included in the
+        repository. These are great for learning how templates work. Sample JSON
+        files are available in the
+        <a
+          href="https://github.com/TheBIMsider/just-the-fields/tree/main/samples"
+          >samples folder</a
+        >.
+      </p>
+
+      <ul>
+        <li>
+          <a
+            href="https://raw.githubusercontent.com/TheBIMsider/just-the-fields/main/templates/Mock_Cars_Simple_Template.json"
+            download
+          >
+            Mock – Cars (Simple)
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="https://raw.githubusercontent.com/TheBIMsider/just-the-fields/main/templates/Mock_Cars_Advanced_Template.json"
+            download
+          >
+            Mock – Cars (Advanced)
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="https://raw.githubusercontent.com/TheBIMsider/just-the-fields/main/templates/Mock_Projects_Template.json"
+            download
+          >
+            Mock – Projects
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="https://raw.githubusercontent.com/TheBIMsider/just-the-fields/main/templates/Mock_Support_Tickets_Template.json"
+            download
+          >
+            Mock – Support Tickets
+          </a>
+        </li>
+      </ul>
+      <p class="note">
+        Each mock template corresponds to a dataset in <code>/samples</code>.
+      </p>
+
+      <p class="note">
+        <strong>Notes:</strong>
+        <br />
+        • Mock templates correspond to the example datasets in the
+        <code>/samples</code> folder and are intended for learning and testing.
+        <br />
+        • Plain and Combined exports have different data shapes and always
+        require separate templates.
+        <br />
+        • If a template opens in your browser instead of downloading
+        automatically, use <strong>Right-click → Save As</strong>.
+        <br />
+        • For Combined exports,
+        <strong>Auto (best match)</strong> can reliably pick a general template.
+        Type-specific Combined templates are best used in
+        <strong>Record</strong> mode when you want to force the type.
+      </p>
+
+      <div class="footer">
+        <p>
+          Back to the app:
+          <a href="../index.html">Just the Fields</a>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
