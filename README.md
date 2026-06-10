@@ -36,8 +36,8 @@ These files help demonstrate how JTF handles different JSON shapes.
 
 Dataset-style arrays work well in **Dataset mode**, while structured objects and API-style records are best explored in **Records mode**, which is where most of JTF’s layout and template features live.
 
-*Special thanks to ChatGPT and [Mockaroo](https://mockaroo.com/) for helping generate the sample datasets used in this repository.  
-Mockaroo provides free sample data generation (up to 1,000 rows), which made it easy to create realistic testing datasets.*
+_Special thanks to ChatGPT and [Mockaroo](https://mockaroo.com/) for helping generate the sample datasets used in this repository.  
+Mockaroo provides free sample data generation (up to 1,000 rows), which made it easy to create realistic testing datasets._
 
 ---
 
@@ -69,7 +69,7 @@ Mockaroo provides free sample data generation (up to 1,000 rows), which made it 
     src="https://github.com/user-attachments/assets/58e2e405-4cb9-4b04-8c61-04773235ccd7"
   />
   <figcaption>
-    Records mode using a Newforma Konekt Issues template (dark theme)
+    Records mode using a custom Issues template (dark theme)
   </figcaption>
 </figure>
 
@@ -181,7 +181,7 @@ Want the how-to? Start here: [Templates in JTF](docs/templates.md)
 - Upload the template back into JTF
 - Read the full guide: [Templates in JTF](docs/templates.md)
 
-Note: Newforma Konekt data (Issues, RFIs, Submittals, Change Items, Files, Emails, and Viewer Files) can be exported in different shapes (Plain vs Combined), which always require different templates. Viewer Files templates cover 3D models (IFC) and sheets viewed in the NFK Viewer created on or before Aug. 19, 2024. Files created after that date use the standard Files templates.
+Note: JSON exports that come in different shapes (Plain vs Combined) always require separate templates. If a template technically matches but shows little or no data, the most common cause is using the right template with the wrong export shape.
 
 ---
 

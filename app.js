@@ -2207,7 +2207,7 @@ function renderTemplateField(record, field) {
   // Missing path renders empty (silent)
   if (value === undefined) return '';
 
-  // NFK Issues History: flatten Changes[] into readable lines (no nested cards)
+  // Issues History: flatten Changes[] into readable lines (no nested cards)
   if (path === 'Changes' && Array.isArray(value)) {
     const rows = value
       .map((c) => {
@@ -3060,7 +3060,7 @@ function renderKvListValue(arrValue, cfg) {
 
 /**
  * Render an array-of-objects as key/value rows inside a single template field.
- * Designed for NFK CustomAttributes where each item has Name + (TextValue or PredefinedValues).
+ * Designed for custom attribute arrays where each item has Name + (TextValue or PredefinedValues).
  *
  * @param {any} arrValue
  * @param {{
@@ -3157,7 +3157,7 @@ function renderKvListValue(arrValue, cfg) {
 
 /**
  * Render an array-of-objects as key/value rows inside a single template field.
- * Designed for things like NFK CustomAttributes where shape varies by project.
+ * Designed for attribute arrays where shape varies by record type.
  *
  * Supports showing empty values when showEmpty is true.
  *
@@ -3177,7 +3177,7 @@ function renderKvListValue(arrValue, cfg) {
   const c = cfg || {};
   const itemKeyPath = String(c.itemKeyPath || 'Name').trim() || 'Name';
 
-  // Default: NFK-style (text OR predefined dropdown names)
+  // Default: text value OR predefined dropdown names
   const valuePaths =
     Array.isArray(c.valuePaths) && c.valuePaths.length
       ? c.valuePaths.map((p) => String(p || '').trim()).filter(Boolean)
@@ -3261,7 +3261,7 @@ function renderKvListValue(arrValue, cfg) {
 
 /**
  * Render an array-of-objects as key/value rows inside a single template field.
- * Designed for things like NFK CustomAttributes where shape varies by project.
+ // Default: text value OR predefined dropdown names
  *
  * @param {any} arrValue
  * @param {{
@@ -3277,7 +3277,7 @@ function renderKvListValue(arrValue, cfg) {
   const c = cfg || {};
   const itemKeyPath = String(c.itemKeyPath || 'Name').trim() || 'Name';
 
-  // Default: NFK-style (text OR predefined dropdown names)
+  // Default: text value OR predefined dropdown names
   const valuePaths =
     Array.isArray(c.valuePaths) && c.valuePaths.length
       ? c.valuePaths.map((p) => String(p || '').trim()).filter(Boolean)
@@ -3733,7 +3733,7 @@ function buildItemSummary(obj, idx) {
 
   bits.push(`[${idx}]`);
 
-  // NFK Issue history: show Author + date + change type in the card title
+  // Issue history: show Author + date + change type in the card title
   if (
     obj &&
     typeof obj === 'object' &&
@@ -3755,7 +3755,7 @@ function buildItemSummary(obj, idx) {
     return bits.join(' • ');
   }
 
-  // NFK Issue comments: show author + date instead of generic object preview
+  // Issue comments: show author + date instead of generic object preview
   if (
     obj.Author &&
     typeof obj.Author === 'object' &&
