@@ -10,3 +10,8 @@ Thumbs.db
 scratch/
 notes/
 *.log
+
+# Claude Code helper files (local only)
+CLAUDE.md
+.claude/
+context/
